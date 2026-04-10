@@ -1,5 +1,5 @@
-import { ErrorRequestHandler } from "express";
-import logger from "../config/logger.config";
+import { ErrorRequestHandler } from 'express';
+import logger from '../config/logger.config';
 
 const errorHandlerMiddleware: ErrorRequestHandler = (err, _req, res, _next) => {
   logger.error(`${err.name}: ${err.message}`);
@@ -8,7 +8,7 @@ const errorHandlerMiddleware: ErrorRequestHandler = (err, _req, res, _next) => {
 
   res.status(statusCode).json({
     success: false,
-    message: err.message || "Internal Server Error",
+    message: err.message || 'Internal Server Error',
   });
 };
 

@@ -12,7 +12,7 @@ const handleServerError = (error: Error): never => {
     throw error;
   }
 
-  throw new ApiError(500, "Something went wrong. Please try again later.");
+  throw new ApiError(500, 'Something went wrong. Please try again later.');
 };
 
 export { ApiError, handleServerError };
