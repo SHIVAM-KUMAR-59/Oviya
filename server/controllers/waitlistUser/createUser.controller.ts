@@ -26,7 +26,9 @@ const createWaitlistUserController: BodyController<
     res.status(201).json({
       success: true,
       message: 'Waitlist user created successfully!',
-      data: waitlistUser,
+      data: {
+        waitlistUser,
+      },
     });
 
     next();

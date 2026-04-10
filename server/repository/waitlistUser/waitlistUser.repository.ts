@@ -31,4 +31,16 @@ const createWaitlistUser = async (email: string) => {
   }
 };
 
-export { findByEmail, createWaitlistUser };
+const getWaitlistUserCount = async () => {
+  try {
+    const count = await prisma.waitlistUser.count();
+    return count;
+  } catch (err) {
+    logger.error(
+      `Error in getWaitlistUserCount counting waitlist users: ${err}`,
+    );
+    throw err;
+  }
+};
+
+export { findByEmail, createWaitlistUser, getWaitlistUserCount };

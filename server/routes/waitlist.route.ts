@@ -39,4 +39,22 @@ waitlistRouter.post(
   Controller.WaitlistUserController.createWaitlistUserController,
 );
 
+/**
+ * @swagger
+ * /api/v1/waitlist/count:
+ *   get:
+ *     summary: Get waitlist user count
+ *     tags: [Waitlist]
+ *     responses:
+ *       200:
+ *         description: Waitlist user count retrieved successfully
+ *       500:
+ *         description: Internal server error
+ */
+
+waitlistRouter.get(
+  '/count',
+  Controller.WaitlistUserController.getWaitlistUserCountController,
+);
+
 export default waitlistRouter;
