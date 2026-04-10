@@ -6,6 +6,7 @@ import logger from './config/logger.config';
 import env from './config/env.config';
 import apiRoutes from './routes/api.route';
 import errorHandlerMiddleware from './middleware/error.middleware';
+import './config/redis.config';
 
 dotenv.config();
 

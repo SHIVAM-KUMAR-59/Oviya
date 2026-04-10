@@ -27,6 +27,22 @@ const toBoolean = (value: string) => {
   return value === 'true';
 };
 
+const REDIS = {
+  URL: process.env.REDIS_URL || 'redis://127.0.0.1:6379',
+  KEYS: {
+    WAITLIST_USER: {
+      ALL_USERS: 'waitlist:all',
+      USER_BY_EMAIL: (email: string) => `waitlist:user:${email}`,
+      COUNT: 'waitlist:count',
+    },
+  },
+  TTL: {
+    SHORT: 30, // 30 seconds
+    MEDIUM: 60, // 1 min
+    LONG: 300, // 5 min
+  },
+};
+
 const env = {
   NODE_ENV: process.env.NODE_ENV || 'development',
 
@@ -41,6 +57,8 @@ const env = {
   ENABLE_LOGS: process.env.ENABLE_LOGS
     ? toBoolean(process.env.ENABLE_LOGS)
     : true,
+
+  REDIS,
 };
 
 export default env;
