@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import { PrismaClient } from '@prisma/client';
 import { requestLogger } from './middleware/logger.middleware';
 import logger from './config/logger.config';
+import env from './config/env.config';
 
 dotenv.config();
 
@@ -19,6 +20,6 @@ app.get('/', async (req, res) => {
   res.json(users);
 });
 
-app.listen(8000, () => {
+app.listen(env.PORT, () => {
   logger.debug('Server running on port 8000');
 });

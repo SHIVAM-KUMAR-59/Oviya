@@ -1,11 +1,7 @@
-import { Request, Response, NextFunction } from 'express';
 import logger from '../config/logger.config';
+import { Middleware } from '../lib/types/controller.types';
 
-export const requestLogger = (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const requestLogger: Middleware = (req, res, next) => {
   const start = Date.now();
 
   res.on('finish', () => {
