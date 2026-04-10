@@ -1,5 +1,7 @@
 import logger from '../../config/logger.config';
 import { BodyController } from '../../lib/types/controller.types';
+import { ApiError } from '../../lib/utils/error.util';
+import { isValidEmail, isValidString } from '../../lib/utils/validator.util';
 import Service from '../../services';
 
 type WaitlistUserRequestBody = {
@@ -11,9 +13,22 @@ const createWaitlistUserController: BodyController<
   WaitlistUserRequestBody
 > = async (req, res, next) => {
   try {
-    logger.debug('Creating waitlist user...');
-    Service.waitlistUserService.createWaitlistUserService();
-    res.status(201).json({ message: 'Waitlist user created successfully!' });
+    const email = req.body.email.trim();
+
+    if (!isValidString(email) || !isValidEmail(email)) {
+      logger.error(`Invalid email address provided: ${email}`);
+      throw new ApiError(400, 'Invalid email address provided.');
+    }
+
+    const waitlistUser =
+      await Service.waitlistUserService.createWaitlistUserService(email);
+
+    res.status(201).json({
+      success: true,
+      message: 'Waitlist user created successfully!',
+      data: waitlistUser,
+    });
+
     next();
   } catch (err) {
     next(err);

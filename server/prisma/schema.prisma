@@ -17,3 +17,10 @@ model Test {
   id   String    @id @default(uuid())
   name String
 }
+
+model WaitlistUser {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  
+  createdAt DateTime @default(now())
+}
