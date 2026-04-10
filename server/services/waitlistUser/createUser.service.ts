@@ -17,7 +17,7 @@ const createWaitlistUserService = async (email: string) => {
       throw new ApiError(409, `Email ${email} is already on the waitlist`);
     }
 
-    // 1Create user in DB
+    // Create user in DB
     const newWaitlistUser =
       await Repository.waitlistUserRepository.createWaitlistUser(email);
 
