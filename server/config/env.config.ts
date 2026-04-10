@@ -30,7 +30,7 @@ const toBoolean = (value: string) => {
 const env = {
   NODE_ENV: process.env.NODE_ENV || 'development',
 
-  PORT: process.env.PORT ? toNumber(process.env.PORT, 'PORT') : 5000,
+  PORT: process.env.PORT ? toNumber(process.env.PORT, 'PORT') : 8000,
 
   DATABASE_URL: requireEnv('DATABASE_URL'),
   DIRECT_URL: requireEnv('DIRECT_URL'),
