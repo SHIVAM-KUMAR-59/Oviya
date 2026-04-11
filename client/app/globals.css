@@ -7,130 +7,140 @@
 
 /* Light mode (default) */
 :root {
-  /* Primary — rose pink */
-  --color-primary: #c4476a;
-  --color-primary-hover: #ad3a5a;
-  --color-primary-light: #e8628a;
-  --color-primary-subtle: #fce8ef;
-  --color-primary-text: #7a2040;
+  /* ================================
+     PRIMARY — Soft rose (calm, not loud)
+  ================================= */
+  --color-primary: #d35a7b;
+  --color-primary-hover: #b94a68;
+  --color-primary-light: #e88aa3;
+  --color-primary-subtle: #fdecef;
+  --color-primary-text: #7a2d45;
 
-  /* Secondary — deep plum */
-  --color-secondary: #6b3a7d;
-  --color-secondary-hover: #5a2e6a;
-  --color-secondary-subtle: #f0e8f5;
-  --color-secondary-text: #4a2060;
+  /* ================================
+     SECONDARY — Muted plum (trust layer)
+  ================================= */
+  --color-secondary: #7b5c85;
+  --color-secondary-hover: #684c70;
+  --color-secondary-subtle: #f3eef6;
+  --color-secondary-text: #4a3455;
 
-  /* Accent — terracotta */
-  --color-accent: #c4674a;
-  --color-accent-hover: #a8543a;
-  --color-accent-subtle: #faeee8;
-  --color-accent-text: #6a2e18;
+  /* ================================
+     ACCENT — Warm neutral (not too orange)
+  ================================= */
+  --color-accent: #c9826b;
+  --color-accent-hover: #b06c56;
+  --color-accent-subtle: #faf1ee;
+  --color-accent-text: #6b3a2c;
 
-  /* Backgrounds */
-  --color-bg: #fdf8f6;
+  /* ================================
+     BACKGROUND — Clean + soft
+  ================================= */
+  --color-bg: #f9f6f7;
   --color-surface: #ffffff;
-  --color-surface-raised: #fff5f2;
-  --color-surface-overlay: #fff0ec;
+  --color-surface-raised: #fff7f8;
+  --color-surface-overlay: #fff1f3;
 
-  /* Text */
-  --color-text-primary: #2d1b24;
-  --color-text-secondary: #8b5e6a;
-  --color-text-tertiary: #b8909a;
+  /* ================================
+     TEXT — Improved contrast
+  ================================= */
+  --color-text-primary: #2a1f25;
+  --color-text-secondary: #7a5a66;
+  --color-text-tertiary: #b39aa4;
   --color-text-on-primary: #ffffff;
   --color-text-on-secondary: #ffffff;
   --color-text-on-accent: #ffffff;
 
-  /* Borders */
-  --color-border: #e8d5d0;
-  --color-border-strong: #d4b8b0;
-  --color-border-subtle: #f2e8e4;
+  /* ================================
+     BORDERS — Softer UI feel
+  ================================= */
+  --color-border: #eadfe3;
+  --color-border-strong: #d6c3c9;
+  --color-border-subtle: #f4ecef;
 
-  /* Semantic — success */
-  --color-success: #2d7a5a;
-  --color-success-subtle: #e8f5ee;
-  --color-success-text: #1a4d38;
+  /* ================================
+     SEMANTIC — Health aligned
+  ================================= */
+  --color-success: #3a8d6d;
+  --color-success-subtle: #e9f6f1;
+  --color-success-text: #1f5c45;
 
-  /* Semantic — warning */
-  --color-warning: #a87820;
-  --color-warning-subtle: #fdf3dc;
-  --color-warning-text: #6a4c10;
+  --color-warning: #c89b3c;
+  --color-warning-subtle: #fdf6e3;
+  --color-warning-text: #6f5315;
 
-  /* Semantic — error */
-  --color-error: #c43a3a;
-  --color-error-subtle: #fce8e8;
-  --color-error-text: #7a2020;
+  --color-error: #d25555;
+  --color-error-subtle: #fdeaea;
+  --color-error-text: #7a2d2d;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 3px rgba(45, 27, 36, 0.08);
-  --shadow-md: 0 4px 12px rgba(45, 27, 36, 0.1);
-  --shadow-lg: 0 8px 24px rgba(45, 27, 36, 0.12);
+  /* ================================
+     SHADOWS — softer, less muddy
+  ================================= */
+  --shadow-sm: 0 1px 2px rgba(42, 31, 37, 0.06);
+  --shadow-md: 0 4px 10px rgba(42, 31, 37, 0.08);
+  --shadow-lg: 0 8px 20px rgba(42, 31, 37, 0.1);
 
   /* Typography */
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --font-mono: 'JetBrains Mono', monospace;
 }
 
 /* ================================
    Dark mode
 ================================ */
 .dark {
-  /* Primary */
-  --color-primary: #e8628a;
-  --color-primary-hover: #f085a5;
-  --color-primary-light: #f085a5;
-  --color-primary-subtle: #3d1828;
-  --color-primary-text: #f0a0bc;
+  /* PRIMARY */
+  --color-primary: #f07c9c;
+  --color-primary-hover: #ff9ab5;
+  --color-primary-light: #ff9ab5;
+  --color-primary-subtle: #3a1c26;
+  --color-primary-text: #ffb3c7;
 
-  /* Secondary */
-  --color-secondary: #b088cc;
-  --color-secondary-hover: #c8a8e0;
-  --color-secondary-subtle: #2d1a38;
-  --color-secondary-text: #d0b0e8;
+  /* SECONDARY */
+  --color-secondary: #b79ac8;
+  --color-secondary-hover: #d0b5e0;
+  --color-secondary-subtle: #2a1d33;
+  --color-secondary-text: #e0c8f0;
 
-  /* Accent */
-  --color-accent: #e8956a;
-  --color-accent-hover: #f0a87a;
-  --color-accent-subtle: #3a2018;
-  --color-accent-text: #f5c0a0;
+  /* ACCENT */
+  --color-accent: #e0a189;
+  --color-accent-hover: #f0b8a0;
+  --color-accent-subtle: #3a241d;
+  --color-accent-text: #ffd2c0;
 
-  /* Backgrounds */
-  --color-bg: #1a1118;
-  --color-surface: #261520;
-  --color-surface-raised: #321b2c;
-  --color-surface-overlay: #3d2238;
+  /* BACKGROUND — cleaner dark */
+  --color-bg: #161216;
+  --color-surface: #211820;
+  --color-surface-raised: #2a1f29;
+  --color-surface-overlay: #332634;
 
-  /* Text */
-  --color-text-primary: #f0e0e8;
-  --color-text-secondary: #c89aaa;
-  --color-text-tertiary: #8a6070;
+  /* TEXT */
+  --color-text-primary: #f5e8ee;
+  --color-text-secondary: #c9a9b5;
+  --color-text-tertiary: #8f6b78;
   --color-text-on-primary: #ffffff;
-  --color-text-on-secondary: #ffffff;
-  --color-text-on-accent: #ffffff;
 
-  /* Borders */
-  --color-border: #3d2a38;
-  --color-border-strong: #5a3a50;
-  --color-border-subtle: #2a1822;
+  /* BORDERS */
+  --color-border: #3a2b36;
+  --color-border-strong: #5a3f50;
+  --color-border-subtle: #261a24;
 
-  /* Semantic — success */
-  --color-success: #5ac890;
-  --color-success-subtle: #0f2a1e;
-  --color-success-text: #90e0b8;
+  /* SEMANTIC */
+  --color-success: #5fd6a5;
+  --color-success-subtle: #0f2e23;
+  --color-success-text: #9af0c8;
 
-  /* Semantic — warning */
-  --color-warning: #e8c060;
-  --color-warning-subtle: #2a2008;
-  --color-warning-text: #f0d080;
+  --color-warning: #f0c96a;
+  --color-warning-subtle: #2b220c;
+  --color-warning-text: #ffe29a;
 
-  /* Semantic — error */
-  --color-error: #f07070;
-  --color-error-subtle: #2a0f0f;
-  --color-error-text: #f8a0a0;
+  --color-error: #ff7a7a;
+  --color-error-subtle: #2a1111;
+  --color-error-text: #ffb0b0;
 
-  /* Shadows (deeper on dark) */
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+  /* SHADOWS */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 8px 20px rgba(0, 0, 0, 0.45);
 }
 
 /* ================================
