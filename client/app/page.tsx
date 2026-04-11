@@ -1,9 +1,5 @@
-import ThemeToggle from '@/components/ui/ThemeToggle';
+import Navbar from '@/components/landing/Navbar';
 
 export default function Home() {
-  return (
-    <div className="bg-bg min-h-screen">
-      <ThemeToggle />
-    </div>
-  );
+  return <Navbar />;
 }
