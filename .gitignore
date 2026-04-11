@@ -1,16 +1,26 @@
-.vscode
-.DS_Store
-
 # =========================
-# Node / Package Managers
+# Dependencies
 # =========================
 node_modules/
+.pnp/
+.pnp.*
 .pnpm-store/
-.pnpm-debug.log*
+.yarn/
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+pnpm-lock.yaml
+
+# =========================
+# Logs
+# =========================
+logs/
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-pnpm-lock.yaml
+.pnpm-debug.log*
 
 # =========================
 # Environment Variables
@@ -20,42 +30,29 @@ pnpm-lock.yaml
 !.env.example
 
 # =========================
-# Build / Output
+# Build Outputs
 # =========================
 dist/
 build/
 out/
+.next/
+client/.next/
+
+# =========================
+# Coverage
+# =========================
+coverage/
 
 # =========================
 # TypeScript
 # =========================
 *.tsbuildinfo
-
-# =========================
-# Logs
-# =========================
-logs/
-*.log
-
-# =========================
-# OS / System Files
-# =========================
-.DS_Store
-Thumbs.db
-
-# =========================
-# IDE / Editor
-# =========================
-.vscode/
-!.vscode/extensions.json
-.idea/
+next-env.d.ts
 
 # =========================
 # Prisma
 # =========================
 /server/prisma/migrations/
-
-# Prisma generated files (optional safety)
 node_modules/.prisma/
 
 # =========================
@@ -64,14 +61,32 @@ node_modules/.prisma/
 .cache/
 .tmp/
 temp/
+
+# =========================
+# Databases / Dumps
+# =========================
 dump.rdb
 
 # =========================
-# Coverage
+# OS Files
 # =========================
-coverage/
+.DS_Store
+Thumbs.db
+
+# =========================
+# IDE / Editors
+# =========================
+.vscode/
+!.vscode/extensions.json
+.idea/
+
+# =========================
+# Vercel
+# =========================
+.vercel
 
 # =========================
 # Misc
 # =========================
 *.local
+*.pem
