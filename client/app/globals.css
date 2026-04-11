@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /* ================================
    startup — design tokens
@@ -8,62 +8,62 @@
 /* Light mode (default) */
 :root {
   /* Primary — rose pink */
-  --color-primary:          #C4476A;
-  --color-primary-hover:    #AD3A5A;
-  --color-primary-light:    #E8628A;
-  --color-primary-subtle:   #FCE8EF;
-  --color-primary-text:     #7A2040;
+  --color-primary: #c4476a;
+  --color-primary-hover: #ad3a5a;
+  --color-primary-light: #e8628a;
+  --color-primary-subtle: #fce8ef;
+  --color-primary-text: #7a2040;
 
   /* Secondary — deep plum */
-  --color-secondary:        #6B3A7D;
-  --color-secondary-hover:  #5A2E6A;
-  --color-secondary-subtle: #F0E8F5;
-  --color-secondary-text:   #4A2060;
+  --color-secondary: #6b3a7d;
+  --color-secondary-hover: #5a2e6a;
+  --color-secondary-subtle: #f0e8f5;
+  --color-secondary-text: #4a2060;
 
   /* Accent — terracotta */
-  --color-accent:           #C4674A;
-  --color-accent-hover:     #A8543A;
-  --color-accent-subtle:    #FAEEE8;
-  --color-accent-text:      #6A2E18;
+  --color-accent: #c4674a;
+  --color-accent-hover: #a8543a;
+  --color-accent-subtle: #faeee8;
+  --color-accent-text: #6a2e18;
 
   /* Backgrounds */
-  --color-bg:               #FDF8F6;
-  --color-surface:          #FFFFFF;
-  --color-surface-raised:   #FFF5F2;
-  --color-surface-overlay:  #FFF0EC;
+  --color-bg: #fdf8f6;
+  --color-surface: #ffffff;
+  --color-surface-raised: #fff5f2;
+  --color-surface-overlay: #fff0ec;
 
   /* Text */
-  --color-text-primary:     #2D1B24;
-  --color-text-secondary:   #8B5E6A;
-  --color-text-tertiary:    #B8909A;
-  --color-text-on-primary:  #FFFFFF;
-  --color-text-on-secondary:#FFFFFF;
-  --color-text-on-accent:   #FFFFFF;
+  --color-text-primary: #2d1b24;
+  --color-text-secondary: #8b5e6a;
+  --color-text-tertiary: #b8909a;
+  --color-text-on-primary: #ffffff;
+  --color-text-on-secondary: #ffffff;
+  --color-text-on-accent: #ffffff;
 
   /* Borders */
-  --color-border:           #E8D5D0;
-  --color-border-strong:    #D4B8B0;
-  --color-border-subtle:    #F2E8E4;
+  --color-border: #e8d5d0;
+  --color-border-strong: #d4b8b0;
+  --color-border-subtle: #f2e8e4;
 
   /* Semantic — success */
-  --color-success:          #2D7A5A;
-  --color-success-subtle:   #E8F5EE;
-  --color-success-text:     #1A4D38;
+  --color-success: #2d7a5a;
+  --color-success-subtle: #e8f5ee;
+  --color-success-text: #1a4d38;
 
   /* Semantic — warning */
-  --color-warning:          #A87820;
-  --color-warning-subtle:   #FDF3DC;
-  --color-warning-text:     #6A4C10;
+  --color-warning: #a87820;
+  --color-warning-subtle: #fdf3dc;
+  --color-warning-text: #6a4c10;
 
   /* Semantic — error */
-  --color-error:            #C43A3A;
-  --color-error-subtle:     #FCE8E8;
-  --color-error-text:       #7A2020;
+  --color-error: #c43a3a;
+  --color-error-subtle: #fce8e8;
+  --color-error-text: #7a2020;
 
   /* Shadows */
-  --shadow-sm:  0 1px 3px rgba(45, 27, 36, 0.08);
-  --shadow-md:  0 4px 12px rgba(45, 27, 36, 0.10);
-  --shadow-lg:  0 8px 24px rgba(45, 27, 36, 0.12);
+  --shadow-sm: 0 1px 3px rgba(45, 27, 36, 0.08);
+  --shadow-md: 0 4px 12px rgba(45, 27, 36, 0.1);
+  --shadow-lg: 0 8px 24px rgba(45, 27, 36, 0.12);
 
   /* Typography */
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
@@ -75,62 +75,62 @@
 ================================ */
 .dark {
   /* Primary */
-  --color-primary:          #E8628A;
-  --color-primary-hover:    #F085A5;
-  --color-primary-light:    #F085A5;
-  --color-primary-subtle:   #3D1828;
-  --color-primary-text:     #F0A0BC;
+  --color-primary: #e8628a;
+  --color-primary-hover: #f085a5;
+  --color-primary-light: #f085a5;
+  --color-primary-subtle: #3d1828;
+  --color-primary-text: #f0a0bc;
 
   /* Secondary */
-  --color-secondary:        #B088CC;
-  --color-secondary-hover:  #C8A8E0;
-  --color-secondary-subtle: #2D1A38;
-  --color-secondary-text:   #D0B0E8;
+  --color-secondary: #b088cc;
+  --color-secondary-hover: #c8a8e0;
+  --color-secondary-subtle: #2d1a38;
+  --color-secondary-text: #d0b0e8;
 
   /* Accent */
-  --color-accent:           #E8956A;
-  --color-accent-hover:     #F0A87A;
-  --color-accent-subtle:    #3A2018;
-  --color-accent-text:      #F5C0A0;
+  --color-accent: #e8956a;
+  --color-accent-hover: #f0a87a;
+  --color-accent-subtle: #3a2018;
+  --color-accent-text: #f5c0a0;
 
   /* Backgrounds */
-  --color-bg:               #1A1118;
-  --color-surface:          #261520;
-  --color-surface-raised:   #321B2C;
-  --color-surface-overlay:  #3D2238;
+  --color-bg: #1a1118;
+  --color-surface: #261520;
+  --color-surface-raised: #321b2c;
+  --color-surface-overlay: #3d2238;
 
   /* Text */
-  --color-text-primary:     #F0E0E8;
-  --color-text-secondary:   #C89AAA;
-  --color-text-tertiary:    #8A6070;
-  --color-text-on-primary:  #FFFFFF;
-  --color-text-on-secondary:#FFFFFF;
-  --color-text-on-accent:   #FFFFFF;
+  --color-text-primary: #f0e0e8;
+  --color-text-secondary: #c89aaa;
+  --color-text-tertiary: #8a6070;
+  --color-text-on-primary: #ffffff;
+  --color-text-on-secondary: #ffffff;
+  --color-text-on-accent: #ffffff;
 
   /* Borders */
-  --color-border:           #3D2A38;
-  --color-border-strong:    #5A3A50;
-  --color-border-subtle:    #2A1822;
+  --color-border: #3d2a38;
+  --color-border-strong: #5a3a50;
+  --color-border-subtle: #2a1822;
 
   /* Semantic — success */
-  --color-success:          #5AC890;
-  --color-success-subtle:   #0F2A1E;
-  --color-success-text:     #90E0B8;
+  --color-success: #5ac890;
+  --color-success-subtle: #0f2a1e;
+  --color-success-text: #90e0b8;
 
   /* Semantic — warning */
-  --color-warning:          #E8C060;
-  --color-warning-subtle:   #2A2008;
-  --color-warning-text:     #F0D080;
+  --color-warning: #e8c060;
+  --color-warning-subtle: #2a2008;
+  --color-warning-text: #f0d080;
 
   /* Semantic — error */
-  --color-error:            #F07070;
-  --color-error-subtle:     #2A0F0F;
-  --color-error-text:       #F8A0A0;
+  --color-error: #f07070;
+  --color-error-subtle: #2a0f0f;
+  --color-error-text: #f8a0a0;
 
   /* Shadows (deeper on dark) */
-  --shadow-sm:  0 1px 3px  rgba(0, 0, 0, 0.30);
-  --shadow-md:  0 4px 12px rgba(0, 0, 0, 0.40);
-  --shadow-lg:  0 8px 24px rgba(0, 0, 0, 0.50);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
 }
 
 /* ================================
@@ -139,58 +139,58 @@
 ================================ */
 @theme {
   /* Colors — primary */
-  --color-primary:           var(--color-primary);
-  --color-primary-hover:     var(--color-primary-hover);
-  --color-primary-light:     var(--color-primary-light);
-  --color-primary-subtle:    var(--color-primary-subtle);
-  --color-primary-text:      var(--color-primary-text);
+  --color-primary: var(--color-primary);
+  --color-primary-hover: var(--color-primary-hover);
+  --color-primary-light: var(--color-primary-light);
+  --color-primary-subtle: var(--color-primary-subtle);
+  --color-primary-text: var(--color-primary-text);
 
   /* Colors — secondary */
-  --color-secondary:         var(--color-secondary);
-  --color-secondary-hover:   var(--color-secondary-hover);
-  --color-secondary-subtle:  var(--color-secondary-subtle);
-  --color-secondary-text:    var(--color-secondary-text);
+  --color-secondary: var(--color-secondary);
+  --color-secondary-hover: var(--color-secondary-hover);
+  --color-secondary-subtle: var(--color-secondary-subtle);
+  --color-secondary-text: var(--color-secondary-text);
 
   /* Colors — accent */
-  --color-accent:            var(--color-accent);
-  --color-accent-hover:      var(--color-accent-hover);
-  --color-accent-subtle:     var(--color-accent-subtle);
-  --color-accent-text:       var(--color-accent-text);
+  --color-accent: var(--color-accent);
+  --color-accent-hover: var(--color-accent-hover);
+  --color-accent-subtle: var(--color-accent-subtle);
+  --color-accent-text: var(--color-accent-text);
 
   /* Colors — backgrounds */
-  --color-bg:                var(--color-bg);
-  --color-surface:           var(--color-surface);
-  --color-surface-raised:    var(--color-surface-raised);
-  --color-surface-overlay:   var(--color-surface-overlay);
+  --color-bg: var(--color-bg);
+  --color-surface: var(--color-surface);
+  --color-surface-raised: var(--color-surface-raised);
+  --color-surface-overlay: var(--color-surface-overlay);
 
   /* Colors — text */
-  --color-text-primary:      var(--color-text-primary);
-  --color-text-secondary:    var(--color-text-secondary);
-  --color-text-tertiary:     var(--color-text-tertiary);
-  --color-text-on-primary:   var(--color-text-on-primary);
+  --color-text-primary: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-secondary);
+  --color-text-tertiary: var(--color-text-tertiary);
+  --color-text-on-primary: var(--color-text-on-primary);
 
   /* Colors — borders */
-  --color-border:            var(--color-border);
-  --color-border-strong:     var(--color-border-strong);
-  --color-border-subtle:     var(--color-border-subtle);
+  --color-border: var(--color-border);
+  --color-border-strong: var(--color-border-strong);
+  --color-border-subtle: var(--color-border-subtle);
 
   /* Colors — semantic */
-  --color-success:           var(--color-success);
-  --color-success-subtle:    var(--color-success-subtle);
-  --color-success-text:      var(--color-success-text);
-  --color-warning:           var(--color-warning);
-  --color-warning-subtle:    var(--color-warning-subtle);
-  --color-warning-text:      var(--color-warning-text);
-  --color-error:             var(--color-error);
-  --color-error-subtle:      var(--color-error-subtle);
-  --color-error-text:        var(--color-error-text);
+  --color-success: var(--color-success);
+  --color-success-subtle: var(--color-success-subtle);
+  --color-success-text: var(--color-success-text);
+  --color-warning: var(--color-warning);
+  --color-warning-subtle: var(--color-warning-subtle);
+  --color-warning-text: var(--color-warning-text);
+  --color-error: var(--color-error);
+  --color-error-subtle: var(--color-error-subtle);
+  --color-error-text: var(--color-error-text);
 
   /* Font family */
-  --font-family-sans:        var(--font-sans);
-  --font-family-mono:        var(--font-mono);
+  --font-family-sans: var(--font-sans);
+  --font-family-mono: var(--font-mono);
 
   /* Shadows */
-  --shadow-sm:               var(--shadow-sm);
-  --shadow-md:               var(--shadow-md);
-  --shadow-lg:               var(--shadow-lg);
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
 }

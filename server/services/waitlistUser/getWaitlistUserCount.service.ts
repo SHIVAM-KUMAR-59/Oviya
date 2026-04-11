@@ -14,8 +14,7 @@ const getWaitlistUserCountService = async (): Promise<number | void> => {
       return cachedCount;
     }
 
-    const count =
-      await Repository.waitlistUserRepository.getWaitlistUserCount();
+    const count = await Repository.waitlistUserRepository.getWaitlistUserCount();
     if (count !== undefined) {
       await CacheService.set(
         env.REDIS.KEYS.WAITLIST_USER.COUNT,

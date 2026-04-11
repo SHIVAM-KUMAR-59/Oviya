@@ -9,9 +9,11 @@ type WaitlistUserRequestBody = {
   name?: string;
 };
 
-const createWaitlistUserController: BodyController<
-  WaitlistUserRequestBody
-> = async (req, res, next) => {
+const createWaitlistUserController: BodyController<WaitlistUserRequestBody> = async (
+  req,
+  res,
+  next,
+) => {
   try {
     const email = req.body.email.trim();
 

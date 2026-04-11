@@ -10,9 +10,7 @@ const findByEmail = async (email: string) => {
     });
     return waitlistUser;
   } catch (err) {
-    logger.error(
-      `Error in findByEmail while finding waitlist user by email: ${err}`,
-    );
+    logger.error(`Error in findByEmail while finding waitlist user by email: ${err}`);
     throw err;
   }
 };
@@ -36,9 +34,7 @@ const getWaitlistUserCount = async () => {
     const count = await prisma.waitlistUser.count();
     return count;
   } catch (err) {
-    logger.error(
-      `Error in getWaitlistUserCount counting waitlist users: ${err}`,
-    );
+    logger.error(`Error in getWaitlistUserCount counting waitlist users: ${err}`);
     throw err;
   }
 };

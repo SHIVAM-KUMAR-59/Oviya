@@ -21,8 +21,7 @@ const CacheService = {
 
   async set(key: string, value: unknown, ttlSeconds?: number) {
     try {
-      const stringValue =
-        typeof value === 'string' ? value : JSON.stringify(value);
+      const stringValue = typeof value === 'string' ? value : JSON.stringify(value);
 
       if (ttlSeconds) {
         return await redis.set(key, stringValue, 'EX', ttlSeconds);

@@ -17,8 +17,7 @@ const findWaitlistUserByEmailService = async (email: string) => {
     }
 
     // Fetch from DB
-    const waitlistUser =
-      await Repository.waitlistUserRepository.findByEmail(email);
+    const waitlistUser = await Repository.waitlistUserRepository.findByEmail(email);
 
     // Cache ONLY if exists
     if (waitlistUser) {

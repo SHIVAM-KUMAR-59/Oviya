@@ -54,9 +54,7 @@ const env = {
   JWT_SECRET: requireEnv('JWT_SECRET'),
   //   JWT_EXPIRES_IN: requireEnv("JWT_EXPIRES_IN") || "7d",
 
-  ENABLE_LOGS: process.env.ENABLE_LOGS
-    ? toBoolean(process.env.ENABLE_LOGS)
-    : true,
+  ENABLE_LOGS: process.env.ENABLE_LOGS ? toBoolean(process.env.ENABLE_LOGS) : true,
 
   REDIS,
 };

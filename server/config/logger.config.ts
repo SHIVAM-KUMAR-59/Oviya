@@ -21,9 +21,7 @@ addColors(customLevels.colors);
 
 const getISTTimestamp = () => {
   const date = new Date();
-  const istDate = new Date(
-    date.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }),
-  );
+  const istDate = new Date(date.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }));
 
   const year = istDate.getFullYear();
   const month = String(istDate.getMonth() + 1).padStart(2, '0');
@@ -77,7 +75,6 @@ const logger = createLogger({
   ],
 }) as CustomLogger;
 
-logger.success = (msg: string) =>
-  logger.log({ level: 'success', message: msg });
+logger.success = (msg: string) => logger.log({ level: 'success', message: msg });
 
 export default logger;

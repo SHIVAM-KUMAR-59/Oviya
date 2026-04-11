@@ -22,10 +22,7 @@ export type ParamsController<T extends Record<string, string>> = (
 ) => Promise<void> | void;
 
 // Controller with typed body + params
-export type BodyParamsController<
-  TBody,
-  TParams extends Record<string, string> = {},
-> = (
+export type BodyParamsController<TBody, TParams extends Record<string, string> = {}> = (
   req: Request<TParams, {}, TBody>,
   res: Response,
   next: NextFunction,

@@ -1,9 +1,9 @@
-import ThemeToggle from "@/components/ui/ThemeToggle";
+import ThemeToggle from '@/components/ui/ThemeToggle';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-bg">
-      <ThemeToggle/>
+    <div className="bg-bg min-h-screen">
+      <ThemeToggle />
     </div>
   );
 }
