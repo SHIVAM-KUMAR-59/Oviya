@@ -9,6 +9,7 @@ import errorHandlerMiddleware from './middleware/error.middleware';
 import swaggerUi from 'swagger-ui-express';
 import swaggerSpec from './config/swagger.config';
 import './config/redis.config';
+import { main } from './algo';
 
 dotenv.config();
 
@@ -23,6 +24,8 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use(errorHandlerMiddleware);
 
-app.listen(env.PORT, () => {
-  logger.debug(`Server running on port ${env.PORT}`);
-});
+main();
+
+// app.listen(env.PORT, () => {
+//   logger.debug(`Server running on port ${env.PORT}`);
+// });
