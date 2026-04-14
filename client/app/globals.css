@@ -1,83 +1,83 @@
 @import 'tailwindcss';
 
 /* ================================
-   startup — design tokens
+   PeriodTrack — design tokens
    globals.css
 ================================ */
 
 /* Light mode (default) */
 :root {
   /* ================================
-     PRIMARY — Soft rose (calm, not loud)
+     PRIMARY — Indigo/violet brand
   ================================= */
-  --color-primary: #d35a7b;
-  --color-primary-hover: #b94a68;
-  --color-primary-light: #e88aa3;
-  --color-primary-subtle: #fdecef;
-  --color-primary-text: #7a2d45;
+  --color-primary: #534AB7;
+  --color-primary-hover: #7F77DD;
+  --color-primary-light: #7F77DD;
+  --color-primary-subtle: #EEEDFE;
+  --color-primary-text: #3C3489;
 
   /* ================================
-     SECONDARY — Muted plum (trust layer)
+     SECONDARY — Muted violet (trust layer)
   ================================= */
-  --color-secondary: #7b5c85;
-  --color-secondary-hover: #684c70;
-  --color-secondary-subtle: #f3eef6;
-  --color-secondary-text: #4a3455;
+  --color-secondary: #7F77DD;
+  --color-secondary-hover: #534AB7;
+  --color-secondary-subtle: #EEEDFE;
+  --color-secondary-text: #3C3489;
 
   /* ================================
-     ACCENT — Warm neutral (not too orange)
+     ACCENT — PCOS accent
   ================================= */
-  --color-accent: #c9826b;
-  --color-accent-hover: #b06c56;
-  --color-accent-subtle: #faf1ee;
-  --color-accent-text: #6b3a2c;
+  --color-accent: #9C27B0;
+  --color-accent-hover: #7B1FA2;
+  --color-accent-subtle: #F3E5F5;
+  --color-accent-text: #6A1280;
 
   /* ================================
-     BACKGROUND — Clean + soft
+     BACKGROUND
   ================================= */
-  --color-bg: #f9f6f7;
-  --color-surface: #ffffff;
-  --color-surface-raised: #fff7f8;
-  --color-surface-overlay: #fff1f3;
+  --color-bg: #FFFFFF;
+  --color-surface: #F5F4FF;
+  --color-surface-raised: #F5F4FF;
+  --color-surface-overlay: #EEEDFE;
 
   /* ================================
-     TEXT — Improved contrast
+     TEXT
   ================================= */
-  --color-text-primary: #2a1f25;
-  --color-text-secondary: #7a5a66;
-  --color-text-tertiary: #b39aa4;
-  --color-text-on-primary: #ffffff;
-  --color-text-on-secondary: #ffffff;
-  --color-text-on-accent: #ffffff;
+  --color-text-primary: #1A1640;
+  --color-text-secondary: #534AB7;
+  --color-text-tertiary: #7F77DD;
+  --color-text-on-primary: #FFFFFF;
+  --color-text-on-secondary: #FFFFFF;
+  --color-text-on-accent: #FFFFFF;
 
   /* ================================
-     BORDERS — Softer UI feel
+     BORDERS
   ================================= */
-  --color-border: #eadfe3;
-  --color-border-strong: #d6c3c9;
-  --color-border-subtle: #f4ecef;
+  --color-border: #CECBF6;
+  --color-border-strong: #AFA9EC;
+  --color-border-subtle: #EEEDFE;
 
   /* ================================
-     SEMANTIC — Health aligned
+     SEMANTIC
   ================================= */
-  --color-success: #3a8d6d;
-  --color-success-subtle: #e9f6f1;
-  --color-success-text: #1f5c45;
+  --color-success: #4CAF50;
+  --color-success-subtle: #E8F5E9;
+  --color-success-text: #2E7D32;
 
-  --color-warning: #c89b3c;
-  --color-warning-subtle: #fdf6e3;
-  --color-warning-text: #6f5315;
+  --color-warning: #FF9800;
+  --color-warning-subtle: #FFF3E0;
+  --color-warning-text: #E65100;
 
-  --color-error: #d25555;
-  --color-error-subtle: #fdeaea;
-  --color-error-text: #7a2d2d;
+  --color-error: #F44336;
+  --color-error-subtle: #FFEBEE;
+  --color-error-text: #B71C1C;
 
   /* ================================
-     SHADOWS — softer, less muddy
+     SHADOWS
   ================================= */
-  --shadow-sm: 0 1px 2px rgba(42, 31, 37, 0.06);
-  --shadow-md: 0 4px 10px rgba(42, 31, 37, 0.08);
-  --shadow-lg: 0 8px 20px rgba(42, 31, 37, 0.1);
+  --shadow-sm: 0 1px 2px rgba(26, 22, 64, 0.06);
+  --shadow-md: 0 4px 10px rgba(26, 22, 64, 0.08);
+  --shadow-lg: 0 8px 20px rgba(26, 22, 64, 0.1);
 
   /* Typography */
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
@@ -89,63 +89,64 @@
 ================================ */
 .dark {
   /* PRIMARY */
-  --color-primary: #f07c9c;
-  --color-primary-hover: #ff9ab5;
-  --color-primary-light: #ff9ab5;
-  --color-primary-subtle: #3a1c26;
-  --color-primary-text: #ffb3c7;
+  --color-primary: #7F77DD;
+  --color-primary-hover: #AFA9EC;
+  --color-primary-light: #AFA9EC;
+  --color-primary-subtle: #1A1640;
+  --color-primary-text: #CECBF6;
 
   /* SECONDARY */
-  --color-secondary: #b79ac8;
-  --color-secondary-hover: #d0b5e0;
-  --color-secondary-subtle: #2a1d33;
-  --color-secondary-text: #e0c8f0;
+  --color-secondary: #AFA9EC;
+  --color-secondary-hover: #7F77DD;
+  --color-secondary-subtle: #1A1640;
+  --color-secondary-text: #EEEDFE;
 
-  /* ACCENT */
-  --color-accent: #e0a189;
-  --color-accent-hover: #f0b8a0;
-  --color-accent-subtle: #3a241d;
-  --color-accent-text: #ffd2c0;
+  /* ACCENT — PCOS accent (same both modes) */
+  --color-accent: #9C27B0;
+  --color-accent-hover: #AB47BC;
+  --color-accent-subtle: #2A0D30;
+  --color-accent-text: #CE93D8;
 
-  /* BACKGROUND — cleaner dark */
-  --color-bg: #161216;
-  --color-surface: #211820;
-  --color-surface-raised: #2a1f29;
-  --color-surface-overlay: #332634;
+  /* BACKGROUND */
+  --color-bg: #0E0B2E;
+  --color-surface: #1A1640;
+  --color-surface-raised: #1A1640;
+  --color-surface-overlay: #26215C;
 
   /* TEXT */
-  --color-text-primary: #f5e8ee;
-  --color-text-secondary: #c9a9b5;
-  --color-text-tertiary: #8f6b78;
-  --color-text-on-primary: #ffffff;
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #CECBF6;
+  --color-text-tertiary: #7F77DD;
+  --color-text-on-primary: #FFFFFF;
+  --color-text-on-secondary: #1A1640;
+  --color-text-on-accent: #FFFFFF;
 
   /* BORDERS */
-  --color-border: #3a2b36;
-  --color-border-strong: #5a3f50;
-  --color-border-subtle: #261a24;
+  --color-border: #3C3489;
+  --color-border-strong: #534AB7;
+  --color-border-subtle: #26215C;
 
-  /* SEMANTIC */
-  --color-success: #5fd6a5;
-  --color-success-subtle: #0f2e23;
-  --color-success-text: #9af0c8;
+  /* SEMANTIC — same both themes per spec */
+  --color-success: #4CAF50;
+  --color-success-subtle: #0A1F0B;
+  --color-success-text: #81C784;
 
-  --color-warning: #f0c96a;
-  --color-warning-subtle: #2b220c;
-  --color-warning-text: #ffe29a;
+  --color-warning: #FF9800;
+  --color-warning-subtle: #1F1200;
+  --color-warning-text: #FFB74D;
 
-  --color-error: #ff7a7a;
-  --color-error-subtle: #2a1111;
-  --color-error-text: #ffb0b0;
+  --color-error: #F44336;
+  --color-error-subtle: #1F0505;
+  --color-error-text: #EF9A9A;
 
   /* SHADOWS */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.25);
-  --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.35);
-  --shadow-lg: 0 8px 20px rgba(0, 0, 0, 0.45);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 20px rgba(0, 0, 0, 0.5);
 }
 
 /* ================================
    Tailwind v4 @theme block
-   Maps CSS vars → Tailwind utilities
 ================================ */
 @theme {
   /* Colors — primary */
