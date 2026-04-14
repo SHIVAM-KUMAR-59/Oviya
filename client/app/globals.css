@@ -10,67 +10,67 @@
   /* ================================
      PRIMARY — Indigo/violet brand
   ================================= */
-  --color-primary: #534AB7;
-  --color-primary-hover: #7F77DD;
-  --color-primary-light: #7F77DD;
-  --color-primary-subtle: #EEEDFE;
-  --color-primary-text: #3C3489;
+  --color-primary: #534ab7;
+  --color-primary-hover: #7f77dd;
+  --color-primary-light: #7f77dd;
+  --color-primary-subtle: #eeedfe;
+  --color-primary-text: #3c3489;
 
   /* ================================
      SECONDARY — Muted violet (trust layer)
   ================================= */
-  --color-secondary: #7F77DD;
-  --color-secondary-hover: #534AB7;
-  --color-secondary-subtle: #EEEDFE;
-  --color-secondary-text: #3C3489;
+  --color-secondary: #7f77dd;
+  --color-secondary-hover: #534ab7;
+  --color-secondary-subtle: #eeedfe;
+  --color-secondary-text: #3c3489;
 
   /* ================================
      ACCENT — PCOS accent
   ================================= */
-  --color-accent: #9C27B0;
-  --color-accent-hover: #7B1FA2;
-  --color-accent-subtle: #F3E5F5;
-  --color-accent-text: #6A1280;
+  --color-accent: #9c27b0;
+  --color-accent-hover: #7b1fa2;
+  --color-accent-subtle: #f3e5f5;
+  --color-accent-text: #6a1280;
 
   /* ================================
      BACKGROUND
   ================================= */
-  --color-bg: #FFFFFF;
-  --color-surface: #F5F4FF;
-  --color-surface-raised: #F5F4FF;
-  --color-surface-overlay: #EEEDFE;
+  --color-bg: #ffffff;
+  --color-surface: #f5f4ff;
+  --color-surface-raised: #f5f4ff;
+  --color-surface-overlay: #eeedfe;
 
   /* ================================
      TEXT
   ================================= */
-  --color-text-primary: #1A1640;
-  --color-text-secondary: #534AB7;
-  --color-text-tertiary: #7F77DD;
-  --color-text-on-primary: #FFFFFF;
-  --color-text-on-secondary: #FFFFFF;
-  --color-text-on-accent: #FFFFFF;
+  --color-text-primary: #1a1640;
+  --color-text-secondary: #534ab7;
+  --color-text-tertiary: #7f77dd;
+  --color-text-on-primary: #ffffff;
+  --color-text-on-secondary: #ffffff;
+  --color-text-on-accent: #ffffff;
 
   /* ================================
      BORDERS
   ================================= */
-  --color-border: #CECBF6;
-  --color-border-strong: #AFA9EC;
-  --color-border-subtle: #EEEDFE;
+  --color-border: #cecbf6;
+  --color-border-strong: #afa9ec;
+  --color-border-subtle: #eeedfe;
 
   /* ================================
      SEMANTIC
   ================================= */
-  --color-success: #4CAF50;
-  --color-success-subtle: #E8F5E9;
-  --color-success-text: #2E7D32;
+  --color-success: #4caf50;
+  --color-success-subtle: #e8f5e9;
+  --color-success-text: #2e7d32;
 
-  --color-warning: #FF9800;
-  --color-warning-subtle: #FFF3E0;
-  --color-warning-text: #E65100;
+  --color-warning: #ff9800;
+  --color-warning-subtle: #fff3e0;
+  --color-warning-text: #e65100;
 
-  --color-error: #F44336;
-  --color-error-subtle: #FFEBEE;
-  --color-error-text: #B71C1C;
+  --color-error: #f44336;
+  --color-error-subtle: #ffebee;
+  --color-error-text: #b71c1c;
 
   /* ================================
      SHADOWS
@@ -89,55 +89,55 @@
 ================================ */
 .dark {
   /* PRIMARY */
-  --color-primary: #7F77DD;
-  --color-primary-hover: #AFA9EC;
-  --color-primary-light: #AFA9EC;
-  --color-primary-subtle: #1A1640;
-  --color-primary-text: #CECBF6;
+  --color-primary: #7f77dd;
+  --color-primary-hover: #afa9ec;
+  --color-primary-light: #afa9ec;
+  --color-primary-subtle: #1a1640;
+  --color-primary-text: #cecbf6;
 
   /* SECONDARY */
-  --color-secondary: #AFA9EC;
-  --color-secondary-hover: #7F77DD;
-  --color-secondary-subtle: #1A1640;
-  --color-secondary-text: #EEEDFE;
+  --color-secondary: #afa9ec;
+  --color-secondary-hover: #7f77dd;
+  --color-secondary-subtle: #1a1640;
+  --color-secondary-text: #eeedfe;
 
   /* ACCENT — PCOS accent (same both modes) */
-  --color-accent: #9C27B0;
-  --color-accent-hover: #AB47BC;
-  --color-accent-subtle: #2A0D30;
-  --color-accent-text: #CE93D8;
+  --color-accent: #9c27b0;
+  --color-accent-hover: #ab47bc;
+  --color-accent-subtle: #2a0d30;
+  --color-accent-text: #ce93d8;
 
   /* BACKGROUND */
-  --color-bg: #0E0B2E;
-  --color-surface: #1A1640;
-  --color-surface-raised: #1A1640;
-  --color-surface-overlay: #26215C;
+  --color-bg: #0e0b2e;
+  --color-surface: #1a1640;
+  --color-surface-raised: #1a1640;
+  --color-surface-overlay: #26215c;
 
   /* TEXT */
-  --color-text-primary: #FFFFFF;
-  --color-text-secondary: #CECBF6;
-  --color-text-tertiary: #7F77DD;
-  --color-text-on-primary: #FFFFFF;
-  --color-text-on-secondary: #1A1640;
-  --color-text-on-accent: #FFFFFF;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #cecbf6;
+  --color-text-tertiary: #7f77dd;
+  --color-text-on-primary: #ffffff;
+  --color-text-on-secondary: #1a1640;
+  --color-text-on-accent: #ffffff;
 
   /* BORDERS */
-  --color-border: #3C3489;
-  --color-border-strong: #534AB7;
-  --color-border-subtle: #26215C;
+  --color-border: #3c3489;
+  --color-border-strong: #534ab7;
+  --color-border-subtle: #26215c;
 
   /* SEMANTIC — same both themes per spec */
-  --color-success: #4CAF50;
-  --color-success-subtle: #0A1F0B;
-  --color-success-text: #81C784;
+  --color-success: #4caf50;
+  --color-success-subtle: #0a1f0b;
+  --color-success-text: #81c784;
 
-  --color-warning: #FF9800;
-  --color-warning-subtle: #1F1200;
-  --color-warning-text: #FFB74D;
+  --color-warning: #ff9800;
+  --color-warning-subtle: #1f1200;
+  --color-warning-text: #ffb74d;
 
-  --color-error: #F44336;
-  --color-error-subtle: #1F0505;
-  --color-error-text: #EF9A9A;
+  --color-error: #f44336;
+  --color-error-subtle: #1f0505;
+  --color-error-text: #ef9a9a;
 
   /* SHADOWS */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);

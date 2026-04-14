@@ -1,5 +1,5 @@
-import Navbar from '@/components/landing/Navbar';
+import HeroSection from '@/components/landing/Hero';
 
 export default function Home() {
-  return <Navbar />;
+  return <HeroSection />;
 }
