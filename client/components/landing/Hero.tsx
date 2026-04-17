@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useRef } from "react";
 import Navbar from "./Navbar";
+import Marquee from "./Marquee";
+import Problem from "./Problem";
 
 // ─── Component-specific styles (inline via style tag)
 // These are styles that can't be easily done with Tailwind
@@ -208,28 +210,6 @@ const componentStyles = `
   .bar.on  { background: var(--soft); }
   .bar.half{ background: var(--mist); opacity: .45; }
 
-  /* ── MARQUEE ── */
-  .marquee-wrap {
-    padding: 14px 0; overflow: hidden;
-    background: var(--deep);
-    border-top:    1px solid rgba(255,255,255,.04);
-    border-bottom: 1px solid rgba(255,255,255,.04);
-  }
-  .marquee-track {
-    display: flex; width: max-content;
-    animation: marquee 40s linear infinite;
-  }
-  .marquee-track:hover { animation-play-state: paused; }
-  .marquee-item { display: flex; align-items: center; gap: 28px; padding: 0 28px; }
-  .marquee-text {
-    font-size: 10px; letter-spacing: .26em; text-transform: uppercase;
-    color: rgba(255,255,255,.42); white-space: nowrap; font-weight: 300;
-  }
-  .marquee-gem {
-    width: 5px; height: 5px; background: var(--rose);
-    transform: rotate(45deg); flex-shrink: 0;
-  }
-
   /* ── SECTION SHARED ── */
   section { position: relative; }
   .wrap { max-width: 1200px; margin: 0 auto; padding: 0 64px; }
@@ -243,50 +223,6 @@ const componentStyles = `
   /* ── WAVE CONNECTORS (all SVG inline) ── */
   .wave      { display: block; width: 100%; line-height: 0; margin-bottom: -1px; }
   .wave-flip { display: block; width: 100%; line-height: 0; margin-top: -1px; }
-
-  /* ── PROBLEM ── */
-  .problem-section { background: var(--cream); padding: 120px 0 0; }
-  .problem-section .section-label { color: var(--mid); }
-  .problem-section .section-label::after { background: var(--pale); }
-  .problem-layout { display: grid; grid-template-columns: 1fr 1fr; }
-  .problem-left {
-    padding-right: 80px;
-    border-right: 1px solid var(--border-light);
-    padding-bottom: 80px;
-  }
-  .problem-left h2 {
-    font-family: 'Cormorant', serif;
-    font-size: clamp(44px,4.5vw,68px); font-weight: 300;
-    line-height: 1.02; letter-spacing: -.03em; color: var(--ink); margin-bottom: 28px;
-  }
-  .problem-left h2 em { font-style: italic; color: var(--mid); }
-  .problem-left p {
-    font-size: 16px; line-height: 1.85;
-    /* readable dark colour instead of faint lavender */
-    color: #4a3f6b; font-weight: 300; max-width: 380px;
-  }
-  .problem-right { border-left: 1px solid var(--border-light); margin-left: -1px; }
-  .problem-card {
-    padding: 36px 48px; border-bottom: 1px solid var(--border-light);
-    position: relative; overflow: hidden; transition: background .4s;
-  }
-  .problem-card:last-child { border-bottom: none; }
-  .problem-card::before {
-    content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
-    background: linear-gradient(180deg, var(--rose), var(--soft));
-    transform: scaleY(0); transform-origin: top; transition: transform .45s;
-  }
-  .problem-card:hover { background: var(--blush); }
-  .problem-card:hover::before { transform: scaleY(1); }
-  .problem-num {
-    font-family: 'Cormorant', serif; font-size: 11px; font-style: italic;
-    color: var(--pale); letter-spacing: .15em; margin-bottom: 12px;
-  }
-  .problem-card h3 {
-    font-family: 'Cormorant', serif; font-size: 22px; font-weight: 500;
-    color: var(--ink); margin-bottom: 10px; letter-spacing: -.01em;
-  }
-  .problem-card p { font-size: 14px; line-height: 1.75; color: #4a3f6b; font-weight: 300; }
 
   /* ── FEATURES ── */
   .features-section { background: var(--ink); padding: 120px 0; position: relative; }
@@ -607,17 +543,6 @@ const Wave = ({ from, to, flip = false }) => (
   </svg>
 );
 
-// ─── Marquee items ────────────────────────────────────────────────────────
-const marqueeItems = [
-  "Irregular cycles understood",
-  "Indian food intelligence",
-  "Mood & energy tracking",
-  "Doctor-ready reports",
-  "No 28-day assumptions",
-  "Built with 110+ women",
-  "Evidence-led care",
-];
-
 export default function OviyaLanding() {
   const [heroForm, setHeroForm] = useState({ val: "", success: false });
   const [ctaForm,  setCtaForm]  = useState({ val: "", success: false });
@@ -778,50 +703,13 @@ export default function OviyaLanding() {
       </section>
 
       {/* ── MARQUEE ── */}
-      <div className="marquee-wrap">
-        <div className="marquee-track">
-          {[...marqueeItems, ...marqueeItems].map((text, i) => (
-            <div key={i} className="marquee-item">
-              <span className="marquee-text">{text}</span>
-              <div className="marquee-gem" />
-            </div>
-          ))}
-        </div>
-      </div>
+      <Marquee />
 
       {/* deep → cream wave */}
       <Wave from="var(--deep)" to="var(--cream)" />
 
       {/* ── PROBLEM ── */}
-      <section className="problem-section" id="problem">
-        <div className="wrap">
-          <div className="section-label reveal">The problem no one is solving</div>
-          <div className="problem-layout">
-            <div className="problem-left reveal">
-              <h2>You are not<br /><em>difficult</em><br />to understand.</h2>
-              <p>
-                You've been told to lose weight. Your tracker assumes 28 days. You've explained your
-                symptoms to three doctors and still walked out feeling unheard. Oviya starts where
-                that frustration begins.
-              </p>
-            </div>
-            <div className="problem-right">
-              {[
-                { n:"01", title:"Cycle tracking", h:"Your cycle is never 28 days.", p:"It's 19 days, then 47, then 31. Every existing app breaks or makes you feel broken. Oviya learns your actual patterns — not a calendar assumption." },
-                { n:"02", title:"Symptoms",       h:"Everything is connected.",       p:"Acne, fatigue, hair fall, mood swings, sleep disruption. These aren't separate problems. Oviya tracks how each connects to your cycle." },
-                { n:"03", title:"Advice",          h:"Generic advice doesn't work.",   p:"Western food databases don't understand what rajma or methi does to your body. Oviya is built around the food you actually eat." },
-              ].map((c, i) => (
-                <div key={c.n} className={`problem-card reveal rd${i+1}`} {...hoverProps}>
-                  <div className="problem-num">— {c.n}. {c.title}</div>
-                  <h3>{c.h}</h3>
-                  <p>{c.p}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
+      <Problem/>
       {/* cream → ink */}
       <Wave from="var(--cream)" to="var(--ink)" flip />
 
