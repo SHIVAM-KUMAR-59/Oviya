@@ -1,6 +1,10 @@
-import React from 'react';
+import React from "react";
 
-const Problem = ({ hoverProps }: any) => {
+type Props = {
+  hoverProps?: React.HTMLAttributes<HTMLDivElement>;
+};
+
+const Problem = ({ hoverProps }: Props) => {
   const cards = [
     {
       n: "01",

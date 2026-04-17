@@ -1,0 +1,81 @@
+const Founder = () => {
+  return (
+    <section
+      id="story"
+      className="relative overflow-hidden bg-ink py-28"
+    >
+      {/* Decorative circle (top-right) */}
+      <div className="pointer-events-none absolute -top-52 -right-52 h-175 w-175 rounded-full border border-[rgba(197,178,232,0.04)]" />
+
+      {/* Bottom gradient glow */}
+      <div className="pointer-events-none absolute -bottom-20 left-0 h-125 w-125 bg-[radial-gradient(circle,rgba(74,47,122,0.16),transparent_70%)]" />
+
+      <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-16">
+        
+        {/* Section Label */}
+        <div className="mb-14 flex items-center gap-4 text-[10px] uppercase tracking-[0.32em] text-mist">
+          Built by someone like you
+          <div className="h-px flex-1 bg-[rgba(197,178,232,0.1)]" />
+        </div>
+
+        {/* Grid */}
+        <div className="grid items-center gap-16 md:grid-cols-[400px_1fr] md:gap-24">
+          
+          {/* Portrait */}
+          <div className="relative">
+            
+            <div className="relative flex aspect-3/4 items-center justify-center overflow-hidden border border-[rgba(197,178,232,0.08)] bg-[linear-gradient(160deg,var(--deep),var(--ink2))]">
+              
+              {/* subtle noise/dots overlay */}
+              <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-size-[30px_30px]" />
+
+              {/* Monogram */}
+              <div className="relative z-10 text-[140px] font-serif italic font-light text-[rgba(197,178,232,0.12)]">
+                O
+              </div>
+
+              {/* Caption */}
+              <div className="absolute bottom-0 left-0 right-0 border-t border-[rgba(255,255,255,0.06)] bg-[rgba(35,24,72,0.92)] px-6 py-4 backdrop-blur-md">
+                <strong className="block text-[13px] tracking-[0.05em] text-white font-normal">
+                  Founder, Oviya
+                </strong>
+                <span className="text-[10px] uppercase tracking-[0.14em] text-white/40">
+                  Built in India · For Indian women
+                </span>
+              </div>
+            </div>
+
+            {/* Accent circle */}
+            <div className="absolute top-5 -right-4 h-18 w-18 rounded-full border border-[rgba(192,115,122,0.3)]" />
+          </div>
+
+          {/* Content */}
+          <div>
+            <h2 className="mb-8 text-[clamp(40px,3.8vw,58px)] leading-[1.05] tracking-[-0.03em] text-white font-serif font-light">
+              Years of confusion became<br />
+              a <em className="italic text-mist">reason</em> to build.
+            </h2>
+
+            <p className="mb-5 text-[16px] leading-[1.9] text-white/50 font-light">
+              I was told to just lose weight. I used every cycle tracking app and none of them ever understood that my cycle is never the same length twice. I sat in doctor&apos;s offices explaining the same symptoms, year after year, and walked out with the same vague advice.
+            </p>
+
+            <p className="mb-5 text-[16px] leading-[1.9] text-white/50 font-light">
+              I know how lonely PCOS can feel when nothing — no app, no doctor, no piece of advice — seems designed for you. That loneliness is what built Oviya.
+            </p>
+
+            <p className="mb-5 text-[16px] leading-[1.9] text-white/50 font-light">
+              Not a side project. Not a feature tacked on somewhere. A company built from the ground up for the 1 in 5 women in India living with PCOS — and finally deserving better.
+            </p>
+
+            <div className="mt-9 border-t border-[rgba(197,178,232,0.1)] pt-9 text-[26px] italic font-serif text-mist">
+              — With you, always.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Founder;
