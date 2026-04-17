@@ -1,129 +1,105 @@
-import { ArrowRight, Flower2, Menu, X } from 'lucide-react';
-import { useEffect, useState } from 'react'
-import ThemeToggle from '../ui/ThemeToggle';
-
-const NAV_LINKS = ['Hero', 'Features', 'About', 'Community', 'Blog'];
+import { useEffect, useRef, useState } from 'react';
 
 const Navbar = () => {
-      const [menuOpen, setMenuOpen] = useState(false);
-      const [scrolled, setScrolled] = useState(false);
+  const cursorRef = useRef<HTMLDivElement | null>(null);
+  const ringRef = useRef<HTMLDivElement | null>(null);
 
-      useEffect(() => {
-          const handleScroll = () => setScrolled(window.scrollY > 20);
-          window.addEventListener('scroll', handleScroll, { passive: true });
-          return () => window.removeEventListener('scroll', handleScroll);
-        }, []);
+  const expandCursor = () => {
+    if (cursorRef.current) {
+      cursorRef.current.style.width = '18px';
+      cursorRef.current.style.height = '18px';
+    }
+    if (ringRef.current) {
+      ringRef.current.style.width = '54px';
+      ringRef.current.style.height = '54px';
+      ringRef.current.style.borderColor = 'var(--rose)';
+      ringRef.current.style.opacity = '0.8';
+    }
+  };
+
+  const contractCursor = () => {
+    if (cursorRef.current) {
+      cursorRef.current.style.width = '10px';
+      cursorRef.current.style.height = '10px';
+    }
+    if (ringRef.current) {
+      ringRef.current.style.width = '36px';
+      ringRef.current.style.height = '36px';
+      ringRef.current.style.borderColor = 'var(--soft)';
+      ringRef.current.style.opacity = '0.55';
+    }
+  };
+
+  const hoverProps = {
+    onMouseEnter: expandCursor,
+    onMouseLeave: contractCursor,
+  };
+
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <header
-        className="fixed top-0 right-0 left-0 z-50 transition-all duration-300 bg-transparent"
-        style={{
-          backdropFilter: scrolled ? 'blur(16px)' : 'none',
-          borderBottom: scrolled
-            ? '1px solid var(--color-border-subtle)'
-            : '1px solid transparent',
-        }}
+      className={`fixed top-0 right-0 left-0 z-50 flex w-full items-center justify-center ${
+        scrolled
+          ? 'border-border-light border-b bg-[rgba(251,249,246,0.93)] py-3.5 backdrop-blur-xl'
+          : 'bg-transparent py-5.5'
+      }`}
+    >
+      <nav
+        className={`mx-auto flex w-full max-w-7xl items-center justify-between px-6 transition-all duration-300 md:px-14`}
       >
-        <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8">
+        <div className="mx-auto flex w-full max-w-6xl items-center justify-between">
           {/* Logo */}
-          <a href="#" className="group flex items-center gap-2" aria-label="Oviya home">
-            <div
-              className="flex h-8 w-8 items-center justify-center rounded-xl transition-transform duration-200 group-hover:scale-105"
-              style={{ background: 'var(--color-primary)' }}
-            >
-              <Flower2 size={16} color="white" strokeWidth={2} />
-            </div>
-            <span
-              className="text-lg font-semibold tracking-tight"
-              style={{ color: 'var(--color-text-primary)' }}
-            >
-              Oviya
-            </span>
-          </a>
-
-          {/* Desktop links */}
-          <ul className="hidden items-center gap-1 md:flex">
-            {NAV_LINKS.map((link) => (
-              <li key={link}>
-                <a
-                  href={`#${link.toLowerCase()}`}
-                  className="hover:bg-primary-subtle rounded-lg px-4 py-2 text-sm transition-all duration-150"
-                  style={{ color: 'var(--color-text-secondary)' }}
-                >
-                  {link}
-                </a>
-              </li>
-            ))}
-          </ul>
-
-          {/* Desktop CTA */}
-          <div className="flex items-center justify-center gap-6">
-            <ThemeToggle />
-            <a
-              href="#waitlist"
-              className="hidden items-center gap-1.5 rounded-xl px-4 py-2 text-sm font-medium transition-all duration-150 hover:opacity-90 active:scale-95 md:inline-flex"
-              style={{
-                background: 'var(--color-primary)',
-                color: 'var(--color-text-on-primary)',
-              }}
-            >
-              Join Waitlist
-              <ArrowRight size={14} />
-            </a>
-
-            {/* Mobile menu toggle */}
-            <button
-              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-              onClick={() => setMenuOpen((v) => !v)}
-              className="rounded-lg p-2 transition-colors duration-150 md:hidden"
-              style={{ color: 'var(--color-text-primary)' }}
-            >
-              {menuOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
+          <div
+            className={`text-[26px] font-medium tracking-[0.06em] transition-colors duration-500 ${
+              scrolled ? 'text-ink' : 'text-white'
+            }`}
+            style={{ fontFamily: 'Cormorant, serif' }}
+          >
+            Oviya
           </div>
-        </nav>
 
-        {/* Mobile drawer */}
-        <div
-          className={`overflow-hidden transition-all duration-300 md:hidden ${
-            menuOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'
-          }`}
-          style={{
-            background: 'rgba(255,255,255,0.97)',
-            backdropFilter: 'blur(16px)',
-            borderBottom: '1px solid var(--color-border-subtle)',
-          }}
-        >
-          <ul className="flex flex-col gap-1 px-5 pt-2 pb-4">
-            {NAV_LINKS.map((link) => (
-              <li key={link}>
-                <a
-                  href={`#${link.toLowerCase()}`}
-                  onClick={() => setMenuOpen(false)}
-                  className="hover:bg-primary-subtle block rounded-lg px-3 py-2.5 text-sm transition-colors duration-150"
-                  style={{ color: 'var(--color-text-primary)' }}
-                >
-                  {link}
-                </a>
-              </li>
-            ))}
-            <li className="pt-1">
-              <a
-                href="#waitlist"
-                onClick={() => setMenuOpen(false)}
-                className="flex w-full items-center justify-center gap-1.5 rounded-xl py-2.5 text-sm font-medium transition-all duration-150 active:scale-95"
-                style={{
-                  background: 'var(--color-primary)',
-                  color: 'var(--color-text-on-primary)',
-                }}
-              >
-                Join Waitlist <ArrowRight size={14} />
-              </a>
-            </li>
-          </ul>
+          {/* Links */}
+          <div className="hidden items-center gap-9 md:flex">
+            {['The Problem:#problem', 'Features:#features', 'Our Story:#story'].map(
+              (s) => {
+                const [label, href] = s.split(':');
+                return (
+                  <a
+                    key={label}
+                    href={href}
+                    {...hoverProps}
+                    className={`text-[11px] tracking-[0.2em] uppercase transition-colors duration-300 ${
+                      scrolled
+                        ? 'text-mid hover:text-violet'
+                        : 'text-white/50 hover:text-white'
+                    }`}
+                  >
+                    {label}
+                  </a>
+                );
+              },
+            )}
+          </div>
+
+          {/* CTA */}
+          <a
+            href="#cta"
+            {...hoverProps}
+            className="bg-rose border-rose rounded-md hover:bg-rose-lt border px-6 py-2.5 text-[10px] tracking-[0.22em] text-white uppercase transition-all duration-200 hover:-translate-y-px"
+          >
+            Join Waitlist
+          </a>
         </div>
-      </header>
+      </nav>
+    </header>
+  );
+};
 
-  )
-}
-
-export default Navbar
+export default Navbar;

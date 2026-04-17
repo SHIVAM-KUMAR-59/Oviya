@@ -1,207 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Jost:wght@200;300;400;500&display=swap');
 @import 'tailwindcss';
 
-/* ================================
-   PeriodTrack — design tokens
-   globals.css
-================================ */
 
-/* Light mode (default) */
-:root {
-  /* ================================
-     PRIMARY — Indigo/violet brand
-  ================================= */
-  --color-primary: #534ab7;
-  --color-primary-hover: #7f77dd;
-  --color-primary-light: #7f77dd;
-  --color-primary-subtle: #eeedfe;
-  --color-primary-text: #3c3489;
+  :root {
+    --ink:       #0f0b1e;
+    --ink2:      #1a1230;
+    --deep:      #231848;
+    --violet:    #4a2f7a;
+    --mid:       #6b4fa0;
+    --soft:      #9b7fd4;
+    --mist:      #c5b2e8;
+    --pale:      #e8e0f5;
+    --blush:     #f2eefb;
+    --parchment: #f7f5f0;
+    --cream:     #fbf9f6;
 
-  /* ================================
-     SECONDARY — Muted violet (trust layer)
-  ================================= */
-  --color-secondary: #7f77dd;
-  --color-secondary-hover: #534ab7;
-  --color-secondary-subtle: #eeedfe;
-  --color-secondary-text: #3c3489;
+    --rose:      #c0737a;   /* replaces gold — warm, readable on dark & light */
+    --rose-lt:   #dda0a6;
+    --rose-pale: #f0d8da;
 
-  /* ================================
-     ACCENT — PCOS accent
-  ================================= */
-  --color-accent: #9c27b0;
-  --color-accent-hover: #7b1fa2;
-  --color-accent-subtle: #f3e5f5;
-  --color-accent-text: #6a1280;
+    --border-dark:  rgba(155,127,212,0.2);
+    --border-light: rgba(155,127,212,0.15);
+  }
 
-  /* ================================
-     BACKGROUND
-  ================================= */
-  --color-bg: #ffffff;
-  --color-surface: #f5f4ff;
-  --color-surface-raised: #f5f4ff;
-  --color-surface-overlay: #eeedfe;
-
-  /* ================================
-     TEXT
-  ================================= */
-  --color-text-primary: #1a1640;
-  --color-text-secondary: #534ab7;
-  --color-text-tertiary: #7f77dd;
-  --color-text-on-primary: #ffffff;
-  --color-text-on-secondary: #ffffff;
-  --color-text-on-accent: #ffffff;
-
-  /* ================================
-     BORDERS
-  ================================= */
-  --color-border: #cecbf6;
-  --color-border-strong: #afa9ec;
-  --color-border-subtle: #eeedfe;
-
-  /* ================================
-     SEMANTIC
-  ================================= */
-  --color-success: #4caf50;
-  --color-success-subtle: #e8f5e9;
-  --color-success-text: #2e7d32;
-
-  --color-warning: #ff9800;
-  --color-warning-subtle: #fff3e0;
-  --color-warning-text: #e65100;
-
-  --color-error: #f44336;
-  --color-error-subtle: #ffebee;
-  --color-error-text: #b71c1c;
-
-  /* ================================
-     SHADOWS
-  ================================= */
-  --shadow-sm: 0 1px 2px rgba(26, 22, 64, 0.06);
-  --shadow-md: 0 4px 10px rgba(26, 22, 64, 0.08);
-  --shadow-lg: 0 8px 20px rgba(26, 22, 64, 0.1);
-
-  /* Typography */
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  @theme {
+   --color-ink: var(--ink);
+   --color-ink2: var(--ink2);
+   --color-deep: var(--deep);
+   --color-violet: var(--violet);
+   --color-mid: var(--mid);
+   --color-soft: var(--soft);
+   --color-mist: var(--mist);
+   --color-pale: var(--pale);
+   --color-blush: var(--blush);
+   --color-parchment: var(--parchment);
+   --color-cream: var(--cream);
+   --color-rose: var(--rose);
+   --color-rose-lt: var(--rose-lt);
+   --color-rose-pale: var(--rose-pale);
+   --color-border-dark: var(--border-dark);
+   --color-border-light: var(--border-light);
 }
 
-/* ================================
-   Dark mode
-================================ */
-.dark {
-  /* PRIMARY */
-  --color-primary: #7f77dd;
-  --color-primary-hover: #afa9ec;
-  --color-primary-light: #afa9ec;
-  --color-primary-subtle: #1a1640;
-  --color-primary-text: #cecbf6;
 
-  /* SECONDARY */
-  --color-secondary: #afa9ec;
-  --color-secondary-hover: #7f77dd;
-  --color-secondary-subtle: #1a1640;
-  --color-secondary-text: #eeedfe;
+  html { scroll-behavior: smooth; font-size: 16px; }
 
-  /* ACCENT — PCOS accent (same both modes) */
-  --color-accent: #9c27b0;
-  --color-accent-hover: #ab47bc;
-  --color-accent-subtle: #2a0d30;
-  --color-accent-text: #ce93d8;
-
-  /* BACKGROUND */
-  --color-bg: #0e0b2e;
-  --color-surface: #1a1640;
-  --color-surface-raised: #1a1640;
-  --color-surface-overlay: #26215c;
-
-  /* TEXT */
-  --color-text-primary: #ffffff;
-  --color-text-secondary: #cecbf6;
-  --color-text-tertiary: #7f77dd;
-  --color-text-on-primary: #ffffff;
-  --color-text-on-secondary: #1a1640;
-  --color-text-on-accent: #ffffff;
-
-  /* BORDERS */
-  --color-border: #3c3489;
-  --color-border-strong: #534ab7;
-  --color-border-subtle: #26215c;
-
-  /* SEMANTIC — same both themes per spec */
-  --color-success: #4caf50;
-  --color-success-subtle: #0a1f0b;
-  --color-success-text: #81c784;
-
-  --color-warning: #ff9800;
-  --color-warning-subtle: #1f1200;
-  --color-warning-text: #ffb74d;
-
-  --color-error: #f44336;
-  --color-error-subtle: #1f0505;
-  --color-error-text: #ef9a9a;
-
-  /* SHADOWS */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 8px 20px rgba(0, 0, 0, 0.5);
-}
-
-/* ================================
-   Tailwind v4 @theme block
-================================ */
-@theme {
-  /* Colors — primary */
-  --color-primary: var(--color-primary);
-  --color-primary-hover: var(--color-primary-hover);
-  --color-primary-light: var(--color-primary-light);
-  --color-primary-subtle: var(--color-primary-subtle);
-  --color-primary-text: var(--color-primary-text);
-
-  /* Colors — secondary */
-  --color-secondary: var(--color-secondary);
-  --color-secondary-hover: var(--color-secondary-hover);
-  --color-secondary-subtle: var(--color-secondary-subtle);
-  --color-secondary-text: var(--color-secondary-text);
-
-  /* Colors — accent */
-  --color-accent: var(--color-accent);
-  --color-accent-hover: var(--color-accent-hover);
-  --color-accent-subtle: var(--color-accent-subtle);
-  --color-accent-text: var(--color-accent-text);
-
-  /* Colors — backgrounds */
-  --color-bg: var(--color-bg);
-  --color-surface: var(--color-surface);
-  --color-surface-raised: var(--color-surface-raised);
-  --color-surface-overlay: var(--color-surface-overlay);
-
-  /* Colors — text */
-  --color-text-primary: var(--color-text-primary);
-  --color-text-secondary: var(--color-text-secondary);
-  --color-text-tertiary: var(--color-text-tertiary);
-  --color-text-on-primary: var(--color-text-on-primary);
-
-  /* Colors — borders */
-  --color-border: var(--color-border);
-  --color-border-strong: var(--color-border-strong);
-  --color-border-subtle: var(--color-border-subtle);
-
-  /* Colors — semantic */
-  --color-success: var(--color-success);
-  --color-success-subtle: var(--color-success-subtle);
-  --color-success-text: var(--color-success-text);
-  --color-warning: var(--color-warning);
-  --color-warning-subtle: var(--color-warning-subtle);
-  --color-warning-text: var(--color-warning-text);
-  --color-error: var(--color-error);
-  --color-error-subtle: var(--color-error-subtle);
-  --color-error-text: var(--color-error-text);
-
-  /* Font family */
-  --font-family-sans: var(--font-sans);
-  --font-family-mono: var(--font-mono);
-
-  /* Shadows */
-  --shadow-sm: var(--shadow-sm);
-  --shadow-md: var(--shadow-md);
-  --shadow-lg: var(--shadow-lg);
-}
+  body {
+      font-family: 'Jost', system-ui, sans-serif;
+      font-weight: 300;
+      background: var(--cream);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      cursor: none;
+      padding: 0;
+      margin: 0;
+  }
