@@ -1,4 +1,26 @@
+"use client";
+
+import { useEffect } from "react";
+
 const Founder = () => {
+  // Scroll reveal effect
+  useEffect(() => {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    const revealElements = document.querySelectorAll(".founder-reveal");
+    revealElements.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+
   return (
     <section
       id="story"
@@ -13,13 +35,13 @@ const Founder = () => {
       <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-16">
         
         {/* Section Label */}
-        <div className="mb-14 flex items-center gap-4 text-[10px] uppercase tracking-[0.32em] text-mist">
+        <div className="founder-reveal mb-14 flex items-center gap-4 text-[10px] uppercase tracking-[0.32em] text-mist">
           Built by someone like you
           <div className="h-px flex-1 bg-[rgba(197,178,232,0.1)]" />
         </div>
 
         {/* Grid */}
-        <div className="grid items-center gap-16 md:grid-cols-[400px_1fr] md:gap-24">
+        <div className="founder-reveal grid items-center gap-16 md:grid-cols-[400px_1fr] md:gap-24">
           
           {/* Portrait */}
           <div className="relative">
@@ -51,24 +73,24 @@ const Founder = () => {
 
           {/* Content */}
           <div>
-            <h2 className="mb-8 text-[clamp(40px,3.8vw,58px)] leading-[1.05] tracking-[-0.03em] text-white font-serif font-light">
+            <h2 className="founder-reveal mb-8 text-[clamp(40px,3.8vw,58px)] leading-[1.05] tracking-[-0.03em] text-white font-serif font-light">
               Years of confusion became<br />
               a <em className="italic text-mist">reason</em> to build.
             </h2>
 
-            <p className="mb-5 text-[16px] leading-[1.9] text-white/50 font-light">
+            <p className="founder-reveal mb-5 text-[16px] leading-[1.9] text-white/50 font-light">
               I was told to just lose weight. I used every cycle tracking app and none of them ever understood that my cycle is never the same length twice. I sat in doctor&apos;s offices explaining the same symptoms, year after year, and walked out with the same vague advice.
             </p>
 
-            <p className="mb-5 text-[16px] leading-[1.9] text-white/50 font-light">
+            <p className="founder-reveal mb-5 text-[16px] leading-[1.9] text-white/50 font-light">
               I know how lonely PCOS can feel when nothing — no app, no doctor, no piece of advice — seems designed for you. That loneliness is what built Oviya.
             </p>
 
-            <p className="mb-5 text-[16px] leading-[1.9] text-white/50 font-light">
+            <p className="founder-reveal mb-5 text-[16px] leading-[1.9] text-white/50 font-light">
               Not a side project. Not a feature tacked on somewhere. A company built from the ground up for the 1 in 5 women in India living with PCOS — and finally deserving better.
             </p>
 
-            <div className="mt-9 border-t border-[rgba(197,178,232,0.1)] pt-9 text-[26px] italic font-serif text-mist">
+            <div className="founder-reveal mt-9 border-t border-[rgba(197,178,232,0.1)] pt-9 text-[26px] italic font-serif text-mist">
               — With you, always.
             </div>
           </div>

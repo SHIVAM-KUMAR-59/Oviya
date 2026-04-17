@@ -1,28 +1,53 @@
-import React from "react";
+"use client";
 
-type Props = {
-  hoverProps?: React.HTMLAttributes<HTMLDivElement>;
+import React, { useEffect } from "react";
+
+type HoverProps = {
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 };
 
-const Voices = ({ hoverProps }: Props) => {
+interface VoicesProps {
+  hoverProps?: HoverProps;
+}
+
+const Voices = ({ hoverProps }: VoicesProps) => {
+  // Scroll reveal effect
+  useEffect(() => {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    const revealElements = document.querySelectorAll(".voices-reveal");
+    revealElements.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+
   return (
     <section className="relative overflow-hidden bg-parchment py-28">
       
       {/* Big decorative quote */}
       <span className="pointer-events-none absolute -top-24 -left-16 text-[560px] leading-none text-[rgba(197,178,232,0.07)] font-light font-serif select-none">
-        “
+        "
       </span>
 
       <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-16">
         
         {/* Section Label */}
-        <div className="mb-14 flex items-center gap-4 text-[10px] uppercase tracking-[0.32em] text-mid">
+        <div className="voices-reveal mb-14 flex items-center gap-4 text-[10px] uppercase tracking-[0.32em] text-mid">
           110 women spoke. We listened.
           <div className="h-px flex-1 bg-pale" />
         </div>
 
         {/* Header */}
-        <div className="mb-16 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+        <div className="voices-reveal mb-16 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           
           <h2 className="max-w-xl text-[clamp(40px,4vw,62px)] leading-[1.02] tracking-[-0.03em] text-ink font-serif font-light">
             What women with PCOS<br />
@@ -58,7 +83,7 @@ const Voices = ({ hoverProps }: Props) => {
             <div
               key={i}
               {...hoverProps}
-              className="group bg-parchment px-9 py-11 transition-all duration-300 hover:-translate-y-1 hover:bg-blush]"
+              className={`voices-reveal group bg-parchment px-9 py-11 transition-all duration-300 hover:-translate-y-1 hover:bg-blush reveal-delay-${i + 1}`}
             >
               {/* Quote mark */}
               <span className="mb-2 block text-[70px] leading-none text-pale font-serif font-light transition-colors duration-300 group-hover:text-mist">

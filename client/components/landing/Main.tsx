@@ -11,92 +11,6 @@ import CTA from "./CTA";
 import Footer from "./Footer";
 import Hero from "./Hero";
 
-// ─── Component-specific styles (inline via style tag)
-// These are styles that can't be easily done with Tailwind
-const componentStyles = `
-
-  ::selection { background: var(--mid); color: #fff; }
-
-  /* ── CURSOR ── */
-  #cursor {
-    position: fixed; width: 10px; height: 10px;
-    background: var(--rose); border-radius: 50%;
-    pointer-events: none; z-index: 9999;
-    transform: translate(-50%,-50%);
-    transition: width .3s, height .3s, background .3s;
-    mix-blend-mode: multiply;
-  }
-  #cursor-ring {
-    position: fixed; width: 36px; height: 36px;
-    border: 1px solid var(--soft); border-radius: 50%;
-    pointer-events: none; z-index: 9998;
-    transform: translate(-50%,-50%);
-    transition: width .3s, height .3s, opacity .3s, border-color .3s;
-    opacity: .55;
-  }
-
-  /* ── SECTION SHARED ── */
-  section { position: relative; }
-  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 64px; }
-  .section-label {
-    font-size: 10px; letter-spacing: .32em; text-transform: uppercase;
-    font-weight: 400; display: flex; align-items: center; gap: 16px;
-    margin-bottom: 52px;
-  }
-  .section-label::after { content: ''; flex: 1; height: 1px; }
-
-  /* ── WAVE CONNECTORS (all SVG inline) ── */
-  .wave      { display: block; width: 100%; line-height: 0; margin-bottom: -1px; }
-  .wave-flip { display: block; width: 100%; line-height: 0; margin-top: -1px; }
-
-  /* ── SCROLL REVEAL ── */
-  .reveal { opacity: 0; transform: translateY(30px); transition: opacity .9s, transform .9s; }
-  .reveal.in { opacity: 1; transform: translateY(0); }
-  .rd1 { transition-delay: .1s; } .rd2 { transition-delay: .2s; }
-  .rd3 { transition-delay: .3s; } .rd4 { transition-delay: .4s; }
-
-  /* ── KEYFRAMES ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(28px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 1060px) {
-    .hero { grid-template-columns: 1fr; }
-    .hero-right { display: none; }
-    .hero-left { padding: 140px 44px 100px; }
-    nav, nav.scrolled { padding: 18px 32px; }
-    .wrap { padding: 0 36px; }
-    .problem-layout, .features-intro, .founder-grid, .cta-grid {
-      grid-template-columns: 1fr; gap: 48px;
-    }
-    .problem-left {
-      border-right: none; padding-right: 0;
-      border-bottom: 1px solid var(--border-light); padding-bottom: 52px;
-    }
-    .problem-right { border-left: none; }
-    .features-grid { grid-template-columns: 1fr 1fr; }
-    .quotes-grid { grid-template-columns: 1fr; }
-    .cta-box { padding: 64px 40px; }
-    footer { grid-template-columns: 1fr; gap: 14px; text-align: center; padding: 36px; }
-    .footer-right { text-align: center; }
-    .voices-header { flex-direction: column; align-items: flex-start; gap: 24px; }
-  }
-  @media (max-width: 640px) {
-    .features-grid { grid-template-columns: 1fr; }
-    .hero-form { flex-direction: column; }
-    .hero-form input { border-right: 1px solid rgba(255,255,255,.12); }
-    .cta-form { flex-direction: column; }
-    .cta-form input { border-right: 1px solid var(--border-light); }
-    .stats-block { grid-template-columns: 1fr; }
-    .stat-cell.wide { grid-column: auto; }
-    nav .nav-links { display: none; }
-  }
-`;
-
 // ─── Reusable wave SVG shapes ─────────────────────────────────────────────
 function Wave({ from, to, flip = false }: { from: string; to: string; flip?: boolean }) {
   return (
@@ -118,7 +32,6 @@ function Wave({ from, to, flip = false }: { from: string; to: string; flip?: boo
 }
 
 export default function OviyaLanding() {
-  
   const [ctaForm, setCtaForm] = useState({ val: "", success: false });
   const cursorRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
@@ -153,21 +66,6 @@ export default function OviyaLanding() {
       document.removeEventListener("mousemove", onMove);
       cancelAnimationFrame(raf);
     };
-  }, []);
-
-  // nav + reveal
-  useEffect(() => {
-    const io = new IntersectionObserver(
-      (entries) =>
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add("in");
-            io.unobserve(e.target);
-          }
-        }),
-      { threshold: 0.1 }
-    );
-    document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
   }, []);
 
   // hover cursor expansion
@@ -211,15 +109,15 @@ export default function OviyaLanding() {
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: componentStyles }} />
-      <div id="cursor"      ref={cursorRef} />
+      <div id="cursor" ref={cursorRef} />
       <div id="cursor-ring" ref={ringRef} />
 
       {/* ── NAV ── */}
-      <Navbar />
+      <Navbar hoverProps={hoverProps} />
 
       {/* ── HERO ── */}
-      <Hero />
+      <Hero hoverProps={hoverProps} />
+      
       {/* ── MARQUEE ── */}
       <Marquee />
 
@@ -228,6 +126,7 @@ export default function OviyaLanding() {
 
       {/* ── PROBLEM ── */}
       <Problem hoverProps={hoverProps} />
+      
       {/* cream → ink */}
       <Wave from="var(--cream)" to="var(--ink)" flip />
 
@@ -258,7 +157,7 @@ export default function OviyaLanding() {
       />
 
       {/* ── FOOTER ── */}
-     <Footer />
+      <Footer />
     </>
   );
 }

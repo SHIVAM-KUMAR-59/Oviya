@@ -1,10 +1,17 @@
-import React from "react";
+"use client";
 
-type Props = {
-  hoverProps?: React.HTMLAttributes<HTMLDivElement>;
+import React, { useEffect } from "react";
+
+type HoverProps = {
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 };
 
-const Features = ({ hoverProps }: Props) => {
+interface FeaturesProps {
+  hoverProps?: HoverProps;
+}
+
+const Features = ({ hoverProps }: FeaturesProps) => {
   const features = [
     {
       n: "01",
@@ -32,6 +39,24 @@ const Features = ({ hoverProps }: Props) => {
     },
   ];
 
+  // Scroll reveal effect
+  useEffect(() => {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    const revealElements = document.querySelectorAll(".features-reveal");
+    revealElements.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+
   return (
     <section
       id="features"
@@ -46,13 +71,13 @@ const Features = ({ hoverProps }: Props) => {
       <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-12">
         
         {/* Section Label */}
-        <div className="flex items-center gap-4 text-[10px] tracking-[0.32em] uppercase text-mist mb-12">
+        <div className="features-reveal flex items-center gap-4 text-[10px] tracking-[0.32em] uppercase text-mist mb-12">
           What makes Oviya different
           <div className="flex-1 h-px bg-[rgba(197,178,232,0.1)]" />
         </div>
 
         {/* Intro */}
-        <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-end mb-16 md:mb-18">
+        <div className="features-reveal grid md:grid-cols-2 gap-12 md:gap-20 items-end mb-16 md:mb-18">
           
           <h2 className="font-[Cormorant] text-[clamp(44px,4vw,64px)] font-light leading-[1.02] tracking-[-0.03em] text-white">
             Specific support,<br />
@@ -66,11 +91,11 @@ const Features = ({ hoverProps }: Props) => {
 
         {/* Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/10 border border-white/10">
-          {features.map((f) => (
+          {features.map((f, index) => (
             <div
               key={f.n}
               {...hoverProps}
-              className="group relative bg-ink px-8 py-11 overflow-hidden transition-colors duration-300 hover:bg-ink2"
+              className={`features-reveal group relative bg-ink px-8 py-11 overflow-hidden transition-colors duration-300 hover:bg-ink2 reveal-delay-${index + 1}`}
             >
               {/* Bottom gradient line */}
               <div className="absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-rose to-transparent scale-x-0 transition-transform duration-500 group-hover:scale-x-100" />

@@ -1,12 +1,20 @@
-import React, { useState } from 'react'
+"use client";
 
-type Props = {
-  hoverProps?: React.HTMLAttributes<HTMLDivElement>;
+import React, { useState, useEffect } from "react";
+
+type HoverProps = {
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 };
 
-const Hero = ({ hoverProps }: Props) => {
+interface HeroProps {
+  hoverProps?: HoverProps;
+}
+
+const Hero = ({ hoverProps }: HeroProps) => {
   const [heroForm, setHeroForm] = useState({ val: "", success: false });
-    const submitForm = (
+
+  const submitForm = (
     formState: { val: string; success: boolean },
     setForm: React.Dispatch<React.SetStateAction<{ val: string; success: boolean }>>
   ) => {
@@ -14,6 +22,25 @@ const Hero = ({ hoverProps }: Props) => {
     setForm({ val: "", success: true });
     setTimeout(() => setForm((f) => ({ ...f, success: false })), 3500);
   };
+
+  // Scroll reveal effect
+  useEffect(() => {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    const revealElements = document.querySelectorAll(".hero-reveal");
+    revealElements.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+
   return (
     <section className="relative min-h-screen grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] overflow-hidden pt-10
       bg-[radial-gradient(ellipse_80%_60%_at_75%_0%,rgba(107,79,160,0.32)_0%,transparent_60%),radial-gradient(ellipse_50%_40%_at_5%_100%,rgba(35,24,72,0.65)_0%,transparent_55%),linear-gradient(155deg,var(--ink)_0%,var(--ink2)_45%,var(--deep)_100%)]">
@@ -35,13 +62,13 @@ const Hero = ({ hoverProps }: Props) => {
       <div className="relative z-10 flex flex-col justify-center px-6 lg:px-16 py-32 lg:py-0 max-w-6xl mx-auto w-full">
 
         {/* Eyebrow */}
-        <div className="flex items-center gap-3 mb-9 text-[10px] tracking-[0.3em] uppercase text-mist">
+        <div className="hero-reveal flex items-center gap-3 mb-9 text-[10px] tracking-[0.3em] uppercase text-mist">
           <div className="w-10 h-px bg-linear-to-r from-rose to-transparent" />
           Built for PCOS · Made in India
         </div>
 
         {/* Heading */}
-        <h1 className="font-[Cormorant] text-[clamp(80px,9vw,136px)] leading-[0.88] tracking-[-0.03em] text-white font-light">
+        <h1 className="hero-reveal font-[Cormorant] text-[clamp(80px,9vw,136px)] leading-[0.88] tracking-[-0.03em] text-white font-light">
           Ovi<em className="italic text-mist">ya</em><br />
           <span className="italic text-transparent [WebkitTextStroke:1px_var(--rose)]">
             Finally.
@@ -49,22 +76,22 @@ const Hero = ({ hoverProps }: Props) => {
         </h1>
 
         {/* Divider */}
-        <div className="w-15 h-px my-7 bg-linear-to-r from-rose via-soft to-transparent" />
+        <div className="hero-reveal w-15 h-px my-7 bg-linear-to-r from-rose via-soft to-transparent" />
 
         {/* Tagline */}
-        <p className="font-[Cormorant] italic text-[clamp(20px,2.4vw,29px)] text-white/50 leading-[1.45] max-w-110">
+        <p className="hero-reveal font-[Cormorant] italic text-[clamp(20px,2.4vw,29px)] text-white/50 leading-[1.45] max-w-110">
           The companion women with PCOS<br />have been waiting for.
         </p>
 
         {/* Body */}
-        <p className="text-[16px] leading-[1.85] text-white/40 max-w-105 mt-6 mb-10 font-light">
+        <p className="hero-reveal text-[16px] leading-[1.85] text-white/40 max-w-105 mt-6 mb-10 font-light">
           Irregular cycles understood. Indian food respected. The emotional weight of PCOS finally
           acknowledged. Built for the 1&nbsp;in&nbsp;5 Indian women living with this.
         </p>
 
         {/* Form */}
         <form
-          className="flex max-w-110"
+          className="hero-reveal flex max-w-110"
           onSubmit={(e) => {
             e.preventDefault();
             submitForm(heroForm, setHeroForm);
@@ -88,7 +115,7 @@ const Hero = ({ hoverProps }: Props) => {
         </form>
 
         {/* Meta */}
-        <div className="flex items-center gap-4 mt-4 text-[10px] tracking-[0.18em] uppercase text-white/30">
+        <div className="hero-reveal flex items-center gap-4 mt-4 text-[10px] tracking-[0.18em] uppercase text-white/30">
           <div className="w-0.75 h-0.75 rounded-full bg-mist/50" />
           <span>Private beta</span>
           <div className="w-0.75 h-0.75 rounded-full bg-mist/50" />
@@ -98,7 +125,7 @@ const Hero = ({ hoverProps }: Props) => {
         </div>
 
         {/* Badges */}
-        <div className="flex flex-wrap gap-2 mt-8">
+        <div className="hero-reveal flex flex-wrap gap-2 mt-8">
           {["PCOS-first","Evidence-led","Indian food aware","Irregular cycles"].map((b) => (
             <span key={b} className="text-[10px] tracking-[0.18em] uppercase px-4 py-1 border border-[rgba(197,178,232,0.22)] text-[rgba(197,178,232,0.55)]">
               {b}
@@ -111,7 +138,7 @@ const Hero = ({ hoverProps }: Props) => {
       <div className="relative z-10 flex flex-col justify-center px-10 py-32 lg:py-0">
 
         {/* Stats */}
-        <div className="grid grid-cols-2 gap-px bg-white/10 border border-white/10 mb-5">
+        <div className="hero-reveal grid grid-cols-2 gap-px bg-white/10 border border-white/10 mb-5">
           <div className="p-6 bg-white/5 hover:bg-white/10 transition" {...hoverProps}>
             <div className="font-[Cormorant] text-5xl text-white font-light">
               1 <em className="italic text-mist">in</em> 5
@@ -141,7 +168,7 @@ const Hero = ({ hoverProps }: Props) => {
         </div>
 
         {/* App Card */}
-        <div className="bg-white/5 border border-white/10 overflow-hidden">
+        <div className="hero-reveal bg-white/5 border border-white/10 overflow-hidden">
           <div className="flex items-center gap-2 px-4 py-3 border-b border-white/10">
             <div className="w-2 h-2 rounded-full bg-red-400"/>
             <div className="w-2 h-2 rounded-full bg-yellow-400"/>
@@ -175,7 +202,7 @@ const Hero = ({ hoverProps }: Props) => {
 
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Hero
+export default Hero;

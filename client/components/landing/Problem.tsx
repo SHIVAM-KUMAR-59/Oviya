@@ -1,10 +1,17 @@
-import React from "react";
+"use client";
 
-type Props = {
-  hoverProps?: React.HTMLAttributes<HTMLDivElement>;
+import React, { useEffect } from "react";
+
+type HoverProps = {
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 };
 
-const Problem = ({ hoverProps }: Props) => {
+interface ProblemProps {
+  hoverProps?: HoverProps;
+}
+
+const Problem = ({ hoverProps }: ProblemProps) => {
   const cards = [
     {
       n: "01",
@@ -26,6 +33,24 @@ const Problem = ({ hoverProps }: Props) => {
     },
   ];
 
+  // Scroll reveal effect
+  useEffect(() => {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    const revealElements = document.querySelectorAll(".problem-reveal");
+    revealElements.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+
   return (
     <section
       id="problem"
@@ -34,7 +59,7 @@ const Problem = ({ hoverProps }: Props) => {
       <div className="mx-auto max-w-6xl px-6 md:px-12">
         
         {/* Section Label */}
-        <div className="text-mid tracking-[0.2em] uppercase text-xs mb-10">
+        <div className="problem-reveal text-mid tracking-[0.2em] uppercase text-xs mb-10">
           The problem no one is solving
         </div>
 
@@ -43,13 +68,13 @@ const Problem = ({ hoverProps }: Props) => {
           
           {/* Left */}
           <div className="pr-0 md:pr-20 pb-20 border-b md:border-b-0 md:border-r border-border-light">
-            <h2 className="font-[Cormorant] text-[clamp(44px,4.5vw,68px)] font-light leading-[1.02] tracking-[-0.03em] text-ink mb-7">
+            <h2 className="problem-reveal font-[Cormorant] text-[clamp(44px,4.5vw,68px)] font-light leading-[1.02] tracking-[-0.03em] text-ink mb-7">
               You are not<br />
               <em className="italic text-mid">difficult</em><br />
               to understand.
             </h2>
 
-            <p className="text-[16px] leading-[1.85] text-[#4a3f6b] font-light max-w-95">
+            <p className="problem-reveal text-[16px] leading-[1.85] text-[#4a3f6b] font-light max-w-95">
               You&apos;ve been told to lose weight. Your tracker assumes 28 days. You&apos;ve explained your
               symptoms to three doctors and still walked out feeling unheard. Oviya starts where
               that frustration begins.
@@ -58,11 +83,11 @@ const Problem = ({ hoverProps }: Props) => {
 
           {/* Right */}
           <div className="md:border-l border-border-light md:-ml-px">
-            {cards.map((c) => (
+            {cards.map((c, index) => (
               <div
                 key={c.n}
                 {...hoverProps}
-                className="group relative overflow-hidden px-8 md:px-12 py-9 border-b border-border-light last:border-b-0 transition-colors duration-300 hover:bg-blush"
+                className={`problem-reveal group relative overflow-hidden px-8 md:px-12 py-9 border-b border-border-light last:border-b-0 transition-colors duration-300 hover:bg-blush reveal-delay-${index + 1}`}
               >
                 {/* Left gradient line */}
                 <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-linear-to-b from-rose to-soft scale-y-0 origin-top transition-transform duration-500 group-hover:scale-y-100" />
