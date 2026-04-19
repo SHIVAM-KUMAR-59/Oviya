@@ -131,7 +131,7 @@ const CTA = ({ hoverProps }: CTAProps) => {
                       type="submit"
                       disabled={loading}
                       {...hoverProps}
-                      className="border-violet bg-violet hover:bg-violet/90 disabled:bg-violet/50 disabled:border-violet/50 cursor-pointer rounded-md border px-7 py-4 text-[11px] tracking-[0.2em] whitespace-nowrap text-white uppercase transition-all duration-200 disabled:cursor-not-allowed md:rounded-none md:rounded-r-lg"
+                      className="bg-violet hover:opacity-90 border-none disabled:bg-violet/50 disabled:border-violet/50 cursor-pointer rounded-md border px-7 py-4 text-[11px] tracking-[0.2em] whitespace-nowrap text-white uppercase transition-all duration-200 disabled:cursor-not-allowed md:rounded-none md:rounded-r-lg"
                     >
                       {loading ? (
                         <span className="flex items-center justify-center gap-2">
