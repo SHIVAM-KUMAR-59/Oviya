@@ -128,7 +128,7 @@ export default function OviyaLanding() {
       <Problem hoverProps={hoverProps} />
 
       {/* cream → ink */}
-      <Wave from="var(--cream)" to="var(--ink)" flip />
+      <Wave from="var(--cream)" to="var(--ink)" />
 
       {/* ── FEATURES ── */}
       <Features hoverProps={hoverProps} />
@@ -140,7 +140,7 @@ export default function OviyaLanding() {
       <Voices hoverProps={hoverProps} />
 
       {/* parchment → ink */}
-      <Wave from="var(--parchment)" to="var(--ink)" flip />
+      <Wave from="var(--parchment)" to="var(--ink)" />
 
       {/* ── FOUNDER ── */}
       <Founder />
