@@ -216,7 +216,7 @@ const Hero = ({ hoverProps }: HeroProps) => {
 
             <div className="bg-white/5 p-6 transition hover:bg-white/10" {...hoverProps}>
               <div className="font-[Cormorant] text-5xl font-light text-white">
-                110<em className="text-mist italic">+</em>
+                150<em className="text-mist italic">+</em>
               </div>
               <p className="mt-2 text-xs text-white/40">
                 Women shaped Oviya before a single line was written

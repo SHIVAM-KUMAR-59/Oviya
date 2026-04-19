@@ -22,7 +22,7 @@ const features = [
     iconBg:
       'bg-violet-500/10 border-violet-500/20 group-hover:bg-violet-500/15 group-hover:border-violet-500/30',
     iconColor: 'text-white/40 group-hover:text-violet-400',
-    numColor: 'group-hover:text-violet-500/10',
+    numColor: 'group-hover:text-violet-500/30',
     line: 'from-transparent via-violet-500 to-transparent',
   },
   {
@@ -34,7 +34,7 @@ const features = [
     iconBg:
       'bg-rose-400/10 border-rose-400/20 group-hover:bg-rose-400/15 group-hover:border-rose-400/30',
     iconColor: 'text-white/40 group-hover:text-rose-400',
-    numColor: 'group-hover:text-rose-500/10',
+    numColor: 'group-hover:text-rose-500/30',
     line: 'from-transparent via-rose-400 to-transparent',
   },
   {
@@ -46,7 +46,7 @@ const features = [
     iconBg:
       'bg-violet-500/10 border-violet-500/20 group-hover:bg-violet-500/15 group-hover:border-violet-500/30',
     iconColor: 'text-white/40 group-hover:text-violet-400',
-    numColor: 'group-hover:text-violet-500/10',
+    numColor: 'group-hover:text-violet-500/30',
     line: 'from-transparent via-violet-500 to-transparent',
   },
   {
@@ -58,7 +58,7 @@ const features = [
     iconBg:
       'bg-rose-400/10 border-rose-400/20 group-hover:bg-rose-400/15 group-hover:border-rose-400/30',
     iconColor: 'text-white/40 group-hover:text-rose-400',
-    numColor: 'group-hover:text-rose-500/10',
+    numColor: 'group-hover:text-rose-500/30',
     line: 'from-transparent via-rose-400 to-transparent',
   },
 ];
@@ -105,8 +105,8 @@ const Features = ({ hoverProps }: FeaturesProps) => {
             not <em className="text-mist italic">generic</em> tracking.
           </h2>
           <p className="text-[16px] leading-[1.85] font-light text-white/40">
-            Built from 110 real conversations. Every feature exists because someone needed
-            it and couldn&apos;t find it anywhere else.
+            Built from 150+ real conversations. Every feature exists because someone
+            needed it and could&apos;nt find it anywhere else.
           </p>
         </div>
 
@@ -135,7 +135,7 @@ const Features = ({ hoverProps }: FeaturesProps) => {
 
                 {/* Number */}
                 <div
-                  className={`mb-4 font-[Cormorant] text-[60px] font-light tracking-[-0.04em] text-white/5 italic transition-colors duration-300 ${f.numColor}`}
+                  className={`mb-4 font-[Cormorant] text-[60px] font-light tracking-[-0.04em] text-white/20 italic transition-colors duration-300 ${f.numColor}`}
                 >
                   {f.n}
                 </div>

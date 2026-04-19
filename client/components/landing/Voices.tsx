@@ -34,13 +34,13 @@ const Voices = ({ hoverProps }: VoicesProps) => {
     <section className="bg-parchment relative overflow-hidden py-28">
       {/* Big decorative quote */}
       <span className="pointer-events-none absolute -top-24 -left-16 font-serif text-[560px] leading-none font-light text-[rgba(197,178,232,0.07)] select-none">
-        "
+        &quot;
       </span>
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-16">
         {/* Section Label */}
         <div className="voices-reveal text-mid mb-14 flex items-center gap-4 text-[10px] tracking-[0.32em] uppercase">
-          110 women spoke. We listened.
+          150+ women spoke. We listened.
           <div className="bg-pale h-px flex-1" />
         </div>
 
@@ -54,7 +54,7 @@ const Voices = ({ hoverProps }: VoicesProps) => {
 
           <div className="text-left md:text-right">
             <div className="text-mid font-serif text-[80px] leading-none font-light tracking-[-0.04em]">
-              110
+              150+
             </div>
             <div className="text-soft mt-1 text-[10px] tracking-[0.18em] uppercase">
               Interviews & surveys

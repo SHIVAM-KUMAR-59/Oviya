@@ -7,7 +7,7 @@ const Marquee = () => {
     'Mood & energy tracking',
     'Doctor-ready reports',
     'No 28-day assumptions',
-    'Built with 110+ women',
+    'Built with 150+ women',
     'Evidence-led care',
   ];
 

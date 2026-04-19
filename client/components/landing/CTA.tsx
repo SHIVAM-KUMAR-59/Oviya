@@ -75,11 +75,11 @@ const CTA = ({ hoverProps, ctaForm, setCtaForm, submitForm }: CTAProps) => {
             {/* Right */}
             <div>
               {/* Tags */}
-              <div className="cta-reveal mb-7 flex flex-wrap gap-2">
+              <div className="cta-reveal mb-7 hidden flex-wrap gap-2 md:flex">
                 {['Founding members', 'Shape the roadmap', 'Priority access'].map((t) => (
                   <span
                     key={t}
-                    className="border-border-light text-mid border px-3.5 py-1 text-[10px] tracking-[0.16em] uppercase"
+                    className="border-border-dark text-mid hover:bg-blush rounded-md border px-3.5 py-1 text-[10px] tracking-[0.16em] uppercase transition-colors duration-200"
                   >
                     {t}
                   </span>
@@ -106,7 +106,7 @@ const CTA = ({ hoverProps, ctaForm, setCtaForm, submitForm }: CTAProps) => {
                 <button
                   type="submit"
                   {...hoverProps}
-                  className="border-violet bg-violet hover:bg-violet/90 rounded-md border px-7 py-4 text-[11px] tracking-[0.2em] whitespace-nowrap text-white uppercase transition-all duration-200 md:rounded-none md:rounded-r-lg cursor-pointer disabled:bg-violet/50 disabled:border-violet/50 disabled:cursor-not-allowed"
+                  className="border-violet bg-violet hover:bg-violet/90 disabled:bg-violet/50 disabled:border-violet/50 cursor-pointer rounded-md border px-7 py-4 text-[11px] tracking-[0.2em] whitespace-nowrap text-white uppercase transition-all duration-200 disabled:cursor-not-allowed md:rounded-none md:rounded-r-lg"
                 >
                   {ctaForm.success ? "✓ You're on the list" : 'Join Waitlist'}
                 </button>

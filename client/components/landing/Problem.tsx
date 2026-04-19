@@ -90,7 +90,7 @@ const Problem = ({ hoverProps }: ProblemProps) => {
                 <div className="from-rose to-soft absolute top-0 bottom-0 left-0 w-0.5 origin-top scale-y-0 bg-linear-to-b transition-transform duration-500 group-hover:scale-y-100" />
 
                 {/* Number */}
-                <div className="text-pale mb-3 font-[Cormorant] text-[11px] tracking-[0.15em] italic">
+                <div className="mb-3 font-[Cormorant] text-[13px] tracking-[0.15em] text-black italic">
                   — {c.n}. {c.title}
                 </div>
 
