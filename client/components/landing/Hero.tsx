@@ -2,7 +2,14 @@
 
 import React, { useState, useEffect } from 'react';
 
-import { Moon, Salad, CloudFog, ClipboardList } from 'lucide-react';
+import {
+  Moon,
+  Salad,
+  CloudFog,
+  ClipboardList,
+  CircleCheck,
+  ArrowRight,
+} from 'lucide-react';
 
 const rows = [
   {
@@ -103,7 +110,7 @@ const Hero = ({ hoverProps }: HeroProps) => {
           </div>
 
           {/* Heading */}
-          <h1 className="hero-reveal font-[Cormorant] text-[clamp(80px,9vw,136px)] leading-[0.88] font-medium md:font-light tracking-[-0.03em] text-white">
+          <h1 className="hero-reveal font-[Cormorant] text-[clamp(80px,9vw,136px)] leading-[0.88] font-medium tracking-[-0.03em] text-white md:font-light">
             Ovi<em className="text-mist italic">ya</em>
             <br />
             <span
@@ -148,14 +155,24 @@ const Hero = ({ hoverProps }: HeroProps) => {
               value={heroForm.val}
               onChange={(e) => setHeroForm((f) => ({ ...f, val: e.target.value }))}
               {...hoverProps}
-              className="flex-1 rounded-md border border-r-0 border-white/20 bg-white/10 px-5 py-4 text-sm font-light text-white outline-none placeholder:text-white/30 focus:border-[rgba(197,178,232,0.45)] focus:bg-white/15 md:rounded-none md:rounded-l-md"
+              className="flex-1 rounded-md border border-r-0 border-white/20 bg-white/10 px-5 py-4 text-sm font-light text-white outline-none placeholder:text-white/30 focus:border-[rgba(197,178,232,0.45)] focus:bg-white/15 md:rounded-none md:rounded-l-lg"
             />
             <button
               type="submit"
               {...hoverProps}
-              className="bg-rose border-rose hover:bg-rose-lt rounded-md border px-7 py-4 text-[11px] font-medium tracking-[0.2em] whitespace-nowrap text-white uppercase transition hover:translate-x-0.5 md:rounded-none md:rounded-r-md"
+              className="bg-soft/90 border-soft hover:bg-soft disabled:bg-soft/50 cursor-pointer rounded-md border px-7 py-4 text-[11px] font-medium tracking-[0.2em] whitespace-nowrap text-white uppercase transition duration-200 disabled:cursor-not-allowed md:rounded-none md:rounded-r-lg"
             >
-              {heroForm.success ? "✓ You're on the list" : 'Request Access'}
+              {heroForm.success ? (
+                <span className="flex items-center justify-center gap-2">
+                  You&apos;re in
+                  <CircleCheck size={20} strokeWidth={2} />
+                </span>
+              ) : (
+                <span className="flex items-center justify-center gap-2">
+                  Join for Free
+                  <ArrowRight size={16} strokeWidth={3} />
+                </span>
+              )}
             </button>
           </form>
 
@@ -175,7 +192,7 @@ const Hero = ({ hoverProps }: HeroProps) => {
               (b) => (
                 <span
                   key={b}
-                  className="border border-[rgba(197,178,232,0.22)] px-4 py-1 text-[10px] tracking-[0.18em] text-[rgba(197,178,232,0.55)] uppercase hover:bg-white/10 transition duration-200"
+                  className="border border-[rgba(197,178,232,0.22)] px-4 py-1 text-[10px] tracking-[0.18em] text-[rgba(197,178,232,0.55)] uppercase transition duration-200 hover:bg-white/10"
                 >
                   {b}
                 </span>

@@ -87,7 +87,7 @@ const Navbar = ({ hoverProps }: NavbarProps) => {
           <a
             href="#cta"
             {...hoverProps}
-            className="navbar-reveal bg-rose border-rose hover:bg-rose-lt rounded-md border px-6 py-2.5 text-[10px] tracking-[0.22em] text-white uppercase transition-all duration-200 hover:-translate-y-px"
+            className={`navbar-reveal bg-soft/90 border-soft hover:bg-soft rounded-md border px-6 py-2.5 text-[10px] tracking-[0.22em] text-white uppercase transition-all duration-200 hover:-translate-y-px ${scrolled && 'bg-violet hover:bg-violet/90'}`}
           >
             Join Waitlist
           </a>
