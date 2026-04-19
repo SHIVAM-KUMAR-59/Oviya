@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import Navbar from './Navbar';
 import Marquee from './Marquee';
 import Problem from './Problem';
@@ -11,7 +11,6 @@ import CTA from './CTA';
 import Footer from './Footer';
 import Hero from './Hero';
 
-// ─── Reusable wave SVG shapes ─────────────────────────────────────────────
 function Wave({ from, to, flip = false }: { from: string; to: string; flip?: boolean }) {
   return (
     <svg
@@ -32,7 +31,6 @@ function Wave({ from, to, flip = false }: { from: string; to: string; flip?: boo
 }
 
 export default function OviyaLanding() {
-  const [ctaForm, setCtaForm] = useState({ val: '', success: false });
   const cursorRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
   const rxRef = useRef(0);
@@ -98,15 +96,6 @@ export default function OviyaLanding() {
     onMouseLeave: contractCursor,
   };
 
-  const submitForm = (
-    formState: { val: string; success: boolean },
-    setForm: React.Dispatch<React.SetStateAction<{ val: string; success: boolean }>>,
-  ) => {
-    if (!formState.val.includes('@')) return;
-    setForm({ val: '', success: true });
-    setTimeout(() => setForm((f) => ({ ...f, success: false })), 3500);
-  };
-
   return (
     <>
       <div id="cursor" ref={cursorRef} />
@@ -149,12 +138,7 @@ export default function OviyaLanding() {
       <Wave from="var(--ink)" to="var(--cream)" />
 
       {/* ── CTA ── */}
-      <CTA
-        hoverProps={hoverProps}
-        ctaForm={ctaForm}
-        setCtaForm={setCtaForm}
-        submitForm={submitForm}
-      />
+      <CTA hoverProps={hoverProps} />
 
       {/* ── FOOTER ── */}
       <Footer />

@@ -1,29 +1,45 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { ArrowRight, CircleCheck, Loader2 } from 'lucide-react';
+import { useApi } from '@/hooks/useApi';
+import { useToast } from '@/context/ToastContext';
 
 type HoverProps = {
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
 };
 
-interface FormState {
-  val: string;
-  success: boolean;
-}
-
 interface CTAProps {
   hoverProps?: HoverProps;
-  ctaForm: FormState;
-  setCtaForm: React.Dispatch<React.SetStateAction<FormState>>;
-  submitForm: (
-    formState: FormState,
-    setForm: React.Dispatch<React.SetStateAction<FormState>>,
-  ) => void;
 }
 
-const CTA = ({ hoverProps, ctaForm, setCtaForm, submitForm }: CTAProps) => {
-  // Scroll reveal effect
+const tags = ['Founding members', 'Shape the roadmap', 'Priority access'];
+
+const CTA = ({ hoverProps }: CTAProps) => {
+  const [email, setEmail] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+  const { error: showError } = useToast();
+
+  const { loading, execute: joinWaitlist } = useApi('post', {
+    onSuccess: () => {
+      setSubmitted(true);
+      setEmail('');
+    },
+    onError: (message) => showError(message),
+  });
+
+  const isValidEmail = (val: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!isValidEmail(email)) {
+      showError('Please enter a valid email address.');
+      return;
+    }
+    await joinWaitlist('/waitlist', { email });
+  };
+
   useEffect(() => {
     const io = new IntersectionObserver(
       (entries) => {
@@ -36,8 +52,7 @@ const CTA = ({ hoverProps, ctaForm, setCtaForm, submitForm }: CTAProps) => {
       },
       { threshold: 0.1 },
     );
-    const revealElements = document.querySelectorAll('.cta-reveal');
-    revealElements.forEach((el) => io.observe(el));
+    document.querySelectorAll('.cta-reveal').forEach((el) => io.observe(el));
     return () => io.disconnect();
   }, []);
 
@@ -64,7 +79,6 @@ const CTA = ({ hoverProps, ctaForm, setCtaForm, submitForm }: CTAProps) => {
                 <br />
                 comes next.
               </h2>
-
               <p className="cta-reveal text-[16px] leading-[1.85] font-light text-[#4a3f6b]">
                 Founding users get priority access, direct input on features, and the
                 chance to build something that will genuinely change how PCOS is managed
@@ -76,7 +90,7 @@ const CTA = ({ hoverProps, ctaForm, setCtaForm, submitForm }: CTAProps) => {
             <div>
               {/* Tags */}
               <div className="cta-reveal mb-7 hidden flex-wrap gap-2 md:flex">
-                {['Founding members', 'Shape the roadmap', 'Priority access'].map((t) => (
+                {tags.map((t) => (
                   <span
                     key={t}
                     className="border-border-dark text-mid hover:bg-blush rounded-md border px-3.5 py-1 text-[10px] tracking-[0.16em] uppercase transition-colors duration-200"
@@ -87,35 +101,60 @@ const CTA = ({ hoverProps, ctaForm, setCtaForm, submitForm }: CTAProps) => {
               </div>
 
               {/* Form */}
-              <form
-                className="cta-reveal flex w-full flex-col gap-4 md:flex-row md:gap-0"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  submitForm(ctaForm, setCtaForm);
-                }}
-              >
-                <input
-                  type="email"
-                  placeholder="Your email address"
-                  value={ctaForm.val}
-                  onChange={(e) => setCtaForm((f) => ({ ...f, val: e.target.value }))}
-                  {...hoverProps}
-                  className="border-border-light text-ink placeholder:text-soft focus:border-mid flex-1 rounded-md border bg-[rgba(74,47,122,0.04)] px-5 py-4 text-[14px] font-light outline-none md:rounded-none md:rounded-l-lg md:border-r-0"
-                />
-
-                <button
-                  type="submit"
-                  {...hoverProps}
-                  className="border-violet bg-violet hover:bg-violet/90 disabled:bg-violet/50 disabled:border-violet/50 cursor-pointer rounded-md border px-7 py-4 text-[11px] tracking-[0.2em] whitespace-nowrap text-white uppercase transition-all duration-200 disabled:cursor-not-allowed md:rounded-none md:rounded-r-lg"
-                >
-                  {ctaForm.success ? "✓ You're on the list" : 'Join Waitlist'}
-                </button>
-              </form>
+              <div className="cta-reveal">
+                {submitted ? (
+                  <div className="flex items-center gap-3 rounded-lg border border-emerald-500/20 bg-emerald-500/10 px-5 py-4">
+                    <CircleCheck
+                      size={18}
+                      className="shrink-0 text-emerald-500"
+                      strokeWidth={1.5}
+                    />
+                    <p className="text-sm font-light text-emerald-700">
+                      You&apos;re on the list! We&apos;ll reach out when Oviya launches.
+                    </p>
+                  </div>
+                ) : (
+                  <form
+                    onSubmit={handleSubmit}
+                    className="flex w-full flex-col gap-4 md:flex-row md:gap-0"
+                  >
+                    <input
+                      type="email"
+                      placeholder="Your email address"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      disabled={loading}
+                      {...hoverProps}
+                      className="border-border-light text-ink placeholder:text-soft focus:border-mid flex-1 rounded-md border bg-[rgba(74,47,122,0.04)] px-5 py-4 text-[14px] font-light outline-none disabled:opacity-50 md:rounded-none md:rounded-l-lg md:border-r-0"
+                    />
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      {...hoverProps}
+                      className="border-violet bg-violet hover:bg-violet/90 disabled:bg-violet/50 disabled:border-violet/50 cursor-pointer rounded-md border px-7 py-4 text-[11px] tracking-[0.2em] whitespace-nowrap text-white uppercase transition-all duration-200 disabled:cursor-not-allowed md:rounded-none md:rounded-r-lg"
+                    >
+                      {loading ? (
+                        <span className="flex items-center justify-center gap-2">
+                          <Loader2 size={14} className="animate-spin" />
+                          Joining…
+                        </span>
+                      ) : (
+                        <span className="flex items-center justify-center gap-2">
+                          Join Waitlist
+                          <ArrowRight size={14} strokeWidth={2.5} />
+                        </span>
+                      )}
+                    </button>
+                  </form>
+                )}
+              </div>
 
               {/* Note */}
-              <p className="cta-reveal text-soft mt-3 text-[10px] tracking-[0.16em] uppercase">
-                No spam · Just early updates when we open
-              </p>
+              {!submitted && (
+                <p className="cta-reveal text-soft mt-3 text-[10px] tracking-[0.16em] uppercase">
+                  No spam · Just early updates when we open
+                </p>
+              )}
             </div>
           </div>
         </div>
