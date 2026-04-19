@@ -100,13 +100,13 @@ const CTA = ({ hoverProps, ctaForm, setCtaForm, submitForm }: CTAProps) => {
                   value={ctaForm.val}
                   onChange={(e) => setCtaForm((f) => ({ ...f, val: e.target.value }))}
                   {...hoverProps}
-                  className="border-border-light text-ink rounded-md md:rounded-none md:rounded-l-md placeholder:text-soft focus:border-mid flex-1 border bg-[rgba(74,47,122,0.04)] px-5 py-4 text-[14px] font-light outline-none md:border-r-0"
+                  className="border-border-light text-ink placeholder:text-soft focus:border-mid flex-1 rounded-md border bg-[rgba(74,47,122,0.04)] px-5 py-4 text-[14px] font-light outline-none md:rounded-none md:rounded-l-md md:border-r-0"
                 />
 
                 <button
                   type="submit"
                   {...hoverProps}
-                  className="border-violet bg-violet rounded-md md:rounded-none md:rounded-r-md hover:bg-deep border px-7 py-4 text-[11px] tracking-[0.2em] whitespace-nowrap text-white uppercase transition-all duration-200 hover:translate-x-0.5"
+                  className="border-violet bg-violet hover:bg-deep rounded-md border px-7 py-4 text-[11px] tracking-[0.2em] whitespace-nowrap text-white uppercase transition-all duration-200 hover:translate-x-0.5 md:rounded-none md:rounded-r-md"
                 >
                   {ctaForm.success ? "✓ You're on the list" : 'Join Waitlist'}
                 </button>

@@ -2,6 +2,39 @@
 
 import React, { useState, useEffect } from 'react';
 
+import { Moon, Salad, CloudFog, ClipboardList } from 'lucide-react';
+
+const rows = [
+  {
+    icon: Moon,
+    iconBg: 'bg-violet-500/10',
+    iconColor: 'text-violet-400',
+    label: 'Cycle day',
+    val: 'Day 34 · Luteal phase (estimated)',
+  },
+  {
+    icon: Salad,
+    iconBg: 'bg-emerald-500/10',
+    iconColor: 'text-emerald-400',
+    label: "Today's nutrition",
+    val: 'Methi roti · Moong dal · Jeera rice',
+  },
+  {
+    icon: CloudFog,
+    iconBg: 'bg-rose-400/10',
+    iconColor: 'text-rose-400',
+    label: 'Mood & energy',
+    val: 'Fatigued · Some brain fog today',
+  },
+  {
+    icon: ClipboardList,
+    iconBg: 'bg-sky-400/10',
+    iconColor: 'text-sky-400',
+    label: 'Doctor report',
+    val: 'Ready · 3 months of data logged',
+  },
+];
+
 type HoverProps = {
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
@@ -103,7 +136,7 @@ const Hero = ({ hoverProps }: HeroProps) => {
 
           {/* Form */}
           <form
-            className="hero-reveal flex flex-col gap-4 md:flex-row md:gap-0 max-w-110"
+            className="hero-reveal flex max-w-110 flex-col gap-4 md:flex-row md:gap-0"
             onSubmit={(e) => {
               e.preventDefault();
               submitForm(heroForm, setHeroForm);
@@ -115,12 +148,12 @@ const Hero = ({ hoverProps }: HeroProps) => {
               value={heroForm.val}
               onChange={(e) => setHeroForm((f) => ({ ...f, val: e.target.value }))}
               {...hoverProps}
-              className="flex-1 border border-r-0 border-white/20 rounded-md md:rounded-none md:rounded-l-md bg-white/10 px-5 py-4 text-sm font-light text-white outline-none placeholder:text-white/30 focus:border-[rgba(197,178,232,0.45)] focus:bg-white/15"
+              className="flex-1 rounded-md border border-r-0 border-white/20 bg-white/10 px-5 py-4 text-sm font-light text-white outline-none placeholder:text-white/30 focus:border-[rgba(197,178,232,0.45)] focus:bg-white/15 md:rounded-none md:rounded-l-md"
             />
             <button
               type="submit"
               {...hoverProps}
-              className="bg-rose border-rose hover:bg-rose-lt border px-7 py-4 rounded-md md:rounded-none md:rounded-r-md text-[11px] font-medium tracking-[0.2em] whitespace-nowrap text-white uppercase transition hover:translate-x-0.5"
+              className="bg-rose border-rose hover:bg-rose-lt rounded-md border px-7 py-4 text-[11px] font-medium tracking-[0.2em] whitespace-nowrap text-white uppercase transition hover:translate-x-0.5 md:rounded-none md:rounded-r-md"
             >
               {heroForm.success ? "✓ You're on the list" : 'Request Access'}
             </button>
@@ -198,44 +231,28 @@ const Hero = ({ hoverProps }: HeroProps) => {
               </span>
             </div>
 
-            {[
-              {
-                icon: '🌙',
-                label: 'Cycle day',
-                val: 'Day 34 · Luteal phase (estimated)',
-              },
-              {
-                icon: '🥗',
-                label: "Today's nutrition",
-                val: 'Methi roti · Moong dal · Jeera rice',
-              },
-              {
-                icon: '💭',
-                label: 'Mood & energy',
-                val: 'Fatigued · Some brain fog today',
-              },
-              {
-                icon: '📋',
-                label: 'Doctor report',
-                val: 'Ready · 3 months of data logged',
-              },
-            ].map((row) => (
-              <div
-                key={row.label}
-                className="flex items-center gap-3 border-b border-white/5 px-4 py-3 transition hover:bg-white/5"
-                {...hoverProps}
-              >
-                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-sm">
-                  {row.icon}
-                </div>
-                <div>
-                  <div className="text-[9px] tracking-[0.12em] text-white/40 uppercase">
-                    {row.label}
+            {rows.map((row) => {
+              const Icon = row.icon;
+              return (
+                <div
+                  key={row.label}
+                  className="group flex items-center gap-3 border-b border-white/5 px-4 py-3 transition-colors duration-200 hover:bg-white/5"
+                  {...hoverProps}
+                >
+                  <div
+                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${row.iconBg} transition-transform duration-200 group-hover:scale-110`}
+                  >
+                    <Icon size={14} strokeWidth={1.5} className={row.iconColor} />
                   </div>
-                  <div className="text-sm font-light text-white/70">{row.val}</div>
+                  <div>
+                    <div className="text-[9px] tracking-[0.12em] text-white/40 uppercase">
+                      {row.label}
+                    </div>
+                    <div className="text-sm font-light text-white/70">{row.val}</div>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
