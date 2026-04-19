@@ -103,7 +103,7 @@ const Hero = ({ hoverProps }: HeroProps) => {
 
           {/* Form */}
           <form
-            className="hero-reveal flex max-w-110"
+            className="hero-reveal flex flex-col gap-4 md:flex-row md:gap-0 max-w-110"
             onSubmit={(e) => {
               e.preventDefault();
               submitForm(heroForm, setHeroForm);
@@ -115,12 +115,12 @@ const Hero = ({ hoverProps }: HeroProps) => {
               value={heroForm.val}
               onChange={(e) => setHeroForm((f) => ({ ...f, val: e.target.value }))}
               {...hoverProps}
-              className="flex-1 border border-r-0 border-white/20 bg-white/10 px-5 py-4 text-sm font-light text-white outline-none placeholder:text-white/30 focus:border-[rgba(197,178,232,0.45)] focus:bg-white/15"
+              className="flex-1 border border-r-0 border-white/20 rounded-md md:rounded-none md:rounded-l-md bg-white/10 px-5 py-4 text-sm font-light text-white outline-none placeholder:text-white/30 focus:border-[rgba(197,178,232,0.45)] focus:bg-white/15"
             />
             <button
               type="submit"
               {...hoverProps}
-              className="bg-rose border-rose hover:bg-rose-lt border px-7 py-4 text-[11px] font-medium tracking-[0.2em] whitespace-nowrap text-white uppercase transition hover:translate-x-0.5"
+              className="bg-rose border-rose hover:bg-rose-lt border px-7 py-4 rounded-md md:rounded-none md:rounded-r-md text-[11px] font-medium tracking-[0.2em] whitespace-nowrap text-white uppercase transition hover:translate-x-0.5"
             >
               {heroForm.success ? "✓ You're on the list" : 'Request Access'}
             </button>
