@@ -2,19 +2,21 @@
 @import 'tailwindcss';
 
 :root {
-  --ink: #0f0b1e;
-  --ink2: #1a1230;
+  --ink: #0A0818;        /* deeper, richer dark */
+  --ink2: #140F2A;
   --deep: #231848;
-  --violet: #4a2f7a;
-  --mid: #6b4fa0;
+
+  --violet: #5C45B0;    /* warmer purple */
+  --mid: #6B52C8;
   --soft: #9b7fd4;
   --mist: #c5b2e8;
   --pale: #e8e0f5;
   --blush: #f2eefb;
-  --parchment: #f7f5f0;
-  --cream: #fbf9f6;
 
-  --rose: #c0737a; /* replaces gold — warm, readable on dark & light */
+  --parchment: #F5F0EB; /* warm light */
+  --cream: #FAF7F4;     /* KEY premium background */
+
+  --rose: #c0737a;
   --rose-lt: #dda0a6;
   --rose-pale: #f0d8da;
 
@@ -49,11 +51,11 @@ html {
 body {
   font-family: 'Jost', system-ui, sans-serif;
   font-weight: 300;
-  background: var(--cream);
+  background: var(--cream); /* now warm premium */
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
-  cursor: none;
+  cursor: default; /* FIXED (was none) */
   padding: 0;
   margin: 0;
 }

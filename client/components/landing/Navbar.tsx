@@ -40,58 +40,52 @@ const Navbar = ({ hoverProps }: NavbarProps) => {
 
   return (
     <header
-      className={`navbar-reveal fixed top-0 right-0 left-0 z-50 flex w-full items-center justify-center transition-all duration-700 ${
+      className={`navbar-reveal fixed top-0 right-0 left-0 z-50 flex w-full items-center justify-center transition-all duration-500 ${
         scrolled
-          ? 'border-border-light border-b bg-[rgba(251,249,246,0.93)] py-3.5 backdrop-blur-xl'
-          : 'bg-transparent py-5.5'
+          ? 'border-b border-white/10 bg-[var(--ink)]/80 backdrop-blur-md py-3'
+          : 'bg-transparent py-5'
       }`}
     >
-      <nav
-        className={`mx-auto flex w-full max-w-7xl items-center justify-between px-6 transition-all duration-300 md:px-14`}
-      >
-        <div className="mx-auto flex w-full max-w-7xl items-center justify-between">
-          {/* Logo */}
-          <div
-            className={`navbar-reveal text-[26px] font-medium tracking-[0.06em] transition-colors duration-500 ${
-              scrolled ? 'text-ink' : 'text-white'
-            }`}
-            style={{ fontFamily: 'Cormorant, serif' }}
-          >
-            Oviya
-          </div>
+      <nav className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 md:px-12 lg:px-20">
 
-          {/* Links */}
-          <div className="hidden items-center gap-9 md:flex">
-            {['The Problem:#problem', 'Features:#features', 'Our Story:#story'].map(
-              (s) => {
-                const [label, href] = s.split(':');
-                return (
-                  <a
-                    key={label}
-                    href={href}
-                    {...hoverProps}
-                    className={`navbar-reveal text-[11px] tracking-[0.2em] uppercase transition-colors duration-300 ${
-                      scrolled
-                        ? 'text-mid hover:text-violet'
-                        : 'text-white/50 hover:text-white'
-                    }`}
-                  >
-                    {label}
-                  </a>
-                );
-              },
-            )}
-          </div>
-
-          {/* CTA */}
-          <a
-            href="#cta"
-            {...hoverProps}
-            className={`navbar-reveal bg-soft/90 border-soft hover:bg-soft rounded-md border px-6 py-2.5 text-[10px] tracking-[0.22em] text-white uppercase transition-all duration-200 hover:-translate-y-px ${scrolled && 'bg-violet hover:bg-violet/90'}`}
-          >
-            Join Waitlist
-          </a>
+        {/* Logo */}
+        <div
+          className={`navbar-reveal text-lg md:text-xl tracking-[0.08em] font-medium transition-colors duration-300 ${
+            scrolled ? 'text-white' : 'text-white'
+          }`}
+          style={{ fontFamily: 'Cormorant, serif' }}
+        >
+          Oviya
         </div>
+
+        {/* Links */}
+        <div className="hidden items-center gap-10 md:flex">
+          {['The Problem:#problem', 'Features:#features', 'Our Story:#story'].map(
+            (s) => {
+              const [label, href] = s.split(':');
+              return (
+                <a
+                  key={label}
+                  href={href}
+                  {...hoverProps}
+                  className="navbar-reveal text-[11px] font-medium tracking-[0.12em] uppercase text-white/70 transition duration-300 hover:text-white"
+                >
+                  {label}
+                </a>
+              );
+            },
+          )}
+        </div>
+
+        {/* CTA */}
+        <a
+          href="#cta"
+          {...hoverProps}
+          className="navbar-reveal ml-4 rounded-full bg-[var(--violet)] px-6 py-2.5 text-[11px] tracking-[0.18em] uppercase text-white transition-all duration-200 hover:opacity-90"
+        >
+          Join Waitlist
+        </a>
+
       </nav>
     </header>
   );

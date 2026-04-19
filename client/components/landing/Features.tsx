@@ -22,7 +22,7 @@ const features = [
     iconBg:
       'bg-violet-500/10 border-violet-500/20 group-hover:bg-violet-500/15 group-hover:border-violet-500/30',
     iconColor: 'text-white/40 group-hover:text-violet-400',
-    numColor: 'group-hover:text-violet-500/30',
+    numColor: 'group-hover:text-violet-400/40',
     line: 'from-transparent via-violet-500 to-transparent',
   },
   {
@@ -34,7 +34,7 @@ const features = [
     iconBg:
       'bg-rose-400/10 border-rose-400/20 group-hover:bg-rose-400/15 group-hover:border-rose-400/30',
     iconColor: 'text-white/40 group-hover:text-rose-400',
-    numColor: 'group-hover:text-rose-500/30',
+    numColor: 'group-hover:text-rose-400/40',
     line: 'from-transparent via-rose-400 to-transparent',
   },
   {
@@ -46,7 +46,7 @@ const features = [
     iconBg:
       'bg-violet-500/10 border-violet-500/20 group-hover:bg-violet-500/15 group-hover:border-violet-500/30',
     iconColor: 'text-white/40 group-hover:text-violet-400',
-    numColor: 'group-hover:text-violet-500/30',
+    numColor: 'group-hover:text-violet-400/40',
     line: 'from-transparent via-violet-500 to-transparent',
   },
   {
@@ -58,7 +58,7 @@ const features = [
     iconBg:
       'bg-rose-400/10 border-rose-400/20 group-hover:bg-rose-400/15 group-hover:border-rose-400/30',
     iconColor: 'text-white/40 group-hover:text-rose-400',
-    numColor: 'group-hover:text-rose-500/30',
+    numColor: 'group-hover:text-rose-400/40',
     line: 'from-transparent via-rose-400 to-transparent',
   },
 ];
@@ -83,35 +83,37 @@ const Features = ({ hoverProps }: FeaturesProps) => {
   }, []);
 
   return (
-    <section id="features" className="bg-ink relative py-30">
-      {/* Background gradients */}
+    <section id="features" className="bg-ink relative py-32">
+      {/* Background */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_90%_50%,rgba(74,47,122,0.22),transparent_60%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_40%_60%_at_0%_0%,rgba(35,24,72,0.32),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_90%_50%,rgba(92,69,176,0.18),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_40%_60%_at_0%_0%,rgba(20,15,42,0.35),transparent_60%)]" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-12">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-12 lg:px-20">
+        
         {/* Section label */}
-        <div className="features-reveal text-mist mb-12 flex items-center gap-4 text-[10px] tracking-[0.32em] uppercase">
+        <div className="features-reveal mb-14 flex items-center gap-4 text-[10px] tracking-[0.32em] uppercase text-mist">
           What makes Oviya different
           <div className="h-px flex-1 bg-white/10" />
         </div>
 
         {/* Intro */}
-        <div className="features-reveal mb-16 grid items-end gap-12 md:mb-18 md:grid-cols-2 md:gap-20">
-          <h2 className="font-[Cormorant] text-[clamp(44px,4vw,64px)] leading-[1.02] font-light tracking-[-0.03em] text-white">
+        <div className="features-reveal mb-20 grid items-end gap-12 md:grid-cols-2 md:gap-24">
+          <h2 className="font-[Cormorant] text-[clamp(44px,4vw,64px)] leading-[1.05] tracking-tight text-white">
             Specific support,
             <br />
             not <em className="text-mist italic">generic</em> tracking.
           </h2>
-          <p className="text-[16px] leading-[1.85] font-light text-white/40">
+
+          <p className="text-[16px] leading-[1.9] font-light text-white/45 max-w-md">
             Built from 150+ real conversations. Every feature exists because someone
-            needed it and could&apos;nt find it anywhere else.
+            needed it and couldn&apos;t find it anywhere else.
           </p>
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 gap-px border border-white/10 bg-white/10 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
           {features.map((f, index) => {
             const Icon = f.icon;
 
@@ -121,49 +123,42 @@ const Features = ({ hoverProps }: FeaturesProps) => {
                 {...hoverProps}
                 onMouseEnter={() => setActiveCard(index)}
                 onMouseLeave={() => setActiveCard(null)}
-                className={`features-reveal group bg-ink relative cursor-default overflow-hidden px-8 py-11 transition-all duration-300 hover:bg-white/3 reveal-delay-${index + 1}`}
+                className={`features-reveal group relative overflow-hidden border border-[var(--border-dark)] bg-white/5 backdrop-blur-sm p-8 md:p-10 transition-all duration-300 hover:bg-white/10 reveal-delay-${index + 1}`}
               >
-                {/* Bottom gradient line */}
+                {/* Gradient line */}
                 <div
-                  className={`absolute right-0 bottom-0 left-0 h-px bg-linear-to-r ${f.line} scale-x-0 transition-transform duration-500 group-hover:scale-x-100`}
-                />
-
-                {/* Glow behind icon */}
-                <div
-                  className={`absolute top-8 left-6 h-16 w-16 rounded-full blur-2xl ${f.glow} opacity-0 transition-opacity duration-300 group-hover:opacity-100`}
+                  className={`absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r ${f.line} scale-x-0 transition-transform duration-500 group-hover:scale-x-100`}
                 />
 
                 {/* Number */}
                 <div
-                  className={`mb-4 font-[Cormorant] text-[60px] font-light tracking-[-0.04em] text-white/20 italic transition-colors duration-300 ${f.numColor}`}
+                  className={`mb-6 font-[Cormorant] text-5xl md:text-6xl font-medium tracking-tight text-white/25 transition-colors duration-300 ${f.numColor}`}
                 >
                   {f.n}
                 </div>
 
                 {/* Icon */}
                 <div
-                  className={`mb-5 flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-300 group-hover:-translate-y-0.5 group-hover:scale-110 ${f.iconBg}`}
+                  className={`mb-6 flex h-11 w-11 items-center justify-center rounded-xl border transition-all duration-300 group-hover:scale-110 ${f.iconBg}`}
                 >
-                  <Icon
-                    size={18}
-                    strokeWidth={1.5}
-                    className={`transition-colors duration-300 ${f.iconColor}`}
-                  />
+                  <Icon size={18} strokeWidth={1.5} className={f.iconColor} />
                 </div>
 
-                {/* Title */}
-                <h3 className="mb-3 font-[Cormorant] text-[24px] leading-tight font-medium tracking-[-0.01em] text-white/85 transition-colors duration-300 group-hover:text-white">
-                  {f.h}
-                </h3>
+                {/* Content */}
+                <div className="flex flex-col gap-4">
+                  <h3 className="font-[Cormorant] text-[22px] leading-tight font-medium text-white/90 group-hover:text-white">
+                    {f.h}
+                  </h3>
 
-                {/* Description */}
-                <p className="text-[13px] leading-[1.75] font-light text-white/35 transition-colors duration-300 group-hover:text-white/60">
-                  {f.p}
-                </p>
+                  <p className="text-[14px] leading-[1.85] font-light text-white/45 group-hover:text-white/65">
+                    {f.p}
+                  </p>
+                </div>
               </div>
             );
           })}
         </div>
+
       </div>
     </section>
   );

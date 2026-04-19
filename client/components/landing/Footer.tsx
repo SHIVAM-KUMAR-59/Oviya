@@ -3,7 +3,6 @@
 import { useEffect } from 'react';
 
 const Footer = () => {
-  // Scroll reveal effect
   useEffect(() => {
     const io = new IntersectionObserver(
       (entries) => {
@@ -22,22 +21,28 @@ const Footer = () => {
   }, []);
 
   return (
-    <footer className="footer-reveal bg-ink border-t border-white/5">
-      <section className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-4 px-6 py-10 text-center md:grid-cols-[1fr_auto_1fr] md:px-16 md:text-left">
+    <footer className="footer-reveal relative bg-[var(--ink)] border-t border-white/5 overflow-hidden">
+
+      {/* subtle grain overlay */}
+      <div className="pointer-events-none absolute inset-0 opacity-[0.04] bg-[url('/noise.png')]" />
+
+      <section className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-6 px-6 py-14 text-center md:grid-cols-[1fr_auto_1fr] md:px-12 lg:px-20 md:text-left">
+        
         {/* Logo */}
-        <div className="font-serif text-[22px] font-light tracking-[0.08em] text-white">
+        <div className="font-[Cormorant] text-xl tracking-[0.08em] text-white">
           Oviya
         </div>
 
         {/* Center text */}
-        <div className="text-center text-[10px] tracking-[0.2em] text-white/50 uppercase">
-          © 2025 · Built with women, not assumptions
+        <div className="text-[10px] tracking-[0.22em] text-white/50 uppercase">
+          © {new Date().getFullYear()} · Built with women, not assumptions
         </div>
 
         {/* Right text */}
-        <div className="text-mist font-serif text-[16px] italic md:text-right">
+        <div className="font-[Cormorant] text-[15px] italic text-[var(--rose-pale)] md:text-right">
           For the 1 in 5. Finally.
         </div>
+
       </section>
     </footer>
   );
