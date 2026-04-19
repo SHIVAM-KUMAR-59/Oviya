@@ -37,7 +37,7 @@ const Voices = ({ hoverProps }: VoicesProps) => {
         "
       </span>
 
-      <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-16">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-16">
         {/* Section Label */}
         <div className="voices-reveal text-mid mb-14 flex items-center gap-4 text-[10px] tracking-[0.32em] uppercase">
           110 women spoke. We listened.

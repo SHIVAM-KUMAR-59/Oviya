@@ -43,7 +43,7 @@ const CTA = ({ hoverProps, ctaForm, setCtaForm, submitForm }: CTAProps) => {
 
   return (
     <section id="cta" className="bg-cream py-28">
-      <div className="mx-auto max-w-6xl px-6 md:px-16">
+      <div className="mx-auto max-w-7xl px-6 md:px-16">
         <div className="cta-reveal border-border-light relative overflow-hidden border bg-[radial-gradient(ellipse_70%_60%_at_80%_50%,rgba(107,79,160,0.08),transparent_60%),var(--parchment)] px-10 py-16 md:px-20 md:py-24">
           {/* Top gradient line */}
           <div className="pointer-events-none absolute top-0 right-20 left-20 h-0.5 bg-[linear-gradient(90deg,transparent,var(--rose),var(--soft),transparent)]" />

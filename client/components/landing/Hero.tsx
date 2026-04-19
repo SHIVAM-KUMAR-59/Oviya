@@ -95,7 +95,7 @@ const Hero = ({ hoverProps }: HeroProps) => {
         />
 
         {/* LEFT */}
-        <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col justify-center px-6 py-32 lg:px-16 lg:py-0">
+        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col justify-center px-6 py-32 lg:px-16 lg:py-0">
           {/* Eyebrow */}
           <div className="hero-reveal text-mist mb-9 flex items-center gap-3 text-[10px] tracking-[0.3em] uppercase">
             <div className="from-rose h-px w-10 bg-linear-to-r to-transparent" />

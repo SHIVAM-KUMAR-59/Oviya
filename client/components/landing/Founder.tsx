@@ -29,7 +29,7 @@ const Founder = () => {
       {/* Bottom gradient glow */}
       <div className="pointer-events-none absolute -bottom-20 left-0 h-125 w-125 bg-[radial-gradient(circle,rgba(74,47,122,0.16),transparent_70%)]" />
 
-      <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-16">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-16">
         {/* Section Label */}
         <div className="founder-reveal text-mist mb-14 flex items-center gap-4 text-[10px] tracking-[0.32em] uppercase">
           Built by someone like you

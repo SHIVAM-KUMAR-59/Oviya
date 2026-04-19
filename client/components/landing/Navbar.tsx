@@ -49,7 +49,7 @@ const Navbar = ({ hoverProps }: NavbarProps) => {
       <nav
         className={`mx-auto flex w-full max-w-7xl items-center justify-between px-6 transition-all duration-300 md:px-14`}
       >
-        <div className="mx-auto flex w-full max-w-6xl items-center justify-between">
+        <div className="mx-auto flex w-full max-w-7xl items-center justify-between">
           {/* Logo */}
           <div
             className={`navbar-reveal text-[26px] font-medium tracking-[0.06em] transition-colors duration-500 ${

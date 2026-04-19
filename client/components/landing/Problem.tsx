@@ -53,7 +53,7 @@ const Problem = ({ hoverProps }: ProblemProps) => {
 
   return (
     <section id="problem" className="bg-cream pt-30">
-      <div className="mx-auto max-w-6xl px-6 md:px-12">
+      <div className="mx-auto max-w-7xl px-6 md:px-12">
         {/* Section Label */}
         <div className="problem-reveal text-mid mb-10 text-xs tracking-[0.2em] uppercase">
           The problem no one is solving

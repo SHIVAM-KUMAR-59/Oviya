@@ -90,7 +90,7 @@ const Features = ({ hoverProps }: FeaturesProps) => {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_40%_60%_at_0%_0%,rgba(35,24,72,0.32),transparent_60%)]" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-12">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-12">
         {/* Section label */}
         <div className="features-reveal text-mist mb-12 flex items-center gap-4 text-[10px] tracking-[0.32em] uppercase">
           What makes Oviya different
