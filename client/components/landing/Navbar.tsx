@@ -43,7 +43,7 @@ const Navbar = ({ hoverProps }: NavbarProps) => {
     <header
       className={`navbar-reveal fixed top-0 right-0 left-0 z-50 flex w-full items-center justify-center transition-all duration-500 ${
         scrolled
-          ? 'border-b border-white/10 bg-[var(--ink)]/80 backdrop-blur-md py-3'
+          ? 'border-b border-white/10 bg-ink/80 backdrop-blur-md py-3'
           : 'bg-transparent py-5'
       }`}
     >
