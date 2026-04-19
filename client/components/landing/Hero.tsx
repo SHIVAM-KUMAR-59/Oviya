@@ -103,7 +103,7 @@ const Hero = ({ hoverProps }: HeroProps) => {
           </div>
 
           {/* Heading */}
-          <h1 className="hero-reveal font-[Cormorant] text-[clamp(80px,9vw,136px)] leading-[0.88] font-light tracking-[-0.03em] text-white">
+          <h1 className="hero-reveal font-[Cormorant] text-[clamp(80px,9vw,136px)] leading-[0.88] font-medium md:font-light tracking-[-0.03em] text-white">
             Ovi<em className="text-mist italic">ya</em>
             <br />
             <span
