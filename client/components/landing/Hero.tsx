@@ -175,7 +175,7 @@ const Hero = ({ hoverProps }: HeroProps) => {
               (b) => (
                 <span
                   key={b}
-                  className="border border-[rgba(197,178,232,0.22)] px-4 py-1 text-[10px] tracking-[0.18em] text-[rgba(197,178,232,0.55)] uppercase"
+                  className="border border-[rgba(197,178,232,0.22)] px-4 py-1 text-[10px] tracking-[0.18em] text-[rgba(197,178,232,0.55)] uppercase hover:bg-white/10 transition duration-200"
                 >
                   {b}
                 </span>
