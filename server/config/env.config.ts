@@ -38,8 +38,8 @@ const REDIS = {
   },
   TTL: {
     SHORT: 30, // 30 seconds
-    MEDIUM: 60, // 1 min
-    LONG: 300, // 5 min
+    MEDIUM: 60, // 1 minutes
+    LONG: 300, // 5 minutes
   },
 };
 

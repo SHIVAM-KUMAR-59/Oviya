@@ -13,14 +13,353 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-model Test {
-  id   String    @id @default(uuid())
-  name String
-}
-
 model WaitlistUser {
   id        String   @id @default(uuid())
   email     String   @unique
   
   createdAt DateTime @default(now())
+}
+
+// ─────────────────────────────────────────
+// ENUMS
+// ─────────────────────────────────────────
+
+enum PCOSStatus {
+  DIAGNOSED
+  SUSPECTED
+  IRREGULAR_ONLY
+  SUPPORTING_SOMEONE
+}
+
+enum SelfReportedRegularity {
+  VERY_IRREGULAR
+  SOMEWHAT_IRREGULAR
+  FAIRLY_REGULAR
+}
+
+enum CycleConfidence {
+  LOGGED      // entered in app — full weight
+  ESTIMATED   // entered during onboarding — half weight
+}
+
+enum FlowIntensity {
+  SPOTTING
+  LIGHT
+  MEDIUM
+  HEAVY
+}
+
+enum ConfidenceLevel {
+  VERY_EARLY
+  EARLY
+  GOOD
+  HIGH
+  ROUGH
+}
+
+enum SleepQuality {
+  POOR
+  FAIR
+  GOOD
+  GREAT
+}
+
+enum MoodLevel {
+  VERY_LOW
+  LOW
+  NEUTRAL
+  GOOD
+  GREAT
+}
+
+enum EnergyLevel {
+  VERY_LOW
+  LOW
+  MODERATE
+  HIGH
+  VERY_HIGH
+}
+
+// ─────────────────────────────────────────
+// USER
+// Core profile + onboarding answers
+// ─────────────────────────────────────────
+
+model User {
+  id                    String                 @id @default(uuid())
+  email                 String                 @unique
+  passwordHash          String
+  name                  String?
+
+  // PCOS profile
+  pcosStatus            PCOSStatus
+  selfReportedRegularity SelfReportedRegularity
+  diagnosisDate         DateTime?              // approximate, optional
+
+  // Onboarding state
+  onboardingCompleted   Boolean                @default(false)
+  onboardingCompletedAt DateTime?
+
+  // Notification preferences
+  notificationsEnabled  Boolean                @default(false)
+  reminderTime          String?                // "20:00" — time of day for daily reminder
+  periodReminderDays    Int                    @default(3) // days before window to notify
+
+  // App preferences
+  language              String                 @default("en") // "en" | "hi" | "or"
+  timezone              String                 @default("Asia/Kolkata")
+
+  // Push notification subscription (web-push)
+  pushSubscriptions     PushSubscription[]
+
+  // Relations
+  cycles                Cycle[]
+  symptoms              SymptomLog[]
+  predictions           Prediction[]
+  dailyLogs             DailyLog[]
+
+  // Refresh tokens for auth
+  refreshTokens         RefreshToken[]
+
+  createdAt             DateTime               @default(now())
+  updatedAt             DateTime               @updatedAt
+
+  @@index([email])
+}
+
+// ─────────────────────────────────────────
+// CYCLE
+// One row per period — start date is the
+// only required input from the user.
+// cycleLength is derived, not entered.
+// ─────────────────────────────────────────
+
+model Cycle {
+  id           String          @id @default(uuid())
+  userId       String
+  user         User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Core dates — only startDate is required from user
+  startDate    DateTime
+  endDate      DateTime?       // null until user logs period end
+
+  // Derived by the algorithm — not entered by user
+  // Days from this startDate to the NEXT cycle's startDate
+  // null for the most recent cycle (next hasn't started yet)
+  cycleLength  Int?
+
+  // Was this entered during onboarding (estimated)
+  // or logged in the app (logged)?
+  confidence   CycleConfidence @default(LOGGED)
+
+  // Daily flow entries within this period
+  periodDays   PeriodDay[]
+
+  // ── Extension points (all nullable — not used in v1) ──
+
+  // Pregnancy tracking (v2+)
+  // If user is trying to conceive, we log ovulation attempts
+  tryingToConceive    Boolean?
+  ovulationTestResult String?  // "positive" | "negative" | "not_tested"
+
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+
+  @@index([userId, startDate])
+  @@index([userId])
+}
+
+// ─────────────────────────────────────────
+// PERIOD DAY
+// Daily flow entry within a cycle.
+// Optional — not every user logs daily.
+// ─────────────────────────────────────────
+
+model PeriodDay {
+  id        String        @id @default(uuid())
+  cycleId   String
+  cycle     Cycle         @relation(fields: [cycleId], references: [id], onDelete: Cascade)
+  userId    String        // denormalised for faster user-scoped queries
+
+  date      DateTime
+  flow      FlowIntensity
+  note      String?       // free text, optional
+
+  createdAt DateTime      @default(now())
+
+  @@unique([cycleId, date])  // one entry per day per cycle
+  @@index([userId, date])
+}
+
+// ─────────────────────────────────────────
+// DAILY LOG
+// The 30-second daily check-in.
+// Separate from PeriodDay — this covers
+// all days, not just period days.
+// This is where sleep, sex, mood live.
+// ─────────────────────────────────────────
+
+model DailyLog {
+  id     String @id @default(uuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  date   DateTime // one per day — enforced by @@unique below
+
+  // ── V1 fields ──
+  mood        MoodLevel?
+  energy      EnergyLevel?
+  bloating    Boolean?
+  cramping    Boolean?
+  acne        Boolean?
+  hairFall    Boolean?
+  cravings    Boolean?
+  headache    Boolean?
+  breastTenderness Boolean?
+  note        String?    // optional free text
+
+  // ── Extension points ──
+
+  // Sleep (v2+)
+  // sleepHours    Float?
+  // sleepQuality  SleepQuality?
+  // sleepTime     String?   // "23:30"
+  // wakeTime      String?   // "07:00"
+
+  // Sex activity (v2+)
+  // sexActivity         Boolean?
+  // protectedSex        Boolean?
+  // ovulationTestTaken  Boolean?
+  // ovulationTestResult String?
+
+  // Stress (v2+)
+  // stressLevel   Int?  // 1–5
+
+  // Medications / supplements (v2+)
+  // medicationTaken Boolean?
+  // medicationNote  String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, date])  // one log per day per user
+  @@index([userId, date])
+}
+
+// ─────────────────────────────────────────
+// SYMPTOM LOG
+// Tracks PCOS-specific symptoms over time.
+// Separate from DailyLog so symptoms can
+// be tracked independently of daily check-in.
+// Used to power the doctor PDF report.
+// ─────────────────────────────────────────
+
+model SymptomLog {
+  id     String @id @default(uuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  date   DateTime
+
+  // PCOS-specific symptoms
+  weightChange      Float?   // kg change since last log (+ or -)
+  hairLossLevel     Int?     // 1–5 scale
+  facialHairLevel   Int?     // 1–5 scale
+  acneLevel         Int?     // 1–5 scale
+  skinDarkening     Boolean? // acanthosis nigricans
+  pelvicPain        Int?     // 1–5 scale
+  fatigue           Int?     // 1–5 scale
+
+  note              String?
+
+  createdAt         DateTime @default(now())
+
+  @@index([userId, date])
+}
+
+// ─────────────────────────────────────────
+// PREDICTION
+// Cached result of the prediction algorithm.
+// Recalculated every time a new cycle is logged.
+// Stored so we can show history and track accuracy.
+// ─────────────────────────────────────────
+
+model Prediction {
+  id     String @id @default(uuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // The prediction output
+  windowStart          DateTime
+  windowEnd            DateTime
+  mostLikelyDate       DateTime
+  windowDays           Int
+  honestWindowDays     Int       // before 10-day cap
+  predictedCycleLength Int       // weighted average in days
+  confidenceLevel      ConfidenceLevel
+  confidenceMessage    String
+  basedOnCycles        Int
+  wasCapApplied        Boolean
+  nextUpdateAfter      DateTime  // when to show overdue message
+
+  // Was this prediction correct?
+  // Filled in once the actual period arrives
+  actualStartDate      DateTime? // null until period logged
+  predictionError      Int?      // actualStartDate - mostLikelyDate in days
+                                 // negative = arrived early, positive = late
+
+  // Is this the active prediction for this user?
+  isActive             Boolean   @default(true)
+
+  generatedAt          DateTime  @default(now())
+
+  @@index([userId, isActive])
+  @@index([userId, generatedAt])
+}
+
+// ─────────────────────────────────────────
+// PUSH SUBSCRIPTION
+// Stores web-push subscription objects.
+// One user can have multiple devices.
+// ─────────────────────────────────────────
+
+model PushSubscription {
+  id       String @id @default(uuid())
+  userId   String
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // The full subscription object from the browser
+  endpoint String @unique
+  p256dh   String  // public key
+  auth     String  // auth secret
+
+  // Device info — useful for debugging
+  userAgent String?
+  deviceType String? // "android" | "ios" | "desktop"
+
+  createdAt DateTime @default(now())
+  lastUsed  DateTime @default(now())
+
+  @@index([userId])
+}
+
+// ─────────────────────────────────────────
+// REFRESH TOKEN
+// JWT refresh token rotation.
+// Stored in DB so tokens can be revoked.
+// ─────────────────────────────────────────
+
+model RefreshToken {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  token     String   @unique
+  expiresAt DateTime
+  revokedAt DateTime? // null = still valid
+
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([token])
 }

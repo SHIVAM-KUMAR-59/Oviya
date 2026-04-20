@@ -1,5 +1,5 @@
-import CycleForm from '@/components/predict/CycleForm';
+import HeroSection from '@/components/landing/Main';
 
 export default function Home() {
-  return <CycleForm />;
+  return <HeroSection />;
 }
