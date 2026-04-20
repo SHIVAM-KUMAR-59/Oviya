@@ -3,7 +3,7 @@ import { ApiError, handleServerError } from '../../lib/utils/error.util';
 import Repository from '../../repository';
 import CacheService from '../cache/cache.service';
 import env from '../../config/env.config';
-import { findByEmail } from '../../repository/waitlistUser/waitlistUser.repository';
+import findWaitlistUserByEmailService from './findByEmail.service';
 
 const createWaitlistUserService = async (email: string) => {
   const userKey = env.REDIS.KEYS.WAITLIST_USER.USER_BY_EMAIL(email);
@@ -11,7 +11,7 @@ const createWaitlistUserService = async (email: string) => {
   const countKey = env.REDIS.KEYS.WAITLIST_USER.COUNT;
 
   try {
-    const existingWaitlistUser = await findByEmail(email);
+    const existingWaitlistUser = await findWaitlistUserByEmailService(email);
 
     if (existingWaitlistUser) {
       throw new ApiError(409, `Email ${email} is already on the waitlist`);
@@ -21,10 +21,12 @@ const createWaitlistUserService = async (email: string) => {
     const newWaitlistUser =
       await Repository.waitlistUserRepository.createWaitlistUser(email);
 
-    // Invalidate cache (IMPORTANT)
-    await CacheService.del(userKey);
-    await CacheService.del(allUsersKey);
-    await CacheService.del(countKey);
+    // Invalidate cache
+    Promise.all([
+      CacheService.del(userKey),
+      CacheService.del(allUsersKey),
+      CacheService.del(countKey),
+    ]);
 
     // Set fresh cache for this user
     await CacheService.set(userKey, newWaitlistUser, env.REDIS.TTL.LONG);
