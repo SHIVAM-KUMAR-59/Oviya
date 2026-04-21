@@ -1,6 +1,6 @@
 import env from '../../config/env.config';
 import logger from '../../config/logger.config';
-import { handleServerError } from '../../lib/utils/error.util';
+import { ErrorUtil } from '../../lib/utils/error.util';
 import Repository from '../../repository';
 import CacheService from '../cache/cache.service';
 
@@ -28,7 +28,7 @@ const getWaitlistUserCountService = async (): Promise<number | void> => {
     logger.error(
       `Error in getWaitlistUserCountService: ${err instanceof Error ? err : new Error(String(err))}`,
     );
-    handleServerError(err instanceof Error ? err : new Error(String(err)));
+    ErrorUtil.handleServerError(err instanceof Error ? err : new Error(String(err)));
   }
 };
 

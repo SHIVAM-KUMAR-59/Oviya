@@ -1,5 +1,5 @@
 import logger from '../../config/logger.config';
-import { ApiError, handleServerError } from '../../lib/utils/error.util';
+import { ApiError, ErrorCode, ErrorUtil } from '../../lib/utils/error.util';
 import Repository from '../../repository';
 import CacheService from '../cache/cache.service';
 import env from '../../config/env.config';
@@ -14,7 +14,7 @@ const createWaitlistUserService = async (email: string) => {
     const existingWaitlistUser = await findWaitlistUserByEmailService(email);
 
     if (existingWaitlistUser) {
-      throw new ApiError(409, `Email ${email} is already on the waitlist`);
+      throw new ApiError(ErrorCode.CONFLICT, `Email ${email} is already on the waitlist`);
     }
 
     // Create user in DB
@@ -41,7 +41,7 @@ const createWaitlistUserService = async (email: string) => {
       }`,
     );
 
-    handleServerError(err instanceof Error ? err : new Error(String(err)));
+    ErrorUtil.handleServerError(err instanceof Error ? err : new Error(String(err)));
   }
 };
 
