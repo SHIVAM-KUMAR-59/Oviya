@@ -4,6 +4,8 @@ import Repository from '../../repository';
 import CacheService from '../cache/cache.service';
 import env from '../../config/env.config';
 import findWaitlistUserByEmailService from './findByEmail.service';
+import waitlistTemplate from '../../lib/templates/waitlist.util';
+import sendMail from '../../lib/utils/mailer.util';
 
 const createWaitlistUserService = async (email: string) => {
   const userKey = env.REDIS.KEYS.WAITLIST_USER.USER_BY_EMAIL(email);
@@ -30,6 +32,13 @@ const createWaitlistUserService = async (email: string) => {
 
     // Set fresh cache for this user
     await CacheService.set(userKey, newWaitlistUser, env.REDIS.TTL.LONG);
+
+    // Send the mail
+    sendMail({
+      to: email,
+      subject: 'Welcome to Oviya 🌸',
+      html: waitlistTemplate(),
+    });
 
     logger.success(`Waitlist user created: ${email}`);
 

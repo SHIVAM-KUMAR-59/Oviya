@@ -67,6 +67,8 @@ const env = {
   ENABLE_LOGS: process.env.ENABLE_LOGS ? toBoolean(process.env.ENABLE_LOGS) : true,
 
   REDIS,
+
+  RESEND_API_KEY: requireEnv('RESEND_API_KEY'),
 };
 
 export default env;
