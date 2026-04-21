@@ -43,6 +43,17 @@ const REDIS = {
   },
 };
 
+const JWT = {
+  ACCESS_TOKEN: {
+    SECRET: requireEnv('ACCESS_TOKEN_SECRET'),
+    EXPIRY_TIME: requireEnv('ACCESS_TOKEN_EXPIRY_TIME'),
+  },
+  REFRESH_TOKEN: {
+    SECRET: requireEnv('REFRESH_TOKEN_SECRET'),
+    EXPIRY_TIME: requireEnv('REFRESH_TOKEN_EXPIRY_TIME'),
+  },
+};
+
 const env = {
   NODE_ENV: process.env.NODE_ENV || 'development',
 
@@ -51,8 +62,7 @@ const env = {
   DATABASE_URL: requireEnv('DATABASE_URL'),
   DIRECT_URL: requireEnv('DIRECT_URL'),
 
-  JWT_SECRET: requireEnv('JWT_SECRET'),
-  //   JWT_EXPIRES_IN: requireEnv("JWT_EXPIRES_IN") || "7d",
+  JWT,
 
   ENABLE_LOGS: process.env.ENABLE_LOGS ? toBoolean(process.env.ENABLE_LOGS) : true,
 
