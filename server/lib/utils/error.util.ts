@@ -1,4 +1,4 @@
-import logger from "../../config/logger.config";
+import logger from '../../config/logger.config';
 
 export enum ErrorCode {
   BAD_REQUEST = 'BAD_REQUEST',
