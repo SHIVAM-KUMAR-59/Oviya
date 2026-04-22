@@ -58,7 +58,7 @@ const JWT = {
   },
   REFRESH_TOKEN: {
     SECRET: requireEnv('REFRESH_TOKEN_SECRET'),
-    EXPIRY_TIME: requireEnv('REFRESH_TOKEN_EXPIRY_TIME'),
+    EXPIRY_SECONDS: 60 * 60 * 24 * 30, // 30 days
   },
 };
 

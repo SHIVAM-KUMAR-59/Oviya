@@ -1,7 +1,8 @@
 import logger from '../../config/logger.config';
 import { ApiError, ErrorCode, ErrorUtil } from '../../lib/utils/error.util';
-import { generateAccessToken, generateRefreshToken } from '../../lib/utils/jwt.util';
+import { generateAccessToken } from '../../lib/utils/jwt.util';
 import Repository from '../../repository';
+import RefreshTokenService from './token';
 
 const registerUserService = async ({ name, email }: { name: string; email: string }) => {
   try {
@@ -21,12 +22,14 @@ const registerUserService = async ({ name, email }: { name: string; email: strin
     }
 
     const accessToken = generateAccessToken(user.id);
-    const refreshToken = generateRefreshToken(user.id);
+    const refreshToken = await RefreshTokenService.issueRefreshToken(user.id);
 
     if (!accessToken || !refreshToken) {
       logger.error('Error generating token');
       throw new ApiError(ErrorCode.INTERNAL_SERVER_ERROR, 'Something went wrong.');
     }
+
+    logger.success(`User registered: userId=${user.id}`);
 
     return { user, accessToken, refreshToken };
   } catch (err) {
