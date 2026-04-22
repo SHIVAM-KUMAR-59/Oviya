@@ -35,6 +35,14 @@ const REDIS = {
       USER_BY_EMAIL: (email: string) => `waitlist:user:${email}`,
       COUNT: 'waitlist:count',
     },
+    AUTH: {
+      REFRESH_TOKEN: (jti: string) => `auth:refresh:${jti}`,
+    },
+    OTP: {
+      BY_EMAIL: (email: string) => `otp:${email}`,
+      ATTEMPTS_BY_EMAIL: (email: string) => `otp:attempts:${email}`,
+      COOLDOWN_BY_EMAIL: (email: string) => `otp:cooldown:${email}`,
+    },
   },
   TTL: {
     SHORT: 30, // 30 seconds
