@@ -35,7 +35,7 @@
  *           example: false
  *         message:
  *           type: string
- *           example: "Invalid request"
+ *           example: "Something went wrong"
  *         error:
  *           type: object
  *           required:
@@ -46,22 +46,22 @@
  *               type: string
  *               enum:
  *                 - BAD_REQUEST
- *                 - UNAUTHORIZED
+ *                 - UNAUTHENTICATED
  *                 - FORBIDDEN
  *                 - NOT_FOUND
  *                 - CONFLICT
  *                 - VALIDATION_ERROR
  *                 - TOO_MANY_REQUESTS
  *                 - INTERNAL_SERVER_ERROR
- *               example: "BAD_REQUEST"
+ *               example: "INTERNAL_SERVER_ERROR"
  *             statusCode:
  *               type: integer
- *               example: 400
+ *               example: 500
  *             details:
  *               nullable: true
  *               oneOf:
  *                 - type: string
- *                   example: "Message describing error"
+ *                   example: "Something went wrong"
  *                 - type: array
  *                   items:
  *                     type: object
@@ -71,7 +71,7 @@
  *                         example: "email"
  *                       message:
  *                         type: string
- *                         example: "Message describing error"
+ *                         example: "Something went wrong"
  */
 import { ErrorCode } from '../lib/utils/error.util';
 

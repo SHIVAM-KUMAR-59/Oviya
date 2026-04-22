@@ -92,6 +92,12 @@ authRouter.post(
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
+ *             example:
+ *               success: false
+ *               message: "Invalid OTP format"
+ *               error:
+ *                 code: BAD_REQUEST
+ *                 statusCode: 400
  *
  *       403:
  *         description: Invalid OTP
@@ -99,9 +105,25 @@ authRouter.post(
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
+ *             example:
+ *               success: false
+ *               message: "Invalid / Expired OTP"
+ *               error:
+ *                 code: FORBIDDEN
+ *                 statusCode: 403
  *
  *       429:
- *         description: Too many attempts
+ *         description: Too many requests (cooldown active)
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ *             example:
+ *               success: false
+ *               message: "Please wait before requesting another OTP"
+ *               error:
+ *                 code: TOO_MANY_REQUESTS
+ *                 statusCode: 429
  *
  *       500:
  *         description: Internal Server Error
@@ -149,11 +171,32 @@ authRouter.post(
  *                     data:
  *                       $ref: '#/components/schemas/AuthResponse'
  *
+ *       400:
+ *         description: OTP expired or invalid request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ *             example:
+ *               success: false
+ *               message: "Invalid email format"
+ *               error:
+ *                 code: BAD_REQUEST
+ *                 statusCode: 400
+ *
  *       409:
  *         description: User already exists
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ *             example:
+ *               success: false
+ *               message: "User with this email already exists"
+ *               error:
+ *                 code: CONFLICT
+ *                 statusCode: 409
  *
- *       400:
- *         description: Validation error
  *
  *       500:
  *         description: Internal Server Error
@@ -199,11 +242,30 @@ authRouter.post(
  *                     data:
  *                       $ref: '#/components/schemas/AuthResponse'
  *
+ *       400:
+ *         description: OTP expired or invalid request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ *             example:
+ *               success: false
+ *               message: "Invalid email format"
+ *               error:
+ *                 code: BAD_REQUEST
+ *                 statusCode: 400
+ *
  *       404:
  *         description: User not found
- *
- *       400:
- *         description: Bad request
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ *             example:
+ *               success: false
+ *               message: "No user found with the given email"
+ *               error:
+ *                 code: NOT_FOUND
+ *                 statusCode: 404
  *
  *       500:
  *         description: Internal Server Error
@@ -242,6 +304,15 @@ authRouter.post(
  *
  *       401:
  *         description: Invalid or expired refresh token
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ *             example:
+ *               success: false
+ *               message: "User is not logged in"
+ *               error:
+ *                 code: UNAUTHENTICATED
+ *                 statusCode: 401
  *
  *       500:
  *         description: Internal Server Error
@@ -271,6 +342,18 @@ authRouter.post('/refresh', Controller.authController.refreshTokenController);
  *             example:
  *               success: true
  *               message: "Logged out successfully"
+ *
+ *       401:
+ *         description: Invalid or expired refresh token
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ *             example:
+ *               success: false
+ *               message: "User is not logged in"
+ *               error:
+ *                 code: UNAUTHENTICATED
+ *                 statusCode: 401
  *
  *       500:
  *         description: Internal Server Error

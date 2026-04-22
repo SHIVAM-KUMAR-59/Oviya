@@ -2,7 +2,7 @@ import logger from '../../config/logger.config';
 
 export enum ErrorCode {
   BAD_REQUEST = 'BAD_REQUEST',
-  UNAUTHORIZED = 'UNAUTHORIZED',
+  UNAUTHENTICATED = 'UNAUTHENTICATED',
   FORBIDDEN = 'FORBIDDEN',
   NOT_FOUND = 'NOT_FOUND',
   CONFLICT = 'CONFLICT',
@@ -14,7 +14,7 @@ export enum ErrorCode {
 
 export const ErrorMessageMap: Record<ErrorCode, string> = {
   [ErrorCode.BAD_REQUEST]: 'Bad request',
-  [ErrorCode.UNAUTHORIZED]: 'Unauthorized',
+  [ErrorCode.UNAUTHENTICATED]: 'Unauthenticated',
   [ErrorCode.FORBIDDEN]: 'Forbidden',
   [ErrorCode.NOT_FOUND]: 'Resource not found',
   [ErrorCode.CONFLICT]: 'Conflict occurred',
@@ -26,7 +26,7 @@ export const ErrorMessageMap: Record<ErrorCode, string> = {
 
 export const ErrorStatusMap: Record<ErrorCode, number> = {
   [ErrorCode.BAD_REQUEST]: 400,
-  [ErrorCode.UNAUTHORIZED]: 401,
+  [ErrorCode.UNAUTHENTICATED]: 401,
   [ErrorCode.FORBIDDEN]: 403,
   [ErrorCode.NOT_FOUND]: 404,
   [ErrorCode.CONFLICT]: 409,

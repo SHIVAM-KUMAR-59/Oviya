@@ -21,7 +21,7 @@ const rotateRefreshToken = async (
   try {
     payload = jwt.verify(token, REFRESH_SECRET) as typeof payload;
   } catch {
-    throw new ApiError(ErrorCode.UNAUTHORIZED, 'Invalid refresh token');
+    throw new ApiError(ErrorCode.UNAUTHENTICATED, 'Invalid refresh token');
   }
 
   const { sub: userId, jti } = payload;

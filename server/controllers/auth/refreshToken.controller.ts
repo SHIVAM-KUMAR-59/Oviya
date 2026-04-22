@@ -13,7 +13,7 @@ export const refreshTokenController = async (
     const refreshToken = req.cookies?.refreshToken;
 
     if (!refreshToken) {
-      throw new ApiError(ErrorCode.UNAUTHORIZED, 'Refresh token missing');
+      throw new ApiError(ErrorCode.UNAUTHENTICATED, 'Refresh token missing');
     }
 
     const { accessToken, refreshToken: newRefreshToken } =
