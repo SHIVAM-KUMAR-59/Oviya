@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken';
-import prisma from '../../../lib/utils/prisma.util';
 import CacheService from '../../cache/cache.service';
 import env from '../../../config/env.config';
 import logger from '../../../config/logger.config';
+import Repository from '../../../repository';
 
 const revokeRefreshToken = async (token: string): Promise<void> => {
   try {
@@ -10,10 +10,7 @@ const revokeRefreshToken = async (token: string): Promise<void> => {
     if (!payload?.jti) return;
 
     await Promise.allSettled([
-      prisma.refreshToken.updateMany({
-        where: { token: payload.jti, revokedAt: null },
-        data: { revokedAt: new Date() },
-      }),
+      Repository.authRepository.revokeByToken(payload.jti),
       CacheService.del(env.REDIS.KEYS.AUTH.REFRESH_TOKEN(payload.jti)),
     ]);
   } catch (err) {

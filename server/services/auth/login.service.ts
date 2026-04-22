@@ -26,7 +26,7 @@ const loginUserService = async (email: string) => {
   } catch (error) {
     const errorMessage = ErrorUtil.getErrorMessage(error);
     logger.error(errorMessage);
-    ErrorUtil.handleServerError(errorMessage);
+    ErrorUtil.handleServerError(error);
   }
 };
 

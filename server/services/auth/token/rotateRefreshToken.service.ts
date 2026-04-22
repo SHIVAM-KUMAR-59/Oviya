@@ -1,10 +1,11 @@
-import jwt, { SignOptions } from 'jsonwebtoken';
-import prisma from '../../../lib/utils/prisma.util';
+import jwt from 'jsonwebtoken';
 import CacheService from '../../cache/cache.service';
 import env from '../../../config/env.config';
 import logger from '../../../config/logger.config';
 import { generateAccessToken } from '../../../lib/utils/jwt.util';
 import issueRefreshToken from './issueRefreshToken.service';
+import Repository from '../../../repository';
+import { ApiError, ErrorCode } from '../../../lib/utils/error.util';
 
 const REFRESH_SECRET = env.JWT.REFRESH_TOKEN.SECRET;
 
@@ -20,38 +21,24 @@ const rotateRefreshToken = async (
   try {
     payload = jwt.verify(token, REFRESH_SECRET) as typeof payload;
   } catch {
-    throw Object.assign(new Error('Invalid refresh token'), {
-      code: 'INVALID_REFRESH_TOKEN',
-      status: 401,
-    });
+    throw new ApiError(ErrorCode.UNAUTHORIZED, 'Invalid refresh token');
   }
 
   const { sub: userId, jti } = payload;
 
-  const dbToken = await prisma.refreshToken.findUnique({
-    where: { token: jti },
-    include: { user: { select: { id: true, email: true } } },
-  });
+  const dbToken = await Repository.authRepository.findByToken(jti);
 
   // Token reuse detection — if already revoked, kill all sessions
   if (!dbToken || dbToken.revokedAt || dbToken.expiresAt < new Date()) {
-    logger.warn(`Refresh token reuse detected userId=${userId}`);
-    await prisma.refreshToken.updateMany({
-      where: { userId, revokedAt: null },
-      data: { revokedAt: new Date() },
-    });
-    throw Object.assign(new Error('Token reuse detected — all sessions terminated'), {
-      code: 'TOKEN_REUSE',
-      status: 401,
-    });
+    logger.debug(`Refresh token reuse detected userId=${userId}`);
+    await Repository.authRepository.revokeAllByUserId(userId);
+
+    throw new ApiError(ErrorCode.TOKEN_REUSE, 'Session invalidated. Please login again.');
   }
 
   // Revoke old token
   await Promise.all([
-    prisma.refreshToken.update({
-      where: { token: jti },
-      data: { revokedAt: new Date() },
-    }),
+    Repository.authRepository.revokeByToken(jti),
     CacheService.del(env.REDIS.KEYS.AUTH.REFRESH_TOKEN(jti)),
   ]);
 

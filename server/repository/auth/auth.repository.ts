@@ -1,7 +1,11 @@
 import { RefreshToken } from '@prisma/client';
 import prisma from '../../lib/utils/prisma.util';
 
-export const createRefreshToken = async (tokenData: RefreshToken) => {
+export const createRefreshToken = async (tokenData: {
+  userId: string;
+  token: string;
+  expiresAt: Date;
+}) => {
   const token = await prisma.refreshToken.create({
     data: {
       userId: tokenData.userId,
@@ -18,20 +22,22 @@ export const findByToken = async (tokenString: string) => {
     where: {
       token: tokenString,
     },
+    include: { user: { select: { id: true, email: true } } },
   });
 
   return token;
 };
 
-export const invalidateToken = async (tokenString: string) => {
-  const token = await prisma.refreshToken.update({
-    where: {
-      token: tokenString,
-    },
-    data: {
-      revokedAt: new Date(),
-    },
+export const revokeByToken = async (token: string) => {
+  return prisma.refreshToken.updateMany({
+    where: { token, revokedAt: null },
+    data: { revokedAt: new Date() },
   });
+};
 
-  return token;
+export const revokeAllByUserId = async (userId: string) => {
+  return prisma.refreshToken.updateMany({
+    where: { userId, revokedAt: null },
+    data: { revokedAt: new Date() },
+  });
 };

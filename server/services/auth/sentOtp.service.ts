@@ -26,7 +26,7 @@ const sendOtpService = async (email: string) => {
   } catch (error) {
     const errorMessage = ErrorUtil.getErrorMessage(error);
     logger.error('Error in sending OTP: ', errorMessage);
-    ErrorUtil.handleServerError(errorMessage);
+    ErrorUtil.handleServerError(error);
   }
 };
 

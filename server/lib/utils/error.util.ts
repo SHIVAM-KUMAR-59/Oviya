@@ -9,6 +9,7 @@ export enum ErrorCode {
   VALIDATION_ERROR = 'VALIDATION_ERROR',
   INTERNAL_SERVER_ERROR = 'INTERNAL_SERVER_ERROR',
   TOO_MANY_REQUESTS = 'TOO_MANY_REQUESTS',
+  TOKEN_REUSE = 'TOKEN_REUSE',
 }
 
 export const ErrorMessageMap: Record<ErrorCode, string> = {
@@ -20,6 +21,7 @@ export const ErrorMessageMap: Record<ErrorCode, string> = {
   [ErrorCode.VALIDATION_ERROR]: 'Validation failed',
   [ErrorCode.TOO_MANY_REQUESTS]: 'Too many requests',
   [ErrorCode.INTERNAL_SERVER_ERROR]: 'Internal server error',
+  [ErrorCode.TOKEN_REUSE]: 'Using expired token',
 };
 
 export const ErrorStatusMap: Record<ErrorCode, number> = {
@@ -31,6 +33,7 @@ export const ErrorStatusMap: Record<ErrorCode, number> = {
   [ErrorCode.VALIDATION_ERROR]: 422,
   [ErrorCode.TOO_MANY_REQUESTS]: 429,
   [ErrorCode.INTERNAL_SERVER_ERROR]: 500,
+  [ErrorCode.TOKEN_REUSE]: 401,
 };
 
 export class ApiError extends Error {

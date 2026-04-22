@@ -46,7 +46,7 @@ const verifyOtpService = async (otp: string, email: string) => {
   } catch (error) {
     const errorMessage = ErrorUtil.getErrorMessage(error);
     logger.error('Error verifying OTP: ', errorMessage);
-    ErrorUtil.handleServerError(errorMessage);
+    ErrorUtil.handleServerError(error);
   }
 };
 

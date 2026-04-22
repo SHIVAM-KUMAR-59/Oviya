@@ -35,7 +35,7 @@ const registerUserService = async ({ name, email }: { name: string; email: strin
   } catch (err) {
     const errorMessage = ErrorUtil.getErrorMessage(err);
     logger.error(errorMessage);
-    ErrorUtil.handleServerError(errorMessage);
+    ErrorUtil.handleServerError(err);
   }
 };
 

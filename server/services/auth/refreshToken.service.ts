@@ -1,4 +1,4 @@
-import { ApiError, ErrorCode } from '../../lib/utils/error.util';
+import { ErrorUtil } from '../../lib/utils/error.util';
 import RefreshTokenService from './token';
 
 const refreshTokenService = async (refreshToken: string) => {
@@ -10,12 +10,8 @@ const refreshTokenService = async (refreshToken: string) => {
       accessToken: newAccessToken,
       refreshToken: newRefreshToken,
     };
-  } catch (err: any) {
-    if (err.status) {
-      throw new ApiError(err.code, err.message);
-    }
-
-    throw new ApiError(ErrorCode.INTERNAL_SERVER_ERROR, 'Failed to refresh token');
+  } catch (err) {
+    throw ErrorUtil.handleServerError(err);
   }
 };
 
