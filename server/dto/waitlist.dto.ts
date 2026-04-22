@@ -1,0 +1,46 @@
+import { IsString, IsEmail, IsNotEmpty } from 'class-validator';
+import { NormalizeEmail } from '../lib/utils/validator.util';
+
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     AddWaitlistRequest:
+ *       type: object
+ *       required:
+ *         - email
+ *       properties:
+ *         email:
+ *           type: string
+ *           format: email
+ *           example: "johndoe@gmail.com"
+ */
+export class AddWaitlistRequestDTO {
+  @IsString({ message: 'Email must be a string' })
+  @NormalizeEmail()
+  @IsEmail({}, { message: 'Please provide a valid email address' })
+  @IsNotEmpty({ message: 'Email is required' })
+  readonly email!: string;
+}
+
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     AddWaitlistResponse:
+ *       type: object
+ *       required:
+ *         - email
+ *       properties:
+ *         id:
+ *           type: string
+ *           example: "1122-332...."
+ *         email:
+ *           type: string
+ *           format: email
+ *           example: "johndoe@gmail.com"
+ */
+export class AddWaitlistResponseDTO {
+  readonly id!: string;
+  readonly email!: string;
+}
