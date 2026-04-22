@@ -1,3 +1,5 @@
+import { Transform } from 'class-transformer';
+
 export const isValidString = (value: unknown): value is string => {
   return typeof value === 'string' && value.trim().length > 0;
 };
@@ -21,3 +23,11 @@ export const isValidNumber = (value: unknown): boolean => {
 
   return false;
 };
+
+export const Trim = () =>
+  Transform(({ value }) => (typeof value === 'string' ? value.trim() : value));
+
+export const NormalizeEmail = () =>
+  Transform(({ value }) =>
+    typeof value === 'string' ? value.trim().toLowerCase() : value,
+  );

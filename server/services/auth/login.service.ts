@@ -1,23 +1,24 @@
 import env from '../../config/env.config';
 import logger from '../../config/logger.config';
+import { LoginRequestDTO } from '../../dto/auth.dto';
 import { ApiError, ErrorCode, ErrorUtil } from '../../lib/utils/error.util';
 import { generateAccessToken } from '../../lib/utils/jwt.util';
 import Repository from '../../repository';
 import CacheService from '../cache/cache.service';
 import RefreshTokenService from './token';
 
-const loginUserService = async (email: string) => {
+const loginUserService = async (loginData: LoginRequestDTO) => {
   try {
-    const verifiedKey = env.REDIS.KEYS.OTP.VERIFIED_BY_EMAIL(email);
+    const verifiedKey = env.REDIS.KEYS.OTP.VERIFIED_BY_EMAIL(loginData.email);
     const isVerified = await CacheService.get<boolean>(verifiedKey);
 
     if (!isVerified) {
       throw new ApiError(ErrorCode.FORBIDDEN, 'OTP verification required');
     }
 
-    const user = await Repository.userRepository.findByEmail(email);
+    const user = await Repository.userRepository.findByEmail(loginData.email);
     if (!user) {
-      logger.error(`User with email: ${email} not found`);
+      logger.error(`User with email: ${loginData.email} not found`);
       throw new ApiError(ErrorCode.NOT_FOUND, `No user was found with this email`);
     }
 

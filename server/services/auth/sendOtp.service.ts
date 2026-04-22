@@ -1,5 +1,6 @@
 import env from '../../config/env.config';
 import logger from '../../config/logger.config';
+import { SendOtpRequestDTO } from '../../dto/auth.dto';
 import otpTemplate from '../../lib/templates/otp.util';
 import { ApiError, ErrorCode, ErrorUtil } from '../../lib/utils/error.util';
 import sendMail from '../../lib/utils/mailer.util';
@@ -9,12 +10,10 @@ const generateOTP = (): string => {
   return Math.floor(100000 + Math.random() * 900000).toString();
 };
 
-const sendOtpService = async (email: string) => {
-  email = email.toLowerCase().trim();
-
-  const otpKey = env.REDIS.KEYS.OTP.BY_EMAIL(email);
-  const attemptsKey = env.REDIS.KEYS.OTP.ATTEMPTS_BY_EMAIL(email);
-  const cooldownKey = env.REDIS.KEYS.OTP.COOLDOWN_BY_EMAIL(email);
+const sendOtpService = async (sendOtpRequest: SendOtpRequestDTO) => {
+  const otpKey = env.REDIS.KEYS.OTP.BY_EMAIL(sendOtpRequest.email);
+  const attemptsKey = env.REDIS.KEYS.OTP.ATTEMPTS_BY_EMAIL(sendOtpRequest.email);
+  const cooldownKey = env.REDIS.KEYS.OTP.COOLDOWN_BY_EMAIL(sendOtpRequest.email);
 
   const otpTtl = env.REDIS.TTL.LONG;
 
@@ -30,18 +29,18 @@ const sendOtpService = async (email: string) => {
 
     const otp = generateOTP();
 
-    // Send mail first
-    await sendMail({
-      to: email,
-      subject: 'OTP for Oviya',
-      html: otpTemplate(otp),
-    });
-
     // Clean previous state
     await Promise.all([CacheService.del(otpKey), CacheService.del(attemptsKey)]);
 
     // Store OTP
     await CacheService.set(otpKey, otp, otpTtl);
+
+    // Send mail first
+    await sendMail({
+      to: sendOtpRequest.email,
+      subject: 'OTP for Oviya',
+      html: otpTemplate(otp),
+    });
 
     // Cooldown
     await CacheService.set(cooldownKey, true, env.REDIS.TTL.SHORT);

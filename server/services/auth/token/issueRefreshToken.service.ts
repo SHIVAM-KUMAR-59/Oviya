@@ -22,7 +22,7 @@ const issueRefreshToken = async (userId: string): Promise<string> => {
   );
 
   return jwt.sign({ sub: userId, jti }, REFRESH_SECRET, {
-    expiresIn: '7d',
+    expiresIn: REFRESH_EXPIRY_SECONDS,
   } as SignOptions);
 };
 

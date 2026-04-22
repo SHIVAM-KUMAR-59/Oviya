@@ -36,7 +36,7 @@ const waitlistRouter = Router();
 waitlistRouter.post(
   '/',
   reqBodyMiddleware,
-  Controller.WaitlistUserController.createWaitlistUserController,
+  Controller.waitlistUserController.createWaitlistUserController,
 );
 
 /**
@@ -54,7 +54,7 @@ waitlistRouter.post(
 
 waitlistRouter.get(
   '/count',
-  Controller.WaitlistUserController.getWaitlistUserCountController,
+  Controller.waitlistUserController.getWaitlistUserCountController,
 );
 
 export default waitlistRouter;

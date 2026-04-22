@@ -9,6 +9,7 @@ import errorHandlerMiddleware from './middleware/error.middleware';
 import swaggerUi from 'swagger-ui-express';
 import swaggerSpec from './config/swagger.config';
 import './config/redis.config';
+import 'reflect-metadata';
 
 dotenv.config();
 

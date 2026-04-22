@@ -1,0 +1,27 @@
+import { Request, Response, NextFunction } from 'express';
+import Service from '../../services';
+import { clearRefreshTokenCookie } from '../../lib/utils/cookie.util';
+
+export const logoutController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
+  try {
+    const refreshToken = req.cookies?.refreshToken;
+
+    if (refreshToken) {
+      await Service.authService.logoutService(refreshToken);
+    }
+
+    // clear cookie regardless (important)
+    clearRefreshTokenCookie(res);
+
+    res.status(200).json({
+      success: true,
+      message: 'Logged out successfully',
+    });
+  } catch (err) {
+    next(err);
+  }
+};
