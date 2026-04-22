@@ -42,6 +42,7 @@ const REDIS = {
       BY_EMAIL: (email: string) => `otp:${email}`,
       ATTEMPTS_BY_EMAIL: (email: string) => `otp:attempts:${email}`,
       COOLDOWN_BY_EMAIL: (email: string) => `otp:cooldown:${email}`,
+      VERIFIED_BY_EMAIL: (email: string) => `otp:verified:${email}`,
     },
   },
   TTL: {

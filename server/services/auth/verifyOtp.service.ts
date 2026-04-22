@@ -8,6 +8,7 @@ const MAX_ATTEMPTS = 5;
 const verifyOtpService = async (otp: string, email: string) => {
   const otpKey = env.REDIS.KEYS.OTP.BY_EMAIL(email);
   const attemptsKey = env.REDIS.KEYS.OTP.ATTEMPTS_BY_EMAIL(email);
+  const verifiedKey = env.REDIS.KEYS.OTP.VERIFIED_BY_EMAIL(email);
 
   try {
     // 1. Check attempt count first
@@ -40,7 +41,11 @@ const verifyOtpService = async (otp: string, email: string) => {
     }
 
     // 4. Valid — delete OTP + attempts immediately
-    await Promise.all([CacheService.del(otpKey), CacheService.del(attemptsKey)]);
+    await Promise.all([
+      CacheService.del(otpKey),
+      CacheService.del(attemptsKey),
+      CacheService.set(verifiedKey, true, env.REDIS.TTL.LONG),
+    ]);
 
     return;
   } catch (error) {
