@@ -82,6 +82,11 @@ enum EnergyLevel {
   VERY_HIGH
 }
 
+enum UserRoles {
+  ADMIN
+  USER
+}
+
 // ─────────────────────────────────────────
 // USER
 // Core profile + onboarding answers
@@ -91,6 +96,7 @@ model User {
   id    String  @id @default(uuid())
   email String  @unique
   name  String?
+  role  UserRoles @default(USER)
 
   // PCOS profile
   pcosStatus             PCOSStatus             @default(UNKNOWN)
@@ -370,6 +376,7 @@ model Admin {
   name         String
   email        String
   password     String
+  role         UserRoles @default(ADMIN)
 
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
