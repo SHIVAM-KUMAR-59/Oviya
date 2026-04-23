@@ -41,27 +41,26 @@ const Founder = () => {
           {/* Portrait */}
           <div className="relative">
             <div className="relative mx-auto w-full max-w-70 sm:max-w-[320px] md:max-w-96 xl:max-w-none">
-              <div className="relative aspect-3/4 overflow-hidden border border-[rgba(197,178,232,0.08)] bg-[linear-gradient(160deg,var(--deep),var(--ink2))] md:aspect-4/4 lg:aspect-2/4 xl:aspect-3/4">
-                {/* Image */}
+              {/* Image container */}
+              <div className="relative aspect-3/4 overflow-hidden rounded-sm border border-[rgba(197,178,232,0.08)] bg-[linear-gradient(160deg,var(--deep),var(--ink2))] md:aspect-3/4 lg:aspect-3/4 xl:aspect-3/4">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/founder2.jpeg" // put your image in public folder
+                  src="/founder1.jpeg"
                   alt="Founder"
-                  className="absolute inset-0 h-full w-full object-cover"
+                  className="absolute inset-0 h-full w-full rounded-sm object-cover"
                 />
 
-                {/* Overlay (optional for premium feel) */}
-                <div className="absolute inset-0 bg-black/20" />
+                {/* Optional overlay */}
+                {/* <div className="absolute inset-0 bg-black/20" /> */}
+              </div>
 
-                {/* Caption */}
-                <div className="absolute right-0 bottom-0 left-0 border-t border-[rgba(255,255,255,0.06)] bg-[rgba(35,24,72,0.85)] px-6 py-4 backdrop-blur-md">
-                  <strong className="block text-[13px] font-normal tracking-[0.05em] text-white">
-                    Founder, Oviya
-                  </strong>
-                  <span className="text-[10px] tracking-[0.14em] text-white/40 uppercase">
-                    Built in India · For Indian women
-                  </span>
-                </div>
+              <div className="mt-4 text-center">
+                <strong className="block text-[13px] tracking-[0.05em] text-white">
+                  Founder, Oviya
+                </strong>
+                <span className="text-[10px] tracking-[0.14em] text-white/50 uppercase">
+                  Built in India · For Indian women
+                </span>
               </div>
 
               {/* Accent circle */}
@@ -73,7 +72,9 @@ const Founder = () => {
           <div>
             <h2 className="founder-reveal mb-8 font-serif text-[clamp(40px,3.8vw,58px)] leading-[1.05] font-light tracking-[-0.03em] text-white">
               Years of confusion became
-              <br />a <em className="text-mist italic">reason</em> to build.
+              <br className="hidden md:block" />
+              <span className="md:hidden"> </span> a{' '}
+              <em className="text-mist italic">reason</em> to build.
             </h2>
 
             <p className="founder-reveal mb-5 text-[16px] leading-[1.9] font-light text-white/50">
@@ -83,10 +84,10 @@ const Founder = () => {
             </p>
 
             <p className="founder-reveal mb-5 text-[16px] leading-[1.9] font-light text-white/50">
-              At 16, a doctor looked at me and said , &dquot;itna motapa hoga toh yahi
-              hoga na.&dquot; I believed her. I worked out twice a day, walked 15,000
-              steps, cut out sugar, tried everything. I lost the weight. The periods still
-              did&quot;nt come back.
+              At 16, a doctor looked at me and said , &quot;itna motapa hoga toh yahi hoga
+              na.&quot; I believed her. I worked out twice a day, walked 15,000 steps, cut
+              out sugar, tried everything. I lost the weight. The periods still
+              did&apos;nt come back.
             </p>
 
             <p className="founder-reveal mb-5 text-[16px] leading-[1.9] font-light text-white/50">
@@ -96,7 +97,7 @@ const Founder = () => {
             </p>
             <p className="founder-reveal mb-5 text-[16px] leading-[1.9] font-light text-white/50">
               Years later I found a doctor who actually listened. I realized what I had
-              been missing was&quot;nt just medical support. It was being understood.
+              been missing was&apos;nt just medical support. It was being understood.
               Still every app I tried assumed my cycle was the same every month. Sometimes
               mine is 19 days. Sometimes 29. They were always wrong.
             </p>
