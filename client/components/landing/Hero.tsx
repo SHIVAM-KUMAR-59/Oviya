@@ -190,7 +190,7 @@ const Hero = ({ hoverProps }: HeroProps) => {
                   type="submit"
                   disabled={loading}
                   {...hoverProps}
-                  className="bg-violet hover:opacity-90 border-none cursor-pointer rounded-md border px-7 py-4 text-[11px] font-medium tracking-[0.2em] whitespace-nowrap text-white uppercase transition duration-200 disabled:cursor-not-allowed disabled:opacity-50 md:rounded-none md:rounded-r-lg"
+                  className="bg-violet cursor-pointer rounded-md border border-none px-7 py-4 text-[11px] font-medium tracking-[0.2em] whitespace-nowrap text-white uppercase transition duration-200 hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50 md:rounded-none md:rounded-r-lg"
                 >
                   {loading ? (
                     <span className="flex items-center justify-center gap-2">
@@ -221,7 +221,7 @@ const Hero = ({ hoverProps }: HeroProps) => {
             {badges.map((b) => (
               <span
                 key={b}
-                className="border border-[rgba(197,178,232,0.22)] px-4 py-1 text-[10px] tracking-[0.18em] text-[rgba(197,178,232,0.55)] uppercase transition duration-200 hover:bg-white/10 rounded-sm"
+                className="rounded-sm border border-[rgba(197,178,232,0.22)] px-4 py-1 text-[10px] tracking-[0.18em] text-[rgba(197,178,232,0.55)] uppercase transition duration-200 hover:bg-white/10"
               >
                 {b}
               </span>
