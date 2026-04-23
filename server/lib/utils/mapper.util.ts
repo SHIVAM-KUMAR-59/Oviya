@@ -11,6 +11,7 @@ export const mapToAuthResponseDTO = (
       id: user.id,
       name: user.name!,
       email: user.email,
+      onboardingCompleted: user.onboardingCompleted,
     },
   };
 };
