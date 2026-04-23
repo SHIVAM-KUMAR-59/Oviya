@@ -81,7 +81,7 @@ const Navbar = ({ hoverProps }: NavbarProps) => {
         <a
           href="#cta"
           {...hoverProps}
-          className="navbar-reveal bg-violet ml-4 flex items-center justify-center gap-1 rounded-md px-6 py-2.5 text-[11px] tracking-[0.18em] text-white uppercase transition-all duration-200 hover:opacity-90"
+          className="navbar-reveal bg-violet flex items-center justify-center gap-1 rounded-md px-6 py-2.5 text-[11px] tracking-[0.18em] text-white uppercase transition-all duration-200 hover:opacity-90"
         >
           Join Waitlist
           <ArrowRight className="mb-0.5" size={15} strokeWidth={1.5} />
