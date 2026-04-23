@@ -33,7 +33,7 @@ const sendOtpService = async (sendOtpRequest: SendOtpRequestDTO) => {
     await Promise.all([CacheService.del(otpKey), CacheService.del(attemptsKey)]);
 
     // Store OTP
-    await CacheService.set(otpKey, otp, otpTtl);
+    await CacheService.set(otpKey, String(otp), otpTtl);
 
     // Send mail first
     await sendMail({

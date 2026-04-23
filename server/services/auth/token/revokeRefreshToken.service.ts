@@ -14,7 +14,7 @@ const revokeRefreshToken = async (token: string): Promise<void> => {
       CacheService.del(env.REDIS.KEYS.AUTH.REFRESH_TOKEN(payload.jti)),
     ]);
   } catch (err) {
-    logger.warn(`revokeRefreshToken failed silently: ${err}`);
+    logger.debug(`revokeRefreshToken failed silently: ${err}`);
     // Never throw on logout
   }
 };

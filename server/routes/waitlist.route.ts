@@ -8,7 +8,7 @@ const waitlistRouter = Router();
 
 /**
  * @openapi
- * /auth/login:
+ * /waitlist:
  *   post:
  *     tags:
  *       - Waitlist
@@ -79,7 +79,8 @@ waitlistRouter.post(
  * /waitlist/count:
  *   get:
  *     summary: Get waitlist user count
- *     tags: [Waitlist]
+ *     tags:
+ *       - Waitlist
  *     responses:
  *       200:
  *         description: Added to waitlist successfully
