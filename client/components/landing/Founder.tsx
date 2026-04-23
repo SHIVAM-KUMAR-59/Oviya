@@ -37,27 +37,28 @@ const Founder = () => {
         </div>
 
         {/* Grid */}
-        <div className="founder-reveal grid items-center gap-16 xl:grid-cols-[400px_1fr] xl:gap-24">
+        <div className="founder-reveal grid items-center gap-16 lg:grid-cols-[400px_1fr] lg:gap-24">
           {/* Portrait */}
           <div className="relative">
-            <div className="relative flex aspect-3/4 items-center justify-center overflow-hidden border border-[rgba(197,178,232,0.08)] bg-[linear-gradient(160deg,var(--deep),var(--ink2))]">
-              {/* subtle noise/dots overlay */}
-              <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-size-[30px_30px]" />
+            <div className="relative mx-auto w-full max-w-70 sm:max-w-[320px] md:max-w-96 xl:max-w-none">
+              <div className="relative flex aspect-3/4 items-center justify-center overflow-hidden border border-[rgba(197,178,232,0.08)] bg-[linear-gradient(160deg,var(--deep),var(--ink2))] md:aspect-4/4 lg:aspect-2/4 xl:aspect-3/4">
+                <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-size-[30px_30px]" />
 
-              {/* Monogram */}
-              <div className="relative z-10 font-serif text-[140px] font-light text-[rgba(197,178,232,0.12)] italic">
-                O
+                <div className="relative z-10 font-serif text-[90px] font-light text-[rgba(197,178,232,0.12)] italic sm:text-[110px] lg:text-[140px]">
+                  O
+                </div>
+
+                <div className="absolute right-0 bottom-0 left-0 border-t border-[rgba(255,255,255,0.06)] bg-[rgba(35,24,72,0.92)] px-6 py-4 backdrop-blur-md">
+                  <strong className="block text-[13px] font-normal tracking-[0.05em] text-white">
+                    Founder, Oviya
+                  </strong>
+                  <span className="text-[10px] tracking-[0.14em] text-white/40 uppercase">
+                    Built in India · For Indian women
+                  </span>
+                </div>
               </div>
 
-              {/* Caption */}
-              <div className="absolute right-0 bottom-0 left-0 border-t border-[rgba(255,255,255,0.06)] bg-[rgba(35,24,72,0.92)] px-6 py-4 backdrop-blur-md">
-                <strong className="block text-[13px] font-normal tracking-[0.05em] text-white">
-                  Founder, Oviya
-                </strong>
-                <span className="text-[10px] tracking-[0.14em] text-white/40 uppercase">
-                  Built in India · For Indian women
-                </span>
-              </div>
+              <div className="absolute top-5 -right-4 h-14 w-14 rounded-full border border-[rgba(192,115,122,0.3)] md:h-16 md:w-16" />
             </div>
 
             {/* Accent circle */}
