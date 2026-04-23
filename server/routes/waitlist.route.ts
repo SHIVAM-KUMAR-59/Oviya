@@ -76,15 +76,29 @@ waitlistRouter.post(
 
 /**
  * @swagger
- * /api/v1/waitlist/count:
+ * /waitlist/count:
  *   get:
  *     summary: Get waitlist user count
  *     tags: [Waitlist]
  *     responses:
  *       200:
- *         description: Waitlist user count retrieved successfully
+ *         description: Added to waitlist successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               allOf:
+ *                 - $ref: '#/components/schemas/SuccessResponse'
+ *                 - type: object
+ *                   properties:
+ *                     data:
+ *                       $ref: '#/components/schemas/GetWaitlistCountResponse'
+ * 
  *       500:
- *         description: Internal server error
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 
 waitlistRouter.get(

@@ -8,9 +8,18 @@ const options: swaggerJSDoc.Options = {
       version: '1.0.0',
       description: 'API documentation for startup backend',
     },
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+        },
+      },
+    },
     servers: [
       {
-        url: 'http://localhost:8000',
+        url: 'http://localhost:8000/api/v1',
       },
     ],
   },

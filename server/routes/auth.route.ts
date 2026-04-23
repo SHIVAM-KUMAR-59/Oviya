@@ -254,9 +254,9 @@ authRouter.post(
  *               error:
  *                 code: BAD_REQUEST
  *                 statusCode: 400
- *
  *       404:
  *         description: User not found
+ *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
@@ -289,6 +289,8 @@ authRouter.post(
  *       - Authentication
  *     summary: Refresh access token
  *     description: Generates a new access token using refresh token (from cookie).
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Token refreshed successfully
@@ -304,6 +306,7 @@ authRouter.post(
  *
  *       401:
  *         description: Invalid or expired refresh token
+ *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
@@ -331,6 +334,8 @@ authRouter.post('/refresh', Controller.authController.refreshTokenController);
  *       - Authentication
  *     summary: Logout user
  *     description: Logs out the user by revoking refresh token and clearing cookie.
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Logout successful
@@ -345,6 +350,7 @@ authRouter.post('/refresh', Controller.authController.refreshTokenController);
  *
  *       401:
  *         description: Invalid or expired refresh token
+ *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'

@@ -44,3 +44,18 @@ export class AddWaitlistResponseDTO {
   readonly id!: string;
   readonly email!: string;
 }
+
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     GetWaitlistCountResponse:
+ *       type: object
+ *       properties:
+ *         count:
+ *           type: number
+ *           example: 25
+ */
+export class GetWaitlistCountResponseDTO {
+  readonly count!: number
+}
