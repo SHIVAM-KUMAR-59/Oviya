@@ -3,6 +3,7 @@ import logger from '../../config/logger.config';
 import { LoginRequestDTO } from '../../dto/auth.dto';
 import { ApiError, ErrorCode, ErrorUtil } from '../../lib/utils/error.util';
 import { generateAccessToken } from '../../lib/utils/jwt.util';
+import { mapToAuthResponseDTO } from '../../lib/utils/mapper.util';
 import Repository from '../../repository';
 import CacheService from '../cache/cache.service';
 import RefreshTokenService from './token';
@@ -34,7 +35,8 @@ const loginUserService = async (loginData: LoginRequestDTO) => {
 
     logger.success(`User logged in: userId=${user.id}`);
 
-    return { user, accessToken, refreshToken };
+    const authResponse = mapToAuthResponseDTO(user, accessToken);
+    return { authResponse, refreshToken };
   } catch (error) {
     const errorMessage = ErrorUtil.getErrorMessage(error);
     logger.error(errorMessage);

@@ -92,7 +92,7 @@ waitlistRouter.post(
  *                   properties:
  *                     data:
  *                       $ref: '#/components/schemas/GetWaitlistCountResponse'
- * 
+ *
  *       500:
  *         description: Internal Server Error
  *         content:

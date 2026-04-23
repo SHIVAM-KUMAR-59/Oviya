@@ -8,12 +8,13 @@ const loginUserController: BodyController<LoginRequestDTO> = async (req, res, ne
   try {
     const { email } = req.body;
 
-    const { user, accessToken, refreshToken } =
-      await Service.authService.loginUserService({ email });
+    const { authResponse, refreshToken } = await Service.authService.loginUserService({
+      email,
+    });
 
     setRefreshTokenCookie(res, refreshToken);
 
-    sendSuccess(res, 'User logged in successfully', { accessToken, user }, 200);
+    sendSuccess(res, 'User logged in successfully', authResponse, 200);
   } catch (err) {
     next(err);
   }

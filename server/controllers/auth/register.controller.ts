@@ -12,12 +12,14 @@ const registerUserController: BodyController<RegisterRequestDTO> = async (
   try {
     const { name, email } = req.body;
 
-    const { user, accessToken, refreshToken } =
-      await Service.authService.registerUserService({ name, email });
+    const { authResponse, refreshToken } = await Service.authService.registerUserService({
+      name,
+      email,
+    });
 
     setRefreshTokenCookie(res, refreshToken);
 
-    sendSuccess(res, 'User registered successfully', { accessToken, user }, 201);
+    sendSuccess(res, 'User registered successfully', authResponse, 201);
   } catch (err) {
     next(err);
   }

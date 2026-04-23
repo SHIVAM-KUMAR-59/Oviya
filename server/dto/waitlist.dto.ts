@@ -57,5 +57,5 @@ export class AddWaitlistResponseDTO {
  *           example: 25
  */
 export class GetWaitlistCountResponseDTO {
-  readonly count!: number
+  readonly count!: number;
 }

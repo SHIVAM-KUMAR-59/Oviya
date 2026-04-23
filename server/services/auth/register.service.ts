@@ -3,6 +3,7 @@ import logger from '../../config/logger.config';
 import { RegisterRequestDTO } from '../../dto/auth.dto';
 import { ApiError, ErrorCode, ErrorUtil } from '../../lib/utils/error.util';
 import { generateAccessToken } from '../../lib/utils/jwt.util';
+import { mapToAuthResponseDTO } from '../../lib/utils/mapper.util';
 import Repository from '../../repository';
 import CacheService from '../cache/cache.service';
 import RefreshTokenService from './token';
@@ -49,7 +50,8 @@ const registerUserService = async (registerData: RegisterRequestDTO) => {
 
     logger.success(`User registered: userId=${user.id}`);
 
-    return { user, accessToken, refreshToken };
+    const authResponse = mapToAuthResponseDTO(user, accessToken);
+    return { authResponse, refreshToken };
   } catch (err) {
     const errorMessage = ErrorUtil.getErrorMessage(err);
     logger.error(errorMessage);
