@@ -375,7 +375,6 @@ model Admin {
   id           String @id @default(uuid())
   name         String
   email        String
-  password     String
   role         UserRoles @default(ADMIN)
 
   createdAt    DateTime @default(now())
