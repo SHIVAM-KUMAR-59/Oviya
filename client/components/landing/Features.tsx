@@ -49,7 +49,7 @@ const features = [
     numColor: 'group-hover:text-violet-500/30',
     line: 'from-transparent via-violet-500 to-transparent',
   },
-    {
+  {
     n: '04',
     icon: Salad,
     h: 'Indian Food Context',
@@ -64,7 +64,6 @@ const features = [
 ];
 
 const Features = ({ hoverProps }: FeaturesProps) => {
-
   useEffect(() => {
     const io = new IntersectionObserver(
       (entries) => {

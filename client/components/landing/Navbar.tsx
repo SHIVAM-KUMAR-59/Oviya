@@ -1,6 +1,7 @@
 'use client';
 
 import { ArrowRight } from 'lucide-react';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 type HoverProps = {
@@ -41,20 +42,21 @@ const Navbar = ({ hoverProps }: NavbarProps) => {
 
   return (
     <header
-      className={`navbar-reveal fixed top-0 right-0 left-0 z-50 flex w-full items-center justify-center transition-all duration-500 ${
+      className={`navbar-reveal fixed top-0 z-50 flex w-full items-center justify-center transition-all duration-500 ${
         scrolled
           ? 'bg-ink/80 border-b border-white/10 py-3 backdrop-blur-md'
           : 'bg-transparent py-5'
       }`}
     >
-      <nav className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 md:px-12 lg:px-20">
+      <nav className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 lg:px-16">
         {/* Logo */}
         <div
-          className={`navbar-reveal text-lg font-medium tracking-[0.08em] transition-colors duration-300 md:text-xl ${
+          className={`navbar-reveal flex items-center justify-center gap-2 text-lg font-medium tracking-[0.08em] transition-colors duration-300 md:text-xl ${
             scrolled ? 'text-white' : 'text-white'
           }`}
           style={{ fontFamily: 'Cormorant, serif' }}
         >
+          <Image src={'/logo.png'} alt="Logo" height={40} width={40} />
           Oviya
         </div>
 
