@@ -1,15 +1,18 @@
 import jwt, { SignOptions } from 'jsonwebtoken';
 import env from '../../config/env.config';
 
-export const generateAccessToken = (userId: string) => {
-  return jwt.sign({ userId }, env.JWT.ACCESS_TOKEN.SECRET, {
+export const generateAccessToken = (userId: string, role: string) => {
+  return jwt.sign({ userId, role }, env.JWT.ACCESS_TOKEN.SECRET, {
     expiresIn: env.JWT.ACCESS_TOKEN.EXPIRY_TIME as SignOptions['expiresIn'],
   });
 };
 
 export const verifyAccessToken = (token: string) => {
   try {
-    const payload = jwt.verify(token, env.JWT.ACCESS_TOKEN.SECRET) as { userId: string };
+    const payload = jwt.verify(token, env.JWT.ACCESS_TOKEN.SECRET) as {
+      userId: string;
+      role: string;
+    };
 
     return payload;
   } catch (error) {
@@ -18,5 +21,5 @@ export const verifyAccessToken = (token: string) => {
 };
 
 export const decodeToken = (token: string) => {
-  return jwt.decode(token) as { userId: string } | null;
+  return jwt.decode(token) as { userId: string; role: string } | null;
 };

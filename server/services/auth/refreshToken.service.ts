@@ -1,10 +1,10 @@
 import { ErrorUtil } from '../../lib/utils/error.util';
 import RefreshTokenService from './token';
 
-const refreshTokenService = async (refreshToken: string) => {
+const refreshTokenService = async (refreshToken: string, role: string) => {
   try {
     const { newAccessToken, newRefreshToken } =
-      await RefreshTokenService.rotateRefreshToken(refreshToken);
+      await RefreshTokenService.rotateRefreshToken(refreshToken, role);
 
     return {
       accessToken: newAccessToken,

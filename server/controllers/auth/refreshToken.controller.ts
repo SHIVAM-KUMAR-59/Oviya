@@ -17,7 +17,7 @@ export const refreshTokenController = async (
     }
 
     const { accessToken, refreshToken: newRefreshToken } =
-      await Service.authService.refreshTokenService(refreshToken);
+      await Service.authService.refreshTokenService(refreshToken, 'USER');
 
     // rotate cookie
     setRefreshTokenCookie(res, newRefreshToken);

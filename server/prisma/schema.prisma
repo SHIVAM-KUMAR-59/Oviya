@@ -374,7 +374,7 @@ model RefreshToken {
 model Admin {
   id           String @id @default(uuid())
   name         String
-  email        String
+  email        String @unique
   role         UserRoles @default(ADMIN)
 
   createdAt    DateTime @default(now())

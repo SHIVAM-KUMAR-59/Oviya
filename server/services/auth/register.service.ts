@@ -40,7 +40,7 @@ const registerUserService = async (registerData: RegisterRequestDTO) => {
 
     await CacheService.del(verifiedKey);
 
-    const accessToken = generateAccessToken(user.id);
+    const accessToken = generateAccessToken(user.id, user.role);
     const refreshToken = await RefreshTokenService.issueRefreshToken(user.id);
 
     if (!accessToken || !refreshToken) {
