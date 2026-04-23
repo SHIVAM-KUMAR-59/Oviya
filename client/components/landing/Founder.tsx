@@ -37,7 +37,7 @@ const Founder = () => {
         </div>
 
         {/* Grid */}
-        <div className="founder-reveal grid items-center gap-16 md:grid-cols-[400px_1fr] md:gap-24">
+        <div className="founder-reveal grid items-center gap-16 xl:grid-cols-[400px_1fr] xl:gap-24">
           {/* Portrait */}
           <div className="relative">
             <div className="relative flex aspect-3/4 items-center justify-center overflow-hidden border border-[rgba(197,178,232,0.08)] bg-[linear-gradient(160deg,var(--deep),var(--ink2))]">
@@ -72,21 +72,31 @@ const Founder = () => {
             </h2>
 
             <p className="founder-reveal mb-5 text-[16px] leading-[1.9] font-light text-white/50">
-              I was told to just lose weight. I used every cycle tracking app and none of
-              them ever understood that my cycle is never the same length twice. I sat in
-              doctor&apos;s offices explaining the same symptoms, year after year, and
-              walked out with the same vague advice.
+              My periods lasted 15 days, stopped for 9, then came back again. For 2 years,
+              I was told it would settle. Then they stopped coming altogether. Then the
+              weight came, and nobody had answers.
             </p>
 
             <p className="founder-reveal mb-5 text-[16px] leading-[1.9] font-light text-white/50">
-              I know how lonely PCOS can feel when nothing — no app, no doctor, no piece
-              of advice — seems designed for you. That loneliness is what built Oviya.
+              At 16, a doctor looked at me and said , &dquot;itna motapa hoga toh yahi
+              hoga na.&dquot; I believed her. I worked out twice a day, walked 15,000
+              steps, cut out sugar, tried everything. I lost the weight. The periods still
+              did&quot;nt come back.
             </p>
 
             <p className="founder-reveal mb-5 text-[16px] leading-[1.9] font-light text-white/50">
-              Not a side project. Not a feature tacked on somewhere. A company built from
-              the ground up for the 1 in 5 women in India living with PCOS — and finally
-              deserving better.
+              I went back. Same vague advice. And somewhere in those years, I lost
+              something harder to name than weight. My motivation. My confidence. Some
+              days, myself.
+            </p>
+            <p className="founder-reveal mb-5 text-[16px] leading-[1.9] font-light text-white/50">
+              Years later I found a doctor who actually listened. I realized what I had
+              been missing was&quot;nt just medical support. It was being understood.
+              Still every app I tried assumed my cycle was the same every month. Sometimes
+              mine is 19 days. Sometimes 29. They were always wrong.
+            </p>
+            <p className="founder-reveal mb-5 text-[16px] leading-[1.9] font-light text-white/50">
+              That loneliness is what built Oviya.
             </p>
 
             <div className="founder-reveal text-mist mt-9 border-t border-[rgba(197,178,232,0.1)] pt-9 font-serif text-[26px] italic">
