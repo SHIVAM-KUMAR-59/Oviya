@@ -217,11 +217,11 @@ const Hero = ({ hoverProps }: HeroProps) => {
             <span>No spam</span>
           </div>
 
-          <div className="hero-reveal mt-8 flex flex-wrap gap-2">
+          <div className="hero-reveal mt-8 flex flex-wrap gap-3">
             {badges.map((b) => (
               <span
                 key={b}
-                className="border border-[rgba(197,178,232,0.22)] px-4 py-1 text-[10px] tracking-[0.18em] text-[rgba(197,178,232,0.55)] uppercase transition duration-200 hover:bg-white/10"
+                className="border border-[rgba(197,178,232,0.22)] px-4 py-1 text-[10px] tracking-[0.18em] text-[rgba(197,178,232,0.55)] uppercase transition duration-200 hover:bg-white/10 rounded-sm"
               >
                 {b}
               </span>
