@@ -5,7 +5,7 @@ import getWaitlistUserCountController from './getWaitlistUserCount.controller';
 const WaitlistUserController = {
   createWaitlistUserController,
   getWaitlistUserCountController,
-  fetchAllWaitlistUserController
+  fetchAllWaitlistUserController,
 };
 
 export default WaitlistUserController;

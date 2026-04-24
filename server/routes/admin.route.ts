@@ -17,7 +17,7 @@ adminRoutes.use(requireAdmin);
  *     tags:
  *       - Admin
  *     summary: Create a new admin
- *     description: Creates a new admin, can be done only by another admin.
+ *     description: Creates a new admin. Only accessible by existing admins.
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -28,10 +28,7 @@ adminRoutes.use(requireAdmin);
  *             $ref: '#/components/schemas/CreateAdminRequest'
  *     responses:
  *       201:
- *         description: Admin registered successfully
- *         headers:
- *             schema:
- *               type: string
+ *         description: Admin created successfully
  *         content:
  *           application/json:
  *             schema:
@@ -40,7 +37,10 @@ adminRoutes.use(requireAdmin);
  *                 - type: object
  *                   properties:
  *                     data:
- *                       $ref: '#/components/schemas/CreateAdminResponse'
+ *                       type: object
+ *                       properties:
+ *                         admin:
+ *                           $ref: '#/components/schemas/CreateAdminResponse'
  *
  *       401:
  *         description: Invalid or expired access token
@@ -165,6 +165,9 @@ adminRoutes.post(
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
  */
-adminRoutes.get('/waitlist', Controller.waitlistUserController.fetchAllWaitlistUserController)
+adminRoutes.get(
+  '/waitlist',
+  Controller.waitlistUserController.fetchAllWaitlistUserController,
+);
 
 export default adminRoutes;

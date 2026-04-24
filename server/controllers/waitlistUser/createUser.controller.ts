@@ -15,7 +15,7 @@ const createWaitlistUserController: BodyController<AddWaitlistRequestDTO> = asyn
       email,
     });
 
-    sendSuccess(res, 'Waitlist user created successfully!', waitlistUser, 201);
+    sendSuccess(res, 'Waitlist user created successfully!', { waitlistUser }, 201);
   } catch (err) {
     next(err);
   }

@@ -42,10 +42,10 @@ const getWaitlistUserCount = async () => {
 const findAll = async () => {
   const users = await prisma.waitlistUser.findMany({
     orderBy: {
-      createdAt: 'desc'
-    }
+      createdAt: 'desc',
+    },
   });
-  return users
-}
+  return users;
+};
 
 export { findByEmail, createWaitlistUser, getWaitlistUserCount, findAll };

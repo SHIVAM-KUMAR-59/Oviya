@@ -9,7 +9,7 @@ const WaitlistUserRepository = {
   createWaitlistUser,
   findByEmail,
   getWaitlistUserCount,
-  findAll
+  findAll,
 };
 
 export default WaitlistUserRepository;

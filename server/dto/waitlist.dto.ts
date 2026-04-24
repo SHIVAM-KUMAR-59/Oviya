@@ -86,5 +86,5 @@ export class GetWaitlistCountResponseDTO {
 export class WaitlistUserDTO {
   readonly id!: string;
   readonly email!: string;
-  readonly joinedAt!: string
+  readonly joinedAt!: string;
 }

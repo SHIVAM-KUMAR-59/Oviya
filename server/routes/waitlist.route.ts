@@ -13,7 +13,7 @@ const waitlistRouter = Router();
  *     tags:
  *       - Waitlist
  *     summary: Add user to the waitlist
- *     description: Add user to the waitlist
+ *     description: Add a new user to the waitlist.
  *     requestBody:
  *       required: true
  *       content:
@@ -31,7 +31,10 @@ const waitlistRouter = Router();
  *                 - type: object
  *                   properties:
  *                     data:
- *                       $ref: '#/components/schemas/AddWaitlistResponse'
+ *                       type: object
+ *                       properties:
+ *                         waitlistUser:
+ *                           $ref: '#/components/schemas/AddWaitlistResponse'
  *
  *       400:
  *         description: Invalid request

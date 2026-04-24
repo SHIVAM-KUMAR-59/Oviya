@@ -28,9 +28,7 @@ export const mapToCreateAdminResponseDTO = (admin: User): CreateAdminResponseDTO
   };
 };
 
-export const mapToWaitlistUserDTO = (
-  user: WaitlistUser,
-): WaitlistUserDTO => {
+export const mapToWaitlistUserDTO = (user: WaitlistUser): WaitlistUserDTO => {
   return {
     id: user.id,
     email: user.email,
