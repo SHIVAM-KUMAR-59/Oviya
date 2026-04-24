@@ -59,3 +59,32 @@ export class AddWaitlistResponseDTO {
 export class GetWaitlistCountResponseDTO {
   readonly count!: number;
 }
+
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     WaitlistUser:
+ *       type: object
+ *       required:
+ *         - id
+ *         - email
+ *         - joinedAt
+ *       properties:
+ *         id:
+ *           type: string
+ *           example: "1122-332..."
+ *         email:
+ *           type: string
+ *           format: email
+ *           example: "johndoe@gmail.com"
+ *         joinedAt:
+ *           type: string
+ *           format: date-time
+ *           example: "2026-04-24T06:50:00.000Z"
+ */
+export class WaitlistUserDTO {
+  readonly id!: string;
+  readonly email!: string;
+  readonly joinedAt!: string
+}

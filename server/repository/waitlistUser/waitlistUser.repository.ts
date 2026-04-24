@@ -39,4 +39,13 @@ const getWaitlistUserCount = async () => {
   }
 };
 
-export { findByEmail, createWaitlistUser, getWaitlistUserCount };
+const findAll = async () => {
+  const users = await prisma.waitlistUser.findMany({
+    orderBy: {
+      createdAt: 'desc'
+    }
+  });
+  return users
+}
+
+export { findByEmail, createWaitlistUser, getWaitlistUserCount, findAll };
