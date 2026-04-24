@@ -142,7 +142,7 @@ adminRoutes.post(
  *                 waitlistUsers:
  *                   - id: "1122-332..."
  *                     email: "johndoe@gmail.com"
- *                     joinedAt: "2026-04-24T06:21:17.129Z"
+ *                     joinedAt: "2026-04-24T06:50:00.000Z"
  *
  *       401:
  *         description: Invalid or expired access token
@@ -169,5 +169,69 @@ adminRoutes.get(
   '/waitlist',
   Controller.waitlistUserController.fetchAllWaitlistUserController,
 );
+
+/**
+ * @openapi
+ * /admin/users:
+ *   get:
+ *     tags:
+ *       - Admin
+ *     summary: Fetch all users
+ *     description: Retrieve all users who have registered.
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Users fetched successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               allOf:
+ *                 - $ref: '#/components/schemas/SuccessResponse'
+ *                 - type: object
+ *                   properties:
+ *                     data:
+ *                       type: object
+ *                       properties:
+ *                         users:
+ *                           type: array
+ *                           items:
+ *                             $ref: '#/components/schemas/UserResponse'
+ *             example:
+ *               success: true
+ *               message: "Users fetched successfully"
+ *               data:
+ *                 users:
+ *                   - id: "1122-332..."
+ *                     name: "John Doe"
+ *                     email: "johndoe@gmail.com"
+ *                     role: "USER"
+ *                     onboardingCompleted: true
+ *                     pcosStatus: "DIAGNOSED"
+ *                     selfReportedRegularity: "VERY_IRREGULAR"
+ *                     joinedAt: "2026-04-24T06:50:00.000Z"
+ *
+ *       401:
+ *         description: Invalid or expired access token
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ *
+ *       403:
+ *         description: Forbidden — admin access required
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ *
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ */
+adminRoutes.get('/users', Controller.userController.fetchAllUserController);
 
 export default adminRoutes;

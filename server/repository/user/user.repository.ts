@@ -30,3 +30,13 @@ export const findById = async (userId: string) => {
 
   return user;
 };
+
+export const findAll = async () => {
+  const users = await prisma.user.findMany({
+    orderBy: {
+      createdAt: 'desc',
+    },
+  });
+
+  return users;
+};

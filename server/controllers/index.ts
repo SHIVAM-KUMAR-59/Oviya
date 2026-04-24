@@ -1,6 +1,7 @@
 import AdminController from './admin';
 import AuthController from './auth';
 import PredictionController from './prediction';
+import UserController from './user';
 import WaitlistUserController from './waitlistUser';
 
 const Controller = {
@@ -8,6 +9,7 @@ const Controller = {
   predictionController: PredictionController,
   authController: AuthController,
   adminController: AdminController,
+  userController: UserController,
 };
 
 export default Controller;

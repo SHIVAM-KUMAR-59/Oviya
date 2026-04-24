@@ -2,6 +2,7 @@ import { User, WaitlistUser } from '@prisma/client';
 import { AuthResponseDTO } from '../../dto/auth.dto';
 import { CreateAdminResponseDTO } from '../../dto/admin.dto';
 import { WaitlistUserDTO } from '../../dto/waitlist.dto';
+import { UserResponseDTO } from '../../dto/user.dto';
 
 export const mapToAuthResponseDTO = (
   user: User,
@@ -32,6 +33,19 @@ export const mapToWaitlistUserDTO = (user: WaitlistUser): WaitlistUserDTO => {
   return {
     id: user.id,
     email: user.email,
+    joinedAt: user.createdAt.toISOString(),
+  };
+};
+
+export const mapToUserResponseDTO = (user: User): UserResponseDTO => {
+  return {
+    id: user.id,
+    name: user.name!,
+    email: user.email,
+    role: user.role,
+    onboardingCompleted: user.onboardingCompleted,
+    pcosStatus: user.pcosStatus,
+    selfReportedRegularity: user.selfReportedRegularity,
     joinedAt: user.createdAt.toISOString(),
   };
 };
