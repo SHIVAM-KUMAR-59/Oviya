@@ -34,6 +34,7 @@ const authRouter = Router();
  *               $ref: '#/components/schemas/SuccessResponse'
  *             example:
  *               success: true
+ *               data: null
  *               message: "OTP sent successfully"
  *
  *       429:
@@ -84,6 +85,7 @@ authRouter.post(
  *           application/json:
  *             example:
  *               success: true
+ *               data: null
  *               message: "OTP verified successfully"
  *
  *       400:
