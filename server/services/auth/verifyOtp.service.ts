@@ -30,8 +30,6 @@ const verifyOtpService = async (verifyOtpRequest: VerifyOtpRequestDTO) => {
       throw new ApiError(ErrorCode.BAD_REQUEST, 'OTP has expired — request a new code');
     }
 
-    console.log(`Stored OTP: ${storedOtp} given OTP: ${verifyOtpRequest.otp}`);
-
     // 3. Constant-time comparison to prevent timing attacks
     const isValid = timingSafeEqual(storedOtp, verifyOtpRequest.otp.trim());
 
@@ -54,7 +52,6 @@ const verifyOtpService = async (verifyOtpRequest: VerifyOtpRequestDTO) => {
     return;
   } catch (error) {
     const errorMessage = ErrorUtil.getErrorMessage(error);
-    console.log(error);
     logger.error('Error verifying OTP: ', errorMessage);
     ErrorUtil.handleServerError(error);
   }

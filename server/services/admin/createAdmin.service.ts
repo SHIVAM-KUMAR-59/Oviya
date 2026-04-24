@@ -11,7 +11,7 @@ const createAdminService = async (
     const existingAdmin = await Repository.adminRepository.findByEmail(
       createAdminRequest.email,
     );
-    console.log('existingAdmin', existingAdmin);
+
     if (existingAdmin) {
       logger.error(`Admin with email ${createAdminRequest.email} already exists`);
       throw new ApiError(
