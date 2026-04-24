@@ -49,10 +49,14 @@ export class CreateAdminRequestDTO {
  *           example: "John Doe"
  *         email:
  *           type: string
- *           example: "test@example.com"s
+ *           example: "test@example.com"
+ *         role:
+ *           type: string
+ *           example: "ADMIN"
  */
 export class CreateAdminResponseDTO {
   readonly id!: string;
   readonly email!: string;
   readonly name!: string;
+  readonly role!: string;
 }

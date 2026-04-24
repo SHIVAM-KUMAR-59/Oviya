@@ -141,6 +141,9 @@ export class VerifyOtpRequestDTO {
  *             onboardingCompleted:
  *               type: string
  *               example: false
+ *             role:
+ *               type: string
+ *               example: "USER"
  */
 export class AuthResponseDTO {
   readonly accessToken!: string;
@@ -149,5 +152,6 @@ export class AuthResponseDTO {
     readonly email: string;
     readonly name: string;
     readonly onboardingCompleted: boolean;
+    readonly role: string;
   };
 }

@@ -1,7 +1,7 @@
-import { createAdmin } from '../../repository/admin/admin.repository';
+import createAdminService from './createAdmin.service';
 
 const AdminService = {
-  createAdmin,
+  createAdminService,
 };
 
 export default AdminService;

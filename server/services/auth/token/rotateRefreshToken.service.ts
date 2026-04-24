@@ -11,7 +11,6 @@ const REFRESH_SECRET = env.JWT.REFRESH_TOKEN.SECRET;
 
 const rotateRefreshToken = async (
   token: string,
-  role: string,
 ): Promise<{
   userId: string;
   newAccessToken: string;
@@ -44,7 +43,7 @@ const rotateRefreshToken = async (
   ]);
 
   // Issue new pair
-  const newAccessToken = generateAccessToken(userId, role);
+  const newAccessToken = generateAccessToken(userId, dbToken.user.role);
   const newRefreshToken = await issueRefreshToken(userId);
 
   return { userId, newAccessToken, newRefreshToken };

@@ -3,12 +3,13 @@ import Service from '../../services';
 import { ApiError, ErrorCode } from '../../lib/utils/error.util';
 import { setRefreshTokenCookie } from '../../lib/utils/cookie.util';
 import { sendSuccess } from '../../lib/utils/response.util';
+import { Controller } from '../../lib/types/controller.types';
 
-export const refreshTokenController = async (
+export const refreshTokenController: Controller = async (
   req: Request,
   res: Response,
   next: NextFunction,
-): Promise<void> => {
+) => {
   try {
     const refreshToken = req.cookies?.refreshToken;
 
@@ -17,7 +18,7 @@ export const refreshTokenController = async (
     }
 
     const { accessToken, refreshToken: newRefreshToken } =
-      await Service.authService.refreshTokenService(refreshToken, 'USER');
+      await Service.authService.refreshTokenService(refreshToken);
 
     // rotate cookie
     setRefreshTokenCookie(res, newRefreshToken);

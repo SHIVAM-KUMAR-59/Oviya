@@ -22,7 +22,7 @@ export const findByToken = async (tokenString: string) => {
     where: {
       token: tokenString,
     },
-    include: { user: { select: { id: true, email: true } } },
+    include: { user: { select: { id: true, email: true, role: true } } },
   });
 
   return token;
