@@ -52,8 +52,8 @@ const features = [
   {
     n: '04',
     icon: Salad,
-    h: 'Indian Food Context',
-    p: 'Nutrition insights built around dal, roti, sabzi, and fasting patterns — not imported Western food databases.',
+    h: 'Nutrition, Understood.',
+    p: 'Designed for global diets — aligned with how you actually eat, not generic databases.',
     glow: 'bg-rose-400/10',
     iconBg:
       'bg-rose-400/10 border-rose-400/20 group-hover:bg-rose-400/15 group-hover:border-rose-400/30',
