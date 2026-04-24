@@ -6,14 +6,8 @@ import Repository from '../../repository';
 
 const createAdminService = async (
   createAdminRequest: CreateAdminRequestDTO,
-  role: string,
 ): Promise<CreateAdminResponseDTO> => {
   try {
-    if (role !== 'ADMIN') {
-      logger.error('Only admins can create new admins');
-      throw new ApiError(ErrorCode.FORBIDDEN, 'Only admins can create new admins');
-    }
-
     const existingAdmin = await Repository.adminRepository.findByEmail(
       createAdminRequest.email,
     );

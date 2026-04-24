@@ -3,10 +3,12 @@ import Controller from '../controllers';
 import { validateBody } from '../middleware/validation.middleware';
 import { CreateAdminRequestDTO } from '../dto/admin.dto';
 import authMiddleware from '../middleware/auth.middleware';
+import { requireAdmin } from '../middleware/admin.middleware';
 
 const adminRoutes = Router();
 
 adminRoutes.use(authMiddleware);
+adminRoutes.use(requireAdmin);
 
 /**
  * @openapi
