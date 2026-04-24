@@ -184,7 +184,7 @@ const Hero = ({ hoverProps }: HeroProps) => {
                   onChange={(e) => setEmail(e.target.value)}
                   disabled={loading}
                   {...hoverProps}
-                  className="flex-1 rounded-md border border-r-0 border-white/20 bg-white/10 px-5 py-4 text-sm font-light text-white outline-none placeholder:text-white/30 focus:border-[rgba(197,178,232,0.45)] focus:bg-white/15 disabled:opacity-50 md:rounded-none md:rounded-l-lg"
+                  className="flex-1 rounded-md border border-white/20 bg-white/10 px-5 py-4 text-sm font-light text-white outline-none placeholder:text-white/30 focus:border-[rgba(197,178,232,0.45)] focus:bg-white/15 disabled:opacity-50 md:rounded-none md:rounded-l-lg md:border-none"
                 />
                 <button
                   type="submit"
