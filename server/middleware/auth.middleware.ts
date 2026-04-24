@@ -2,11 +2,12 @@ import { Request, Response, NextFunction } from 'express';
 import { verifyAccessToken } from '../lib/utils/jwt.util';
 import { ApiError, ErrorCode } from '../lib/utils/error.util';
 import logger from '../config/logger.config';
+import { UserRoles } from '@prisma/client';
 
 export interface AuthRequest extends Request {
   user?: {
     userId: string;
-    role: string;
+    role: UserRoles;
   };
 }
 

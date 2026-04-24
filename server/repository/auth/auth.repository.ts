@@ -1,4 +1,3 @@
-import { RefreshToken } from '@prisma/client';
 import prisma from '../../lib/utils/prisma.util';
 
 export const createRefreshToken = async (tokenData: {
