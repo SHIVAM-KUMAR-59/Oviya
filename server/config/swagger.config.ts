@@ -20,6 +20,11 @@ const options: swaggerJSDoc.Options = {
     servers: [
       {
         url: 'http://localhost:8000/api/v1',
+        description: 'Development server',
+      },
+      {
+        url: 'https://oviyacare.onrender.com/api/v1',
+        description: 'Production server',
       },
     ],
   },
