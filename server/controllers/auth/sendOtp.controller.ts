@@ -9,7 +9,7 @@ const sendOtpController: BodyController<SendOtpRequestDTO> = async (req, res, ne
 
     await Service.authService.sendOtpService({ email });
 
-    sendSuccess(res, 'OTP sent successfully', 200);
+    sendSuccess(res, 'OTP sent successfully', null, 200);
   } catch (err) {
     next(err);
   }

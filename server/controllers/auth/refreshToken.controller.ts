@@ -23,7 +23,7 @@ export const refreshTokenController: Controller = async (
     // rotate cookie
     setRefreshTokenCookie(res, newRefreshToken);
 
-    sendSuccess(res, 'Token refreshed successfully', accessToken, 200);
+    sendSuccess(res, 'Token refreshed successfully', { accessToken }, 200);
   } catch (err) {
     next(err);
   }

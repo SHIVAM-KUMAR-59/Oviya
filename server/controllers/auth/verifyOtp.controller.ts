@@ -13,7 +13,7 @@ const verifyOtpController: BodyController<VerifyOtpRequestDTO> = async (
 
     await Service.authService.verifyOtpService({ email, otp });
 
-    sendSuccess(res, 'OTP verified successfully', 200);
+    sendSuccess(res, 'OTP verified successfully', null, 200);
   } catch (err) {
     next(err);
   }

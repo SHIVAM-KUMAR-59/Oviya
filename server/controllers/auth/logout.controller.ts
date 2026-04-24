@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import Service from '../../services';
 import { clearRefreshTokenCookie } from '../../lib/utils/cookie.util';
 import { Controller } from '../../lib/types/controller.types';
+import { sendSuccess } from '../../lib/utils/response.util';
 
 export const logoutController: Controller = async (
   req: Request,
@@ -18,10 +19,7 @@ export const logoutController: Controller = async (
     // clear cookie regardless (important)
     clearRefreshTokenCookie(res);
 
-    res.status(200).json({
-      success: true,
-      message: 'Logged out successfully',
-    });
+    sendSuccess(res, 'Logged out successfully', null, 200);
   } catch (err) {
     next(err);
   }
