@@ -7,7 +7,6 @@ import {
   Mail,
   User,
   Loader2,
-  CircleCheck,
   RefreshCw,
   ShieldCheck,
 } from 'lucide-react';
@@ -15,10 +14,15 @@ import OtpInput from '@/components/auth/OtpInput';
 import CountdownTimer from '@/components/auth/CountdownTimer';
 import Reveal from '@/components/auth/Reveal';
 import TermsAndConditions from '@/components/auth/TermsAndConditions';
+import PrimaryButton from '@/components/ui/PrimaryButton';
+import ModeToggle from '@/components/auth/ModeToggle';
+import Divider from '@/components/auth/Divider';
+import Header from '@/components/auth/Header';
+import { useToast } from '@/context/ToastContext';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type Mode = 'login' | 'register';
+export type Mode = 'login' | 'register';
 type Step = 'credentials' | 'otp' | 'success';
 
 // ─── Apple Icon ───────────────────────────────────────────────────────────────
@@ -63,6 +67,8 @@ export default function AuthPage() {
   const [timerKey, setTimerKey] = useState(0);
   const [revealKey, setRevealKey] = useState(0);
 
+  const { success: showSuccess } = useToast();
+
   const switchMode = (m: Mode) => {
     setMode(m);
     setStep('credentials');
@@ -77,6 +83,7 @@ export default function AuthPage() {
     setLoading(true);
     await new Promise((r) => setTimeout(r, 1200));
     setLoading(false);
+    showSuccess('OTP sent successfully');
     setStep('otp');
     setOtp('');
     setOtpExpired(false);
@@ -90,8 +97,7 @@ export default function AuthPage() {
     setLoading(true);
     await new Promise((r) => setTimeout(r, 1000));
     setLoading(false);
-    setStep('success');
-    setRevealKey((k) => k + 1);
+    showSuccess('Registered successfully');
   };
 
   const handleResend = async () => {
@@ -178,40 +184,7 @@ export default function AuthPage() {
           style={{ position: 'relative', zIndex: 1, width: '100%', maxWidth: '420px' }}
         >
           {/* Brand above card */}
-          {step !== 'success' && (
-            <Reveal delay={0}>
-              <div style={{ textAlign: 'center', marginBottom: '28px' }}>
-                <div
-                  style={{ display: 'inline-flex', alignItems: 'center', gap: '10px' }}
-                >
-                  <div
-                    style={{
-                      height: '1px',
-                      width: '28px',
-                      background: 'linear-gradient(to right, transparent, var(--rose))',
-                    }}
-                  />
-                  <span
-                    style={{
-                      fontFamily: 'Cormorant, serif',
-                      fontSize: '30px',
-                      fontWeight: 500,
-                      color: 'var(--ink)',
-                    }}
-                  >
-                    Ovi<em style={{ color: 'var(--rose)' }}>ya</em>
-                  </span>
-                  <div
-                    style={{
-                      height: '1px',
-                      width: '28px',
-                      background: 'linear-gradient(to left, transparent, var(--rose))',
-                    }}
-                  />
-                </div>
-              </div>
-            </Reveal>
-          )}
+          {step !== 'success' && <Header />}
 
           {/* Card body */}
           <div
@@ -229,37 +202,17 @@ export default function AuthPage() {
             {step === 'credentials' && (
               <>
                 <Reveal delay={60}>
-                  <h1
-                    style={{
-                      fontFamily: 'Cormorant, serif',
-                      fontSize: 'clamp(28px,5vw,36px)',
-                      fontWeight: 500,
-                      lineHeight: 1.15,
-                      letterSpacing: '-0.02em',
-                      color: 'var(--ink)',
-                      marginBottom: '8px',
-                    }}
-                  >
+                  <h1 className="text-ink mb-2 font-[Cormorant] text-[clamp(28px,5vw,36px)] leading-[1.15] font-medium tracking-[-0.02em]">
                     {mode === 'login' ? (
                       'Welcome back'
                     ) : (
                       <>
-                        Start your{' '}
-                        <em className="shimmer-text" style={{ fontStyle: 'normal' }}>
-                          journey
-                        </em>
+                        Start your <em className="shimmer-text not-italic">journey</em>
                       </>
                     )}
                   </h1>
-                  <p
-                    style={{
-                      fontSize: '14px',
-                      fontWeight: 300,
-                      lineHeight: 1.7,
-                      color: 'rgba(15,11,30,0.45)',
-                      marginBottom: '24px',
-                    }}
-                  >
+
+                  <p className="mb-6 text-[14px] leading-[1.7] font-light text-[rgba(15,11,30,0.45)]">
                     {mode === 'login'
                       ? "We'll send a one-time code to your email."
                       : 'Create your account — it takes under a minute.'}
@@ -268,14 +221,7 @@ export default function AuthPage() {
 
                 {/* Social buttons */}
                 <Reveal delay={110}>
-                  <div
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      gap: '10px',
-                      marginBottom: '20px',
-                    }}
-                  >
+                  <div className="mb-5 flex flex-col gap-2.5">
                     {[
                       { icon: <GoogleIcon />, label: 'Continue with Google' },
                       { icon: <AppleIcon />, label: 'Continue with Apple' },
@@ -300,71 +246,21 @@ export default function AuthPage() {
                 </Reveal>
 
                 {/* Divider */}
-                <Reveal delay={150}>
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '12px',
-                      marginBottom: '20px',
-                    }}
-                  >
-                    <div
-                      style={{
-                        flex: 1,
-                        height: '1px',
-                        background: 'rgba(107,79,160,0.15)',
-                      }}
-                    />
-                    <span
-                      style={{
-                        fontSize: '11px',
-                        letterSpacing: '0.2em',
-                        textTransform: 'uppercase',
-                        color: 'rgba(15,11,30,0.3)',
-                      }}
-                    >
-                      or
-                    </span>
-                    <div
-                      style={{
-                        flex: 1,
-                        height: '1px',
-                        background: 'rgba(107,79,160,0.15)',
-                      }}
-                    />
-                  </div>
-                </Reveal>
+                <Divider />
 
                 {/* Form */}
                 <form onSubmit={handleCredentialsSubmit}>
                   {mode === 'register' && (
                     <Reveal delay={190}>
                       <div style={{ marginBottom: '14px' }}>
-                        <label
-                          style={{
-                            display: 'block',
-                            marginBottom: '6px',
-                            fontSize: '11px',
-                            letterSpacing: '0.15em',
-                            textTransform: 'uppercase',
-                            color: 'rgba(15,11,30,0.45)',
-                          }}
-                        >
+                        <label className="mb-1.5 block text-[11px] tracking-[0.15em] text-[rgba(15,11,30,0.45)] uppercase">
                           Your name
                         </label>
                         <div style={{ position: 'relative' }}>
                           <User
                             size={15}
                             strokeWidth={1.5}
-                            style={{
-                              position: 'absolute',
-                              left: '14px',
-                              top: '50%',
-                              transform: 'translateY(-50%)',
-                              color: 'var(--soft)',
-                              pointerEvents: 'none',
-                            }}
+                            className="text-soft pointer-events-none absolute top-1/2 left-3.5 -translate-y-1/2"
                           />
                           <input
                             type="text"
@@ -441,31 +337,7 @@ export default function AuthPage() {
                   </Reveal>
 
                   <Reveal delay={mode === 'register' ? 270 : 230}>
-                    <button
-                      type="submit"
-                      disabled={loading}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        gap: '10px',
-                        width: '100%',
-                        padding: '14px',
-                        borderRadius: '12px',
-                        border: 'none',
-                        background:
-                          'linear-gradient(135deg, var(--violet) 0%, var(--mid) 100%)',
-                        color: 'white',
-                        fontSize: '13px',
-                        fontWeight: 500,
-                        fontFamily: 'inherit',
-                        letterSpacing: '0.03em',
-                        cursor: loading ? 'not-allowed' : 'pointer',
-                        boxShadow: '0 4px 18px rgba(74,47,122,0.28)',
-                        opacity: loading ? 0.65 : 1,
-                        transition: 'opacity 0.2s, transform 0.15s',
-                      }}
-                    >
+                    <PrimaryButton type="submit" disabled={loading}>
                       {loading ? (
                         <>
                           <Loader2
@@ -480,59 +352,12 @@ export default function AuthPage() {
                           <ArrowRight size={15} strokeWidth={2.5} />
                         </>
                       )}
-                    </button>
+                    </PrimaryButton>
                   </Reveal>
                 </form>
 
                 {/* Mode toggle */}
-                <Reveal delay={310}>
-                  <p
-                    style={{
-                      marginTop: '20px',
-                      textAlign: 'center',
-                      fontSize: '13px',
-                      color: 'rgba(15,11,30,0.4)',
-                    }}
-                  >
-                    {mode === 'login' ? (
-                      <>
-                        Don&apos;t have an account?{' '}
-                        <button
-                          onClick={() => switchMode('register')}
-                          style={{
-                            background: 'none',
-                            border: 'none',
-                            color: 'var(--violet)',
-                            fontWeight: 500,
-                            fontFamily: 'inherit',
-                            fontSize: '13px',
-                            cursor: 'pointer',
-                          }}
-                        >
-                          Register
-                        </button>
-                      </>
-                    ) : (
-                      <>
-                        Already have an account?{' '}
-                        <button
-                          onClick={() => switchMode('login')}
-                          style={{
-                            background: 'none',
-                            border: 'none',
-                            color: 'var(--violet)',
-                            fontWeight: 500,
-                            fontFamily: 'inherit',
-                            fontSize: '13px',
-                            cursor: 'pointer',
-                          }}
-                        >
-                          Sign in
-                        </button>
-                      </>
-                    )}
-                  </p>
-                </Reveal>
+                <ModeToggle mode={mode} switchMode={switchMode} />
               </>
             )}
 
@@ -546,7 +371,7 @@ export default function AuthPage() {
                       setOtp('');
                       setRevealKey((k) => k + 1);
                     }}
-                    className="mb-5 flex cursor-pointer items-center gap-1.5 border-0 bg-transparent text-[11px] tracking-[0.12em] text-(--soft) uppercase"
+                    className="text-soft mb-5 flex cursor-pointer items-center gap-1.5 border-0 bg-transparent text-[11px] tracking-[0.12em] uppercase"
                   >
                     <ArrowLeft size={13} strokeWidth={2} />
                     Back
@@ -554,21 +379,17 @@ export default function AuthPage() {
                 </Reveal>
 
                 <Reveal delay={60}>
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-[14px] bg-(--pale)">
-                    <ShieldCheck
-                      size={22}
-                      strokeWidth={1.5}
-                      className="text-(--violet)"
-                    />
+                  <div className="bg-pale mb-4 flex h-12 w-12 items-center justify-center rounded-[14px]">
+                    <ShieldCheck size={22} strokeWidth={1.5} className="text-violet)" />
                   </div>
 
-                  <h2 className="mb-2.5 font-[Cormorant,serif] text-[clamp(24px,4.5vw,32px)] leading-[1.2] font-medium tracking-[-0.02em] text-(--ink)">
+                  <h2 className="text-ink mb-2.5 font-[Cormorant,serif] text-[clamp(24px,4.5vw,32px)] leading-[1.2] font-medium tracking-[-0.02em]">
                     Check your email
                   </h2>
 
                   <p className="mb-7 text-[14px] leading-[1.7] font-light text-[rgba(15,11,30,0.45)]">
                     We sent a 6-digit code to{' '}
-                    <strong className="font-medium text-(--violet)">{email}</strong>. It
+                    <strong className="text-violet font-medium">{email}</strong>. It
                     expires in 5 minutes.
                   </p>
                 </Reveal>
@@ -601,38 +422,9 @@ export default function AuthPage() {
                 {/* Verify button */}
                 <Reveal delay={200}>
                   <form onSubmit={handleOtpSubmit} style={{ marginTop: '18px' }}>
-                    <button
+                    <PrimaryButton
                       type="submit"
                       disabled={loading || !isOtpComplete || otpExpired}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        gap: '10px',
-                        width: '100%',
-                        padding: '14px',
-                        borderRadius: '12px',
-                        border: 'none',
-                        background:
-                          isOtpComplete && !otpExpired
-                            ? 'linear-gradient(135deg, var(--violet) 0%, var(--mid) 100%)'
-                            : 'rgba(74,47,122,0.2)',
-                        color:
-                          isOtpComplete && !otpExpired ? 'white' : 'rgba(74,47,122,0.5)',
-                        fontSize: '13px',
-                        fontWeight: 500,
-                        fontFamily: 'inherit',
-                        letterSpacing: '0.03em',
-                        cursor:
-                          isOtpComplete && !otpExpired && !loading
-                            ? 'pointer'
-                            : 'not-allowed',
-                        boxShadow:
-                          isOtpComplete && !otpExpired
-                            ? '0 4px 18px rgba(74,47,122,0.25)'
-                            : 'none',
-                        transition: 'all 0.25s ease',
-                      }}
                     >
                       {loading ? (
                         <>
@@ -648,7 +440,7 @@ export default function AuthPage() {
                           <ArrowRight size={15} strokeWidth={2.5} />
                         </>
                       )}
-                    </button>
+                    </PrimaryButton>
                   </form>
                 </Reveal>
 
@@ -679,6 +471,7 @@ export default function AuthPage() {
                         cursor: loading ? 'not-allowed' : 'pointer',
                       }}
                     >
+                      Resend code
                       {loading ? (
                         <Loader2
                           size={11}
@@ -687,188 +480,21 @@ export default function AuthPage() {
                       ) : (
                         <RefreshCw size={11} />
                       )}
-                      Resend code
                     </button>
                   </p>
                 </Reveal>
 
                 {/* Decorative dots */}
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    gap: '8px',
-                    marginTop: '28px',
-                  }}
-                >
+                <div className="mt-7 flex justify-center gap-2">
                   {[0, 1, 2].map((i) => (
                     <div
                       key={i}
-                      className="pulse-dot"
-                      style={{
-                        width: '5px',
-                        height: '5px',
-                        borderRadius: '50%',
-                        background: 'var(--mist)',
-                        animationDelay: `${i * 0.4}s`,
-                      }}
+                      className="pulse-dot bg-mist h-1.25 w-1.25 rounded-full"
+                      style={{ animationDelay: `${i * 0.4}s` }}
                     />
                   ))}
                 </div>
               </>
-            )}
-
-            {/* ── SUCCESS STEP ── */}
-            {step === 'success' && (
-              <div style={{ textAlign: 'center', padding: '16px 0' }}>
-                <Reveal delay={0}>
-                  <div
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '10px',
-                      marginBottom: '28px',
-                    }}
-                  >
-                    <div
-                      style={{
-                        height: '1px',
-                        width: '24px',
-                        background: 'linear-gradient(to right, transparent, var(--rose))',
-                      }}
-                    />
-                    <span
-                      style={{
-                        fontFamily: 'Cormorant, serif',
-                        fontSize: '28px',
-                        fontWeight: 500,
-                        color: 'var(--ink)',
-                      }}
-                    >
-                      Ovi<em style={{ color: 'var(--rose)' }}>ya</em>
-                    </span>
-                    <div
-                      style={{
-                        height: '1px',
-                        width: '24px',
-                        background: 'linear-gradient(to left, transparent, var(--rose))',
-                      }}
-                    />
-                  </div>
-                </Reveal>
-                <Reveal delay={80}>
-                  <div
-                    className="check-pop"
-                    style={{
-                      width: '80px',
-                      height: '80px',
-                      borderRadius: '50%',
-                      background:
-                        'linear-gradient(135deg, var(--pale) 0%, var(--blush) 100%)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      margin: '0 auto 24px',
-                      boxShadow: '0 8px 32px rgba(74,47,122,0.15)',
-                    }}
-                  >
-                    <CircleCheck
-                      size={34}
-                      strokeWidth={1.5}
-                      style={{ color: 'var(--violet)' }}
-                    />
-                  </div>
-                </Reveal>
-                <Reveal delay={180}>
-                  <h2
-                    style={{
-                      fontFamily: 'Cormorant, serif',
-                      fontSize: 'clamp(26px,5vw,34px)',
-                      fontWeight: 500,
-                      lineHeight: 1.2,
-                      letterSpacing: '-0.02em',
-                      color: 'var(--ink)',
-                      marginBottom: '12px',
-                    }}
-                  >
-                    {mode === 'register' ? (
-                      <>
-                        Welcome,{' '}
-                        <em className="shimmer-text" style={{ fontStyle: 'normal' }}>
-                          {name.split(' ')[0] || 'lovely'}
-                        </em>
-                      </>
-                    ) : (
-                      "You're in"
-                    )}
-                  </h2>
-                  <p
-                    style={{
-                      fontSize: '14px',
-                      fontWeight: 300,
-                      lineHeight: 1.75,
-                      color: 'rgba(15,11,30,0.45)',
-                      maxWidth: '280px',
-                      margin: '0 auto 28px',
-                    }}
-                  >
-                    {mode === 'register'
-                      ? "Your Oviya account is ready. Let's start understanding your cycle on your terms."
-                      : 'Identity verified. Welcome back — your data is waiting.'}
-                  </p>
-                </Reveal>
-                <Reveal delay={300}>
-                  <button
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '10px',
-                      padding: '13px 28px',
-                      borderRadius: '12px',
-                      border: 'none',
-                      background:
-                        'linear-gradient(135deg, var(--violet) 0%, var(--mid) 100%)',
-                      color: 'white',
-                      fontSize: '13px',
-                      fontWeight: 500,
-                      fontFamily: 'inherit',
-                      letterSpacing: '0.03em',
-                      cursor: 'pointer',
-                      boxShadow: '0 4px 18px rgba(74,47,122,0.28)',
-                    }}
-                  >
-                    Go to dashboard <ArrowRight size={15} strokeWidth={2.5} />
-                  </button>
-                </Reveal>
-                <Reveal delay={400}>
-                  <div
-                    style={{
-                      display: 'flex',
-                      flexWrap: 'wrap',
-                      justifyContent: 'center',
-                      gap: '8px',
-                      marginTop: '24px',
-                    }}
-                  >
-                    {['PCOS-first', 'Evidence-led', 'Indian food aware'].map((b) => (
-                      <span
-                        key={b}
-                        style={{
-                          padding: '4px 12px',
-                          borderRadius: '4px',
-                          border: '1px solid rgba(197,178,232,0.3)',
-                          fontSize: '10px',
-                          letterSpacing: '0.15em',
-                          textTransform: 'uppercase',
-                          color: 'rgba(155,127,212,0.7)',
-                        }}
-                      >
-                        {b}
-                      </span>
-                    ))}
-                  </div>
-                </Reveal>
-              </div>
             )}
           </div>
 

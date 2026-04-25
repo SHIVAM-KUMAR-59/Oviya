@@ -20,6 +20,8 @@
 
   --border-dark: rgba(155, 127, 212, 0.2);
   --border-light: rgba(155, 127, 212, 0.15);
+
+  --muted: rgba(15, 11, 30, 0.4);
 }
 
 @theme {
@@ -39,6 +41,7 @@
   --color-rose-pale: var(--rose-pale);
   --color-border-dark: var(--border-dark);
   --color-border-light: var(--border-light);
+  --color-muted: var(--muted);
 }
 
 html {
