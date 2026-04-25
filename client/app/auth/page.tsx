@@ -21,9 +21,21 @@ import Header from '@/components/auth/Header';
 import { useToast } from '@/context/ToastContext';
 import { AppleIcon, GoogleIcon } from '@/components/auth/SocialIcon';
 import TextInput from '@/components/auth/TextInput';
+import { useApi } from '@/hooks/useApi';
 
 export type Mode = 'login' | 'register';
 type Step = 'credentials' | 'otp' | 'success';
+
+interface SendOtpResponse {
+  message: string;
+}
+interface VerifyOtpResponse {
+  verified: boolean;
+}
+interface AuthResponse {
+  token: string;
+  user: { id: string; name: string; email: string };
+}
 
 export default function AuthPage() {
   const [mode, setMode] = useState<Mode>('login');
@@ -31,12 +43,38 @@ export default function AuthPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [otp, setOtp] = useState('');
-  const [loading, setLoading] = useState(false);
   const [otpExpired, setOtpExpired] = useState(false);
   const [timerKey, setTimerKey] = useState(0);
   const [revealKey, setRevealKey] = useState(0);
 
-  const { success: showSuccess } = useToast();
+  const { success: showSuccess, error: showError } = useToast();
+
+  const sendOtp = useApi<SendOtpResponse>('post', {
+    onSuccess: () => {
+      showSuccess('OTP sent successfully');
+      setStep('otp');
+      setOtp('');
+      setOtpExpired(false);
+      setTimerKey((k) => k + 1);
+      setRevealKey((k) => k + 1);
+    },
+    onError: (msg) => showError(msg),
+  });
+
+  const verifyOtp = useApi<VerifyOtpResponse>('post', {
+    onError: (msg) => showError(msg),
+  });
+
+  const authAction = useApi<AuthResponse>('post', {
+    onSuccess: (data) => {
+      showSuccess(mode === 'login' ? 'Welcome back!' : 'Account created successfully!');
+      // TODO: store data.token / redirect
+      setStep('success');
+    },
+    onError: (msg) => showError(msg),
+  });
+
+  const loading = sendOtp.loading || verifyOtp.loading || authAction.loading;
 
   const switchMode = (m: Mode) => {
     setMode(m);
@@ -44,45 +82,49 @@ export default function AuthPage() {
     setName('');
     setEmail('');
     setOtp('');
+    sendOtp.reset();
+    verifyOtp.reset();
+    authAction.reset();
     setRevealKey((k) => k + 1);
   };
 
   const handleCredentialsSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    await new Promise((r) => setTimeout(r, 1200));
-    setLoading(false);
-    showSuccess('OTP sent successfully');
-    setStep('otp');
-    setOtp('');
-    setOtpExpired(false);
-    setTimerKey((k) => k + 1);
-    setRevealKey((k) => k + 1);
+    if (!email) return;
+    await sendOtp.execute('/auth/send-otp', { email });
   };
 
   const handleOtpSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (otp.length < 6) return;
-    setLoading(true);
-    await new Promise((r) => setTimeout(r, 1000));
-    setLoading(false);
-    showSuccess('Registered successfully');
+    if (otp.length < 6 || otpExpired) return;
+
+    // Step 1 — verify the OTP
+    const verified = await verifyOtp.execute('/auth/verify-otp', { email, otp });
+    if (!verified?.verified) {
+      showError('Invalid or expired code. Please try again.');
+      return;
+    }
+
+    // Step 2 — register or login
+    const endpoint = mode === 'register' ? '/auth/register' : '/auth/login';
+    const body = mode === 'register' ? { name, email, otp } : { email, otp };
+    await authAction.execute(endpoint, body);
   };
 
   const handleResend = async () => {
-    setLoading(true);
     setOtp('');
-    await new Promise((r) => setTimeout(r, 800));
-    setLoading(false);
-    setOtpExpired(false);
-    setTimerKey((k) => k + 1);
+    verifyOtp.reset();
+    const result = await sendOtp.execute('/auth/send-otp', { email });
+    if (result) {
+      setOtpExpired(false);
+      setTimerKey((k) => k + 1);
+    }
   };
 
   const isOtpComplete = otp.length === 6;
 
   return (
     <>
-      {/* ── Page background ── */}
       <div
         style={{
           background:
@@ -110,15 +152,13 @@ export default function AuthPage() {
           }}
         />
 
-        {/* ── Card ── */}
+        {/* Card */}
         <div
           key={revealKey}
           style={{ position: 'relative', zIndex: 1, width: '100%', maxWidth: '420px' }}
         >
-          {/* Brand above card */}
           {step !== 'success' && <Header />}
 
-          {/* Card body */}
           <div className="rounded-[20px] border border-[rgba(155,127,212,0.18)] bg-[rgba(255,255,255,0.75)] px-7 py-8 shadow-[0_4px_32px_rgba(74,47,122,0.09),0_1px_4px_rgba(74,47,122,0.06),inset_0_1px_0_rgba(255,255,255,0.95)] backdrop-blur-[20px]">
             {/* ── CREDENTIALS STEP ── */}
             {step === 'credentials' && (
@@ -133,7 +173,6 @@ export default function AuthPage() {
                       </>
                     )}
                   </h1>
-
                   <p className="mb-6 text-[14px] leading-[1.7] font-light text-[rgba(15,11,30,0.45)]">
                     {mode === 'login'
                       ? "We'll send a one-time code to your email."
@@ -167,7 +206,6 @@ export default function AuthPage() {
                   </div>
                 </Reveal>
 
-                {/* Divider */}
                 <Divider />
 
                 {/* Form */}
@@ -196,8 +234,8 @@ export default function AuthPage() {
                   </Reveal>
 
                   <Reveal delay={mode === 'register' ? 270 : 230}>
-                    <PrimaryButton type="submit" disabled={loading}>
-                      {loading ? (
+                    <PrimaryButton type="submit" disabled={loading || !email}>
+                      {sendOtp.loading ? (
                         <>
                           <Loader2
                             size={15}
@@ -215,7 +253,6 @@ export default function AuthPage() {
                   </Reveal>
                 </form>
 
-                {/* Mode toggle */}
                 <ModeToggle mode={mode} switchMode={switchMode} />
               </>
             )}
@@ -228,6 +265,8 @@ export default function AuthPage() {
                     onClick={() => {
                       setStep('credentials');
                       setOtp('');
+                      verifyOtp.reset();
+                      authAction.reset();
                       setRevealKey((k) => k + 1);
                     }}
                     className="text-soft mb-5 flex cursor-pointer items-center gap-1.5 border-0 bg-transparent text-[11px] tracking-[0.12em] uppercase"
@@ -239,7 +278,7 @@ export default function AuthPage() {
 
                 <Reveal delay={60}>
                   <div className="bg-pale mb-4 flex h-12 w-12 items-center justify-center rounded-[14px]">
-                    <ShieldCheck size={22} strokeWidth={1.5} className="text-violet)" />
+                    <ShieldCheck size={22} strokeWidth={1.5} className="text-violet" />
                   </div>
 
                   <h2 className="text-ink mb-2.5 font-[Cormorant,serif] text-[clamp(24px,4.5vw,32px)] leading-[1.2] font-medium tracking-[-0.02em]">
@@ -253,13 +292,10 @@ export default function AuthPage() {
                   </p>
                 </Reveal>
 
-                {/* OTP input */}
                 <Reveal delay={120}>
                   <OtpInput value={otp} onChange={setOtp} />
-                  {/* <input className='border-2 border-black w-full'/> */}
                 </Reveal>
 
-                {/* Timer */}
                 <Reveal delay={160}>
                   <p className="mt-3 text-center text-sm text-[rgba(15,11,30,0.35)]">
                     Code expires in{' '}
@@ -271,20 +307,19 @@ export default function AuthPage() {
                   </p>
                 </Reveal>
 
-                {/* Verify button */}
                 <Reveal delay={200}>
                   <form onSubmit={handleOtpSubmit} style={{ marginTop: '18px' }}>
                     <PrimaryButton
                       type="submit"
                       disabled={loading || !isOtpComplete || otpExpired}
                     >
-                      {loading ? (
+                      {verifyOtp.loading || authAction.loading ? (
                         <>
                           <Loader2
                             size={15}
                             style={{ animation: 'spin 1s linear infinite' }}
                           />
-                          Verifying…
+                          {verifyOtp.loading ? 'Verifying…' : 'Signing in…'}
                         </>
                       ) : (
                         <>
@@ -296,17 +331,16 @@ export default function AuthPage() {
                   </form>
                 </Reveal>
 
-                {/* Resend */}
                 <Reveal delay={240}>
                   <p className="mt-4 text-center text-xs text-[rgba(15,11,30,0.4)]">
-                    Did&apos;nt receive it?{' '}
+                    Didn&apos;t receive it?{' '}
                     <button
                       onClick={handleResend}
                       disabled={loading}
-                      className={`text-rose inline-flex items-center gap-1 border-none bg-transparent text-[12px] font-medium ${loading ? 'cursor-not-allowed opacity-60' : 'cursor-pointer'} `}
+                      className={`text-rose inline-flex items-center gap-1 border-none bg-transparent text-[12px] font-medium ${loading ? 'cursor-not-allowed opacity-60' : 'cursor-pointer'}`}
                     >
                       Resend code
-                      {loading ? (
+                      {sendOtp.loading ? (
                         <Loader2
                           size={11}
                           style={{ animation: 'spin 1s linear infinite' }}
@@ -318,7 +352,6 @@ export default function AuthPage() {
                   </p>
                 </Reveal>
 
-                {/* Decorative dots */}
                 <div className="mt-7 flex justify-center gap-2">
                   {[0, 1, 2].map((i) => (
                     <div
@@ -330,9 +363,32 @@ export default function AuthPage() {
                 </div>
               </>
             )}
+
+            {/* ── SUCCESS STEP ── */}
+            {step === 'success' && (
+              <Reveal delay={0}>
+                <div className="flex flex-col items-center py-4 text-center">
+                  <div className="bg-pale mb-5 flex h-14 w-14 items-center justify-center rounded-2xl">
+                    <ShieldCheck size={26} strokeWidth={1.5} className="text-violet" />
+                  </div>
+                  <h2 className="text-ink mb-2 font-[Cormorant,serif] text-[clamp(24px,4.5vw,32px)] font-medium tracking-[-0.02em]">
+                    {mode === 'login' ? 'Welcome back!' : "You're all set!"}
+                  </h2>
+                  <p className="text-[14px] leading-[1.7] font-light text-[rgba(15,11,30,0.45)]">
+                    {mode === 'login'
+                      ? 'Redirecting you to your dashboard…'
+                      : 'Your account is ready. Taking you in…'}
+                  </p>
+                  <Loader2
+                    size={20}
+                    className="text-violet mt-6 opacity-50"
+                    style={{ animation: 'spin 1s linear infinite' }}
+                  />
+                </div>
+              </Reveal>
+            )}
           </div>
 
-          {/* Footer */}
           {step === 'credentials' && <TermsAndConditions />}
         </div>
       </div>
