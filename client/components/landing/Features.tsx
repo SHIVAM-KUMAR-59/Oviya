@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { RefreshCcw, Salad, Brain, FileText } from 'lucide-react';
 
 type HoverProps = {
@@ -27,9 +27,9 @@ const features = [
   },
   {
     n: '02',
-    icon: Salad,
-    h: 'Indian Food Context',
-    p: 'Nutrition insights built around dal, roti, sabzi, and fasting patterns — not imported Western food databases.',
+    icon: FileText,
+    h: 'Doctor-Ready Reports',
+    p: 'Walk into appointments with a clear, printable summary of cycle history, symptoms, and patterns over months.',
     glow: 'bg-rose-400/10',
     iconBg:
       'bg-rose-400/10 border-rose-400/20 group-hover:bg-rose-400/15 group-hover:border-rose-400/30',
@@ -51,9 +51,9 @@ const features = [
   },
   {
     n: '04',
-    icon: FileText,
-    h: 'Doctor-Ready Reports',
-    p: 'Walk into appointments with a clear, printable summary of cycle history, symptoms, and patterns over months.',
+    icon: Salad,
+    h: 'Nutrition, Understood.',
+    p: 'Designed for global diets — aligned with how you actually eat, not generic databases.',
     glow: 'bg-rose-400/10',
     iconBg:
       'bg-rose-400/10 border-rose-400/20 group-hover:bg-rose-400/15 group-hover:border-rose-400/30',
@@ -64,8 +64,6 @@ const features = [
 ];
 
 const Features = ({ hoverProps }: FeaturesProps) => {
-  const [_activeCard, setActiveCard] = useState<number | null>(null);
-
   useEffect(() => {
     const io = new IntersectionObserver(
       (entries) => {
@@ -119,8 +117,6 @@ const Features = ({ hoverProps }: FeaturesProps) => {
               <div
                 key={f.n}
                 {...hoverProps}
-                onMouseEnter={() => setActiveCard(index)}
-                onMouseLeave={() => setActiveCard(null)}
                 className={`features-reveal group bg-ink relative cursor-default overflow-hidden px-8 py-11 transition-all duration-300 hover:bg-white/3 reveal-delay-${index + 1}`}
               >
                 {/* Bottom gradient line */}

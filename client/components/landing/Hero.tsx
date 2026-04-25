@@ -109,7 +109,7 @@ const Hero = ({ hoverProps }: HeroProps) => {
 
   return (
     <main className="bg-[radial-gradient(ellipse_80%_60%_at_75%_0%,rgba(107,79,160,0.32)_0%,transparent_60%),radial-gradient(ellipse_50%_40%_at_5%_100%,rgba(35,24,72,0.65)_0%,transparent_55%),linear-gradient(155deg,var(--ink)_0%,var(--ink2)_45%,var(--deep)_100%)] pt-10">
-      <section className="relative mx-auto grid min-h-screen w-full max-w-7xl grid-cols-1 overflow-hidden lg:grid-cols-[1.15fr_0.85fr]">
+      <section className="relative mx-auto grid min-h-screen w-full max-w-7xl grid-cols-1 overflow-hidden lg:grid-cols-[1.15fr_0.85fr] xl:py-16">
         {/* Noise overlay */}
         <div className="pointer-events-none absolute inset-0 z-1 bg-[url('data:image/svg+xml,%3Csvg_viewBox%3D%270_0_200_200%27_xmlns%3D%27http://www.w3.org/2000/svg%27%3E%3Cfilter_id%3D%27n%27%3E%3CfeTurbulence_type%3D%27fractalNoise%27_baseFrequency%3D%270.9%27_numOctaves%3D%274%27/%3E%3C/filter%3E%3Crect_width%3D%27100%25%27_height%3D%27100%25%27_filter%3D%27url(%23n)%27/%3E%3C/svg%3E')] opacity-[0.03]" />
 
@@ -184,7 +184,7 @@ const Hero = ({ hoverProps }: HeroProps) => {
                   onChange={(e) => setEmail(e.target.value)}
                   disabled={loading}
                   {...hoverProps}
-                  className="flex-1 rounded-md border border-r-0 border-white/20 bg-white/10 px-5 py-4 text-sm font-light text-white outline-none placeholder:text-white/30 focus:border-[rgba(197,178,232,0.45)] focus:bg-white/15 disabled:opacity-50 md:rounded-none md:rounded-l-lg"
+                  className="flex-1 rounded-md border border-white/20 bg-white/10 px-5 py-4 text-sm font-light text-white outline-none placeholder:text-white/30 focus:border-[rgba(197,178,232,0.45)] focus:bg-white/15 disabled:opacity-50 md:rounded-none md:rounded-l-lg md:border-none"
                 />
                 <button
                   type="submit"
@@ -217,11 +217,11 @@ const Hero = ({ hoverProps }: HeroProps) => {
             <span>No spam</span>
           </div>
 
-          <div className="hero-reveal mt-8 flex flex-wrap gap-2">
+          <div className="hero-reveal mt-8 flex flex-wrap gap-3">
             {badges.map((b) => (
               <span
                 key={b}
-                className="border border-[rgba(197,178,232,0.22)] px-4 py-1 text-[10px] tracking-[0.18em] text-[rgba(197,178,232,0.55)] uppercase transition duration-200 hover:bg-white/10"
+                className="rounded-sm border border-[rgba(197,178,232,0.22)] px-4 py-1 text-[10px] tracking-[0.18em] text-[rgba(197,178,232,0.55)] uppercase transition duration-200 hover:bg-white/10"
               >
                 {b}
               </span>

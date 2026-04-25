@@ -66,22 +66,22 @@ const Voices = ({ hoverProps }: VoicesProps) => {
         <div className="border-pale bg-pale grid gap-px border md:grid-cols-3">
           {[
             {
-              q: "I just want one app that doesn't treat me like I'm broken when my cycle is different every single month.",
-              attr: 'Mumbai · 26 · Diagnosed 2 years ago',
+              q: 'The hardest part is the guilt of taking your mood swings out on others. Nobody talks about that.',
+              attr: 'Nagpur · 24 · Diagnosed officially',
             },
             {
               q: 'Every tracker assumes 28 days. Mine has never been 28 days. Not once in my entire life.',
               attr: 'Bangalore · 29 · PCOS since college',
             },
             {
-              q: 'I want one place for symptoms, food, moods, and cycles — where someone actually connects the dots.',
-              attr: 'Delhi · 31 · Still searching for clarity',
+              q: "I want something I can confidently bring to my doctor and point to, show them my receipts. Because we're not taken seriously.",
+              attr: 'Delhi · 31 · Years without answers',
             },
           ].map((q, i) => (
             <div
               key={i}
               {...hoverProps}
-              className={`voices-reveal group bg-parchment hover:bg-blush px-9 py-11 transition-all duration-300 hover:-translate-y-1 reveal-delay-${i + 1}`}
+              className={`voices-reveal group bg-parchment hover:bg-blush px-9 py-11 transition-all duration-300 hover:-translate-y-1 reveal-delay-${i + 1} flex flex-col`}
             >
               {/* Quote mark */}
               <span className="text-pale group-hover:text-mist mb-2 block font-serif text-[70px] leading-none font-light transition-colors duration-300">
@@ -93,10 +93,10 @@ const Voices = ({ hoverProps }: VoicesProps) => {
                 {q.q}
               </p>
 
-              {/* Attribution */}
-              <div className="mt-6 flex items-center gap-2 text-[10px] tracking-[0.18em] text-[#6b5490] uppercase">
-                <div className="bg-pale h-px w-5" />
-                {q.attr}
+              {/* Attribution (pushed to bottom) */}
+              <div className="mt-auto flex gap-2 pt-6 text-[10px] tracking-[0.18em] text-[#6b5490] uppercase">
+                <div className="bg-pale mt-2 h-px w-5" />
+                <p>{q.attr}</p>
               </div>
             </div>
           ))}
