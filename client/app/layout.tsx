@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from 'next-themes';
 import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { ToastProvider } from '@/context/ToastContext';
 
 const geistSans = Geist({
@@ -36,8 +37,9 @@ export default function RootLayout({
           {' '}
           <ToastProvider>{children}</ToastProvider>
         </ThemeProvider>
+        {process.env.NODE_ENV === 'production' && <Analytics />}
+        {process.env.NODE_ENV === 'production' && <SpeedInsights />}
       </body>
-      {process.env.NODE_ENV === 'production' && <Analytics />}
     </html>
   );
 }
