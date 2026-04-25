@@ -43,15 +43,14 @@ const Navbar = ({ hoverProps }: NavbarProps) => {
     <header
       className={`navbar-reveal fixed top-0 right-0 left-0 z-50 flex w-full items-center justify-center transition-all duration-500 ${
         scrolled
-          ? 'border-b border-white/10 bg-ink/80 backdrop-blur-md py-3'
+          ? 'bg-ink/80 border-b border-white/10 py-3 backdrop-blur-md'
           : 'bg-transparent py-5'
       }`}
     >
       <nav className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 md:px-12 lg:px-20">
-
         {/* Logo */}
         <div
-          className={`navbar-reveal text-lg md:text-xl tracking-[0.08em] font-medium transition-colors duration-300 ${
+          className={`navbar-reveal text-lg font-medium tracking-[0.08em] transition-colors duration-300 md:text-xl ${
             scrolled ? 'text-white' : 'text-white'
           }`}
           style={{ fontFamily: 'Cormorant, serif' }}
@@ -61,33 +60,30 @@ const Navbar = ({ hoverProps }: NavbarProps) => {
 
         {/* Links */}
         <div className="hidden items-center gap-10 md:flex">
-          {['The Problem:#problem', 'Features:#features', 'Our Story:#story'].map(
-            (s) => {
-              const [label, href] = s.split(':');
-              return (
-                <a
-                  key={label}
-                  href={href}
-                  {...hoverProps}
-                  className="navbar-reveal text-[11px] font-medium tracking-[0.12em] uppercase text-white/70 transition duration-300 hover:text-white"
-                >
-                  {label}
-                </a>
-              );
-            },
-          )}
+          {['The Problem:#problem', 'Features:#features', 'Our Story:#story'].map((s) => {
+            const [label, href] = s.split(':');
+            return (
+              <a
+                key={label}
+                href={href}
+                {...hoverProps}
+                className="navbar-reveal text-[11px] font-medium tracking-[0.12em] text-white/70 uppercase transition duration-300 hover:text-white"
+              >
+                {label}
+              </a>
+            );
+          })}
         </div>
 
         {/* CTA */}
         <a
           href="#cta"
           {...hoverProps}
-          className="navbar-reveal flex items-center justify-center gap-1 ml-4 rounded-md bg-violet px-6 py-2.5 text-[11px] tracking-[0.18em] uppercase text-white transition-all duration-200 hover:opacity-90"
+          className="navbar-reveal bg-violet ml-4 flex items-center justify-center gap-1 rounded-md px-6 py-2.5 text-[11px] tracking-[0.18em] text-white uppercase transition-all duration-200 hover:opacity-90"
         >
           Join Waitlist
           <ArrowRight className="mb-0.5" size={15} strokeWidth={1.5} />
         </a>
-
       </nav>
     </header>
   );
