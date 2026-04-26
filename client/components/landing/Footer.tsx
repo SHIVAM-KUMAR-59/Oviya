@@ -33,7 +33,7 @@ const Footer = () => {
 
         {/* Center text */}
         <div className="text-center text-[10px] tracking-[0.2em] text-white/50 uppercase">
-          © 2025 · Built with women, not assumptions
+          ©{new Date().getFullYear()} · Built with women, not assumptions
         </div>
 
         {/* Right text */}
