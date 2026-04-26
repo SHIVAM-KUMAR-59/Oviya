@@ -1,3 +1,4 @@
+import { PCOSStatus, SelfReportedRegularity } from '@prisma/client';
 import prisma from '../../lib/utils/prisma.util';
 
 export const createUser = async (userData: { name: string; email: string }) => {
@@ -39,4 +40,22 @@ export const findAll = async () => {
   });
 
   return users;
+};
+
+export const updateOnboarding = async (
+  userId: string,
+  data: {
+    hasPCOS?: boolean;
+    selfReportedRegularity: SelfReportedRegularity;
+  },
+) => {
+  return prisma.user.update({
+    where: { id: userId },
+    data: {
+      pcosStatus: data.hasPCOS ? PCOSStatus.DIAGNOSED : PCOSStatus.UNKNOWN,
+      selfReportedRegularity: data.selfReportedRegularity,
+      onboardingCompleted: true,
+      onboardingCompletedAt: new Date(),
+    },
+  });
 };
