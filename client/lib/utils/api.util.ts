@@ -1,5 +1,5 @@
-import { BASE_API_URL } from '@/lib/config/constants.config';
 import axios, { AxiosError } from 'axios';
+import { BASE_API_URL } from '../config/constants.config';
 
 const api = axios.create({
   baseURL: `${BASE_API_URL}/api/v1`,
@@ -8,27 +8,13 @@ const api = axios.create({
   },
 });
 
-// Interceptor to attach token before every request
-// api.interceptors.request.use(
-//   async (config) => {
-//     const session = await getSession(); // Fetch session on each request
-//     const token = session?.accessToken;
-
-//     if (token) {
-//       config.headers.Authorization = `Bearer ${token}`;
-//     }
-//     return config;
-//   },
-//   (error) => Promise.reject(error)
-// );
-
+// Response interceptor — handles 401 globally (optional, uncomment if needed)
 // api.interceptors.response.use(
 //   (response) => response,
-//   async (error) => {
+//   (error) => {
 //     if (error.response?.status === 401) {
-//       await signOut({ redirect: false });
-//       // Redirect to signin page
-//       window.location.href = "/auth/login";
+//       delete api.defaults.headers.common['Authorization'];
+//       window.location.href = '/auth/login';
 //     }
 //     return Promise.reject(error);
 //   }
