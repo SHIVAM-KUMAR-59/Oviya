@@ -1,6 +1,7 @@
 import { ErrorRequestHandler } from 'express';
 import logger from '../config/logger.config';
 
+// error middleware
 const errorHandlerMiddleware: ErrorRequestHandler = (err, _req, res, _next) => {
   logger.error(`${err.name}: ${err.message}`);
   console.log(err);
